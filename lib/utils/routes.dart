@@ -1,11 +1,11 @@
 import 'package:get/get.dart';
+import 'package:nms_chat/features/signin/signin.dart';
 
-import '../features/hello_world.dart';
 
 List<GetPage> routes() => [
       GetPage(
           name: "/",
-          page: () => const HelloWorld(),
+          page: () => const SignInScreen(),
           transition: Transition.cupertino),
 
       // GetPage(

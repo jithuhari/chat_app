@@ -19,12 +19,13 @@ mixin SnackbarMixin on GetxController {
       message: message,
       messageSize: 12,
       duration: const Duration(seconds: 3),
-      backgroundColor: backgroundColor,
+      backgroundColor: const Color(0xffFFE7E6),
       margin: const EdgeInsets.all(10),
       borderRadius: BorderRadius.circular(10),
-      borderColor: errorColor,
+      borderColor: Colors.transparent,
       isDismissible: true,
       blockBackgroundInteraction: true,
+      leftBarIndicatorColor: Colors.red,
     ).show(Get.context!);
   }
 
