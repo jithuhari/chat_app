@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'flavors.dart';
 import 'package:flutter/services.dart';
+import 'repository/api_repository.dart';
 import 'utils/routes.dart';
 import 'utils/screen_orientation.dart';
 import 'utils/theme/app_theme.dart';
@@ -15,6 +16,7 @@ Future<void> initNMSChatApp() async {
 }
 
 Future<void> initializeAppControllers() async {
+  Get.put<ApiRepository>(ApiRepositoryImpl(), permanent: true);
   debugPrint("NMS chat app : Initialized");
 }
 

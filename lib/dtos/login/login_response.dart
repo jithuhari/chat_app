@@ -1,0 +1,19 @@
+import 'package:nms_chat/dtos/api_response.dart';
+import '../../models/login_screen/login_model.dart';
+
+class SubmitLoginResponse extends ApiResponse {
+  SubmitLoginResponse({message, status, data, errors})
+      : super(message: message, status: status, data: data, errors: errors);
+
+  factory SubmitLoginResponse.fromJson(Map<String, dynamic> json) {
+    return SubmitLoginResponse(
+      message: json["message"],
+      status: json["status"],
+      data: json["data"]!,
+    );
+  }
+
+  LoginModel? getToken() {
+    return (data != null) ? LoginModel.fromJson(data) : null;
+  }
+}

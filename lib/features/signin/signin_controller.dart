@@ -1,10 +1,11 @@
 import 'dart:convert';
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nms_chat/utils/utils.dart';
 
+import '../../dtos/login/login.dart';
 import '../../mixins/snackbar_mixin.dart';
+import '../../repository/api_repository.dart';
 
 class SignInController extends GetxController with SnackbarMixin {
   // final JBSharedPreferences authService = JBSharedPreferences();
@@ -32,12 +33,6 @@ class SignInController extends GetxController with SnackbarMixin {
   final _obsecureText = true.obs;
   bool get obsecureText => _obsecureText.value;
 
-  // @override
-  // void onInit() async {
-  //   await loadUserDataFromSharedPreferences();
-  //   super.onInit();
-  // }
-
   // Future<void> loadUserDataFromSharedPreferences() async {
   //   final prefs = await SharedPreferences.getInstance();
   //   final savedEmail = prefs.getString('email') ?? '';
@@ -51,10 +46,10 @@ class SignInController extends GetxController with SnackbarMixin {
     update();
   }
 
-  oncheckBox(value) {
-    isChecked.value = value!;
-    update();
-  }
+  // oncheckBox(value) {
+  //   isChecked.value = value!;
+  //   update();
+  // }
 
 //rememberMe
   // _saveCredentials() async {
@@ -122,35 +117,42 @@ class SignInController extends GetxController with SnackbarMixin {
   }
 
   Future<void> login() async {
-    String platform = (Platform.isAndroid || Platform.isIOS) ? "MOBILE" : "WEB";
-    if (passwordAndEmailValidation()) {
-      try {
-        // final request = SubmitSigninRequest(
-        //     email: emailController.text,
-        //     password: passwordController.text,
-        //     platform: platform);
-        // final response =
-        //     await ApiRepository.to.signInWithEmail(request: request);
+    //String platform = (Platform.isAndroid || Platform.isIOS) ? "MOBILE" : "WEB";
+    // if (passwordAndEmailValidation()) {
 
-        // if (response.code == "SUCCESS") {
-        //   final jbSharedPreferences = JBSharedPreferences();
-        //   String accessToken = response.data['accessToken'];
-        //   String refreshToken = response.data['refreshToken'];
-        //   await jbSharedPreferences.saveTokensToPrefs(
-        //       accessToken, refreshToken);
-        //   await _saveCredentials();
-        //   await AppController.to.SignedIn();
+    try {
+      final request = SubmitLoginRequest(
+          username: emailController.text,
+          // 'francis@nintriva.com',
+           
+          password: passwordController.text,
+          // 'admin',
+           
+          retryCount: 3);
 
-        //   // emailController.clear();
-        //   // passwordController.clear();
-        // } else if (response.code == "INTERNAL_SERVER_ERROR") {
-        //   debugPrint(response.errors[0]);
-        //   showErrorSnackbar(title: errorText, message: errorOccuredText);
-        // }
-      } catch (e) {
-        return catchErrorSection(e);
+      final response = await ApiRepository.to.logInWithEmail(request: request);
+
+      if (response.message == "Success") {
+        debugPrint('----------${response.data['accessToken']}--------------');
+        debugPrint('----------${response.data['refreshToken']}--------------');
+        // final jbSharedPreferences = JBSharedPreferences();
+        // String accessToken = response.data['accessToken'];
+        // String refreshToken = response.data['refreshToken'];
+        // await jbSharedPreferences.saveTokensToPrefs(
+        //     accessToken, refreshToken);
+        // await _saveCredentials();
+        // await AppController.to.SignedIn();
+
+        // emailController.clear();
+        // passwordController.clear();
+      } else if (response.message == "Failed") {
+        debugPrint(response.errors[0]);
+        showErrorSnackbar(title: errorText, message: errorOccuredText);
       }
+    } catch (e) {
+      return catchErrorSection(e);
     }
+    // }
   }
 
   catchErrorSection(e) async {
