@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'controller/app_controller.dart';
 import 'flavors.dart';
 import 'package:flutter/services.dart';
 import 'repository/api_repository.dart';
@@ -18,6 +19,8 @@ Future<void> initNMSChatApp() async {
 Future<void> initializeAppControllers() async {
   Get.put<ApiRepository>(ApiRepositoryImpl(), permanent: true);
   debugPrint("NMS chat app : Initialized");
+   Get.put(AppController(), permanent: true);
+  debugPrint("JustBorrowApp : AppController sucessfully initialized");
 }
 
 class NMSChatApp extends StatelessWidget {

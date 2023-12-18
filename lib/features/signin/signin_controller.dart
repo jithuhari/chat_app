@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nms_chat/managers/sharedpreferences/sharedpreferences.dart';
 import 'package:nms_chat/utils/utils.dart';
 
+import '../../controller/app_controller.dart';
 import '../../dtos/login/login.dart';
 import '../../mixins/snackbar_mixin.dart';
 import '../../repository/api_repository.dart';
@@ -82,8 +84,12 @@ class SignInController extends GetxController with SnackbarMixin {
   }
 
   String? passwordValidator(String value) {
-    if (value.isEmpty || value.length < 7) {
+    if (value.isEmpty
+        //  || value.length < 7
+        ) {
       return "password required";
+    } else if (value.length < 5) {
+      return "Should have minimum 5 letters";
     }
     return null;
   }
@@ -118,45 +124,44 @@ class SignInController extends GetxController with SnackbarMixin {
 
   Future<void> login() async {
     //String platform = (Platform.isAndroid || Platform.isIOS) ? "MOBILE" : "WEB";
-    // if (passwordAndEmailValidation()) {
+    if (passwordAndEmailValidation()) {
+      try {
+        final request = SubmitLoginRequest(
+            username: emailController.text,
+            // 'francis@nintriva.com',
+            password: passwordController.text,
+            // 'admin',
+            retryCount: 3);
 
-    try {
-      final request = SubmitLoginRequest(
-          username: emailController.text,
-          // 'francis@nintriva.com',
-           
-          password: passwordController.text,
-          // 'admin',
-           
-          retryCount: 3);
+        final response =
+            await ApiRepository.to.logInWithEmail(request: request);
 
-      final response = await ApiRepository.to.logInWithEmail(request: request);
+        if (response.message == "Success") {
+          debugPrint('----------${response.data['accessToken']}--------------');
+          debugPrint(
+              '----------${response.data['refreshToken']}--------------');
+          final nmsSharedPreferences = NMSSharedPreferences();
+          String accessToken = response.data['accessToken'];
+          String refreshToken = response.data['refreshToken'];
+          await nmsSharedPreferences.saveTokensToPrefs(
+              accessToken, refreshToken);
+          // await _saveCredentials();
+          await AppController.to.signedIn();
 
-      if (response.message == "Success") {
-        debugPrint('----------${response.data['accessToken']}--------------');
-        debugPrint('----------${response.data['refreshToken']}--------------');
-        // final jbSharedPreferences = JBSharedPreferences();
-        // String accessToken = response.data['accessToken'];
-        // String refreshToken = response.data['refreshToken'];
-        // await jbSharedPreferences.saveTokensToPrefs(
-        //     accessToken, refreshToken);
-        // await _saveCredentials();
-        // await AppController.to.SignedIn();
-
-        // emailController.clear();
-        // passwordController.clear();
-      } else if (response.message == "Failed") {
-        debugPrint(response.errors[0]);
-        showErrorSnackbar(title: errorText, message: errorOccuredText);
+          emailController.clear();
+          passwordController.clear();
+        } else if (response.message == "Failed") {
+          debugPrint(response.errors['errorMessage']);
+          showErrorSnackbar(title: errorText, message: errorOccuredText);
+        }
+      } catch (e) {
+        return catchErrorSection(e);
       }
-    } catch (e) {
-      return catchErrorSection(e);
     }
-    // }
   }
 
   catchErrorSection(e) async {
-    debugPrint('-----${e.toString()}------');
+    debugPrint('error-----${e.toString()}------');
 
     if (e.toString().isNotEmpty) {
       try {

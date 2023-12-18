@@ -17,7 +17,8 @@ class ApiRepositoryImpl extends GetxController implements ApiRepository {
   final _helper = ApiBaseHelper();
 
   final Map<String, String> _headersWithoutToken = {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    'org-id': 'nintriva'
   };
 
   // final Map<String, String> _header = {'org-id': 'nintriva'};
