@@ -11,7 +11,7 @@ const String Login = 'Login';
 
 // const String dontHaveAccount = 'Don’t have a account? ';
 
-// const String remember = 'Remember me';
+const String remember = 'Remember me';
 // const String signInOtp = 'Sign in with  ';
 // const String otp = 'OTP';
 

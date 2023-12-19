@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nms_chat/managers/sharedpreferences/sharedpreferences.dart';
 import 'package:nms_chat/utils/utils.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../controller/app_controller.dart';
 import '../../dtos/login/login.dart';
@@ -48,10 +49,10 @@ class SignInController extends GetxController with SnackbarMixin {
     update();
   }
 
-  // oncheckBox(value) {
-  //   isChecked.value = value!;
-  //   update();
-  // }
+  oncheckBox(value) {
+    isChecked.value = value!;
+    update();
+  }
 
 //rememberMe
   // _saveCredentials() async {
@@ -166,13 +167,13 @@ class SignInController extends GetxController with SnackbarMixin {
     if (e.toString().isNotEmpty) {
       try {
         Map<String, dynamic> errorResponse = jsonDecode(e.toString());
-        print(errorResponse);
+
         if (errorResponse.containsKey("errors")) {
           Map<String, dynamic> errors =
               Map<String, dynamic>.from(errorResponse["errors"]);
           if (errors.containsKey("errorMessage")) {
             String errorMessage = errors["errorMessage"];
-            print(errorMessage);
+
             if (errorMessage.contains("Bad Credentials")) {
               showErrorSnackbar(
                 title: "Error",
@@ -181,12 +182,13 @@ class SignInController extends GetxController with SnackbarMixin {
             }
 
             return;
-          } else if (errors.containsKey("USER NOT FOUND")) {
-            showErrorSnackbar(
-              title: "Error",
-              message: "user not found",
-            );
           }
+          // else if (errors.containsKey("USER NOT FOUND")) {
+          //   showErrorSnackbar(
+          //     title: "Error",
+          //     message: "user not found",
+          //   );
+          // }
         }
       } catch (e) {
         debugPrint('Error decoding JSON: ${e.toString()}');
