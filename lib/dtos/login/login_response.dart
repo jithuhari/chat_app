@@ -10,6 +10,7 @@ class SubmitLoginResponse extends ApiResponse {
       message: json["message"],
       status: json["status"],
       data: json["data"]!,
+      errors: json["errors"]
     );
   }
 

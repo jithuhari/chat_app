@@ -52,6 +52,7 @@ class ApiBaseHelper {
       case 400:
         throw BadRequestException(response.body.toString());
       case 401:
+        throw UnauthorisedException(response.body.toString());
       case 403:
         throw UnauthorisedException(response.body.toString());
       case 500:

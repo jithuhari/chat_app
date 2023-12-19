@@ -89,7 +89,7 @@ class SignInController extends GetxController with SnackbarMixin {
         ) {
       return "password required";
     } else if (value.length < 5) {
-      return "Should have minimum 5 letters";
+      return "minimum 5 Characters";
     }
     return null;
   }
@@ -136,7 +136,7 @@ class SignInController extends GetxController with SnackbarMixin {
         final response =
             await ApiRepository.to.logInWithEmail(request: request);
 
-        if (response.message == "Success") {
+        if (response.status == 200) {
           debugPrint('----------${response.data['accessToken']}--------------');
           debugPrint(
               '----------${response.data['refreshToken']}--------------');
@@ -166,15 +166,22 @@ class SignInController extends GetxController with SnackbarMixin {
     if (e.toString().isNotEmpty) {
       try {
         Map<String, dynamic> errorResponse = jsonDecode(e.toString());
+        print(errorResponse);
         if (errorResponse.containsKey("errors")) {
-          List<String> errors = List<String>.from(errorResponse["errors"]);
-          if (errors.contains("Bad credentials")) {
-            showErrorSnackbar(
-              title: "Error",
-              message: "Email-id or password is incorrect",
-            );
+          Map<String, dynamic> errors =
+              Map<String, dynamic>.from(errorResponse["errors"]);
+          if (errors.containsKey("errorMessage")) {
+            String errorMessage = errors["errorMessage"];
+            print(errorMessage);
+            if (errorMessage.contains("Bad Credentials")) {
+              showErrorSnackbar(
+                title: "Error",
+                message: "Email-id or password is incorrect",
+              );
+            }
+
             return;
-          } else if (errors.contains("USER NOT FOUND")) {
+          } else if (errors.containsKey("USER NOT FOUND")) {
             showErrorSnackbar(
               title: "Error",
               message: "user not found",

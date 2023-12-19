@@ -20,7 +20,7 @@ class BadRequestException extends AppException {
 }
 
 class UnauthorisedException extends AppException {
-  UnauthorisedException([message]) : super(message, "Unauthorised: ");
+  UnauthorisedException([message]) : super(message,"");
 }
 
 class InvalidInputException extends AppException {

@@ -16,7 +16,7 @@ class ApiResponse {
   String? message;
   int status;
   dynamic data;
-  dynamic? errors;
+  dynamic errors;
   String messagecall() {
     String? message;
     debugPrint("ApiResponse : Response Data Type :${message.runtimeType}");
