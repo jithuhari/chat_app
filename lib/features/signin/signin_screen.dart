@@ -42,23 +42,34 @@ class SignInScreen extends StatelessWidget {
                 ),
                 SafeArea(
                     child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Center(
-                      child: Stack(
-                        alignment: Alignment.topCenter,
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(40, 10, 40, 0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          const SizedBox(
+                            height: 60,
+                          ),
                           SvgPicture.asset(
                             "assets/svg/logo.svg",
                           ),
+                          const SizedBox(
+                            height: 40,
+                          ),
+                          // SvgPicture.asset(
+                          //   "assets/svg/NMS.svg",
+                          // ),
+                          Text('Hi there !',
+                              style: AppTheme.lightTheme.textTheme.headlineLarge
+                                  ?.copyWith(color: Colors.black)),
+                          Text('Welcome back.',
+                              style: AppTheme.lightTheme.textTheme.headlineLarge
+                                  ?.copyWith(color: Colors.black)),
                         ],
                       ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    SvgPicture.asset(
-                      "assets/svg/NMS.svg",
                     ),
                     const SizedBox(height: 50),
                     Padding(
@@ -106,42 +117,56 @@ class SignInScreen extends StatelessWidget {
                               obscureText: controller.isObscure,
                               controller: controller.passwordController,
                               keyboardType: TextInputType.visiblePassword,
-                              suffixIcon:SizedBox(
-                                width: 0,
-                                child: InkWell(
-                                  onTap: (){
-                                    controller.onPasswordVisible();
-                                  },
-                                  child: controller.isObscure? const Padding(
-                                    padding:  EdgeInsets.only( right: 5 ),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        Center(child: Text('Show',style: TextStyle(color: primaryColor),)),
-                                      ],
-                                    ),
-                                  ): const Padding(
-                                    padding:  EdgeInsets.all(8.0),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        Center(child: Text('Hide',style: TextStyle(color: primaryColor),)),
-                                      ],
-                                    ),
+                              suffixIcon: IconButton(
+                                  icon: Icon(
+                                    controller.isObscure
+                                        ? Icons.visibility
+                                        : Icons.visibility_off,
+                                    color: secondaryMediumColor,
                                   ),
-                                ),
-                              ),
+                                  onPressed: () {
+                                    controller.onPasswordVisible();
+                                  }),
+                              //  SizedBox(
+                              //   width: 0,
+                              //   child: InkWell(
+                              //     onTap: () {
+                              //       controller.onPasswordVisible();
+                              //     },
+                              //     child: controller.isObscure
+                              //         ? const Padding(
+                              //             padding: EdgeInsets.only(right: 5),
+                              //             child: Row(
+                              //               mainAxisAlignment:
+                              //                   MainAxisAlignment.end,
+                              //               children: [
+                              //                 Center(
+                              //                     child: Text(
+                              //                   'Show',
+                              //                   style: TextStyle(
+                              //                       color: primaryColor),
+                              //                 )),
+                              //               ],
+                              //             ),
+                              //           )
+                              //         : const Padding(
+                              //             padding: EdgeInsets.all(8.0),
+                              //             child: Row(
+                              //               mainAxisAlignment:
+                              //                   MainAxisAlignment.end,
+                              //               children: [
+                              //                 Center(
+                              //                     child: Text(
+                              //                   'Hide',
+                              //                   style: TextStyle(
+                              //                       color: primaryColor),
+                              //                 )),
+                              //               ],
+                              //             ),
+                              //           ),
+                              //   ),
+                              // ),
 
-                              // IconButton(
-                              //     icon: Icon(
-                              //       controller.isObscure
-                              //           ? Icons.visibility
-                              //           : Icons.visibility_off,
-                              //       color: secondaryMediumColor,
-                              //     ),
-                              // onPressed: () {
-                              //   controller.onPasswordVisible();
-                              // }),
                               prefixIcon: IconButton(
                                   icon: const Icon(
                                     Icons.lock_outline,
@@ -171,74 +196,8 @@ class SignInScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30, right: 40),
-                      child: Row(
-                        children: [
-                          Obx(
-                            () => Expanded(
-                              child: Theme(
-                                data: Theme.of(context).copyWith(
-                                  listTileTheme: const ListTileThemeData(
-                                    contentPadding: EdgeInsets.all(0),
-                                    dense: true,
-                                    minLeadingWidth: 0,
-                                    horizontalTitleGap: -5,
-                                  ),
-                                ),
-                                child: CheckboxListTile(
-                                  contentPadding: const EdgeInsets.all(0),
-                                  controlAffinity:
-                                      ListTileControlAffinity.leading,
-                                  checkboxShape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(4)),
-                                  checkColor: Colors.white,
-                                  side: const BorderSide(
-                                      color: secondaryMediumColor),
-                                  activeColor: primaryColor,
-                                  title: Text(
-                                    remember,
-                                    style: AppTheme
-                                        .lightTheme.textTheme.bodyLarge
-                                        ?.copyWith(color: secondaryMediumColor),
-                                  ),
-                                  value: controller.isChecked.value,
-                                  onChanged: (bool? value) {
-                                    controller.oncheckBox(value);
-                                  },
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
                   ],
                 )),
-                // Positioned(
-                //   bottom: 0,
-                //   left: 95,
-                //   child: Padding(
-                //     padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
-                //     child: GestureDetector(
-                //         onTap: () => Get.toNamed('/signup_screen'),
-                //         child: Center(
-                //             child: RichText(
-                //                 text: TextSpan(text: "", children: [
-                //           TextSpan(
-                //               text: dontHaveAccount,
-                //               style: AppTheme.lightTheme.textTheme.bodyLarge
-                //                   ?.copyWith(color: secondaryMediumColor)),
-                //           TextSpan(
-                //               text: signUp,
-                //               style: AppTheme.lightTheme.textTheme.bodyLarge
-                //                   ?.copyWith(
-                //                       color: primaryColor,
-                //                       decoration: TextDecoration.underline,
-                //                       decorationColor: primaryColor))
-                //         ])))),
-                //   ),
-                // ),
               ]),
             ),
           );

@@ -99,14 +99,13 @@
 //   }
 // }
 import 'package:flutter/material.dart';
-
-
+import 'package:nms_chat/utils/theme/theme.dart';
 
 class ChatMainLayoutScreen extends StatefulWidget {
-  const ChatMainLayoutScreen(
-      {super.key, 
-      // required this.chatModels, required this.sourceChat
-      });
+  const ChatMainLayoutScreen({
+    super.key,
+    // required this.chatModels, required this.sourceChat
+  });
   // final List<ChatModel> chatModels;
   // final ChatModel sourceChat;
 
@@ -125,80 +124,87 @@ class _ChatMainLayoutScreenState extends State<ChatMainLayoutScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Chat App'),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.search),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: primaryColor,
+          title: const Text(
+            'NMS CHAT',
+            style: TextStyle(color: backgroundColor),
           ),
-          PopupMenuButton(onSelected: (value) {
-            debugPrint(value);
-          }, itemBuilder: (BuildContext context) {
-            return const [
-              PopupMenuItem(
-                value: 'New group',
-                child: Text(
-                  'New group',
+          actions: [
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.search),
+            ),
+            PopupMenuButton(onSelected: (value) {
+              debugPrint(value);
+            }, itemBuilder: (BuildContext context) {
+              return const [
+                PopupMenuItem(
+                  value: 'New group',
+                  child: Text(
+                    'New group',
+                  ),
                 ),
-              ),
-              PopupMenuItem(
-                value: 'New broadcast',
-                child: Text(
-                  'New broadcast',
+                PopupMenuItem(
+                  value: 'New broadcast',
+                  child: Text(
+                    'New broadcast',
+                  ),
                 ),
-              ),
-              PopupMenuItem(
-                value: 'Whatsapp web',
-                child: Text(
-                  'Whatsapp web',
+                PopupMenuItem(
+                  value: 'Whatsapp web',
+                  child: Text(
+                    'Whatsapp web',
+                  ),
                 ),
-              ),
-              PopupMenuItem(
-                value: 'Starred message',
-                child: Text(
-                  'Starred message',
+                PopupMenuItem(
+                  value: 'Starred message',
+                  child: Text(
+                    'Starred message',
+                  ),
                 ),
-              ),
-              PopupMenuItem(
-                value: 'Settings',
-                child: Text(
-                  'Settings',
+                PopupMenuItem(
+                  value: 'Settings',
+                  child: Text(
+                    'Settings',
+                  ),
                 ),
-              ),
-            ];
-          })
-        ],
-        bottom: TabBar(
-            controller: _controller,
-            indicatorColor: Colors.white,
-            tabs: const [
-              Tab(
-                icon: Icon(Icons.camera_alt),
-              ),
-              Tab(
-                text: 'CHATS',
-              ),
-              Tab(
-                text: 'STATUS',
-              ),
-              Tab(
-                text: 'CALLS',
-              ),
-            ]),
+              ];
+            })
+          ],
+          bottom: TabBar(
+              labelColor: backgroundColor,
+              controller: _controller,
+              indicatorColor: Colors.white,
+              tabs: const [
+                Tab(
+                  icon: Icon(Icons.camera_alt),
+                ),
+                Tab(
+                  text: 'CHATS',
+                ),
+                Tab(
+                  text: 'STATUS',
+                ),
+                Tab(
+                  text: 'CALLS',
+                ),
+              ]),
+        ),
+        body: TabBarView(controller: _controller, children: const [
+          // const CameraScreen(),
+          // ChatScreen(
+          //   chatModels: widget.chatModels,
+          //   sourceChat: widget.sourceChat,
+          // ),
+          Text('Status'),
+          Text('Calls'),
+          Text('Status'),
+          Text('Calls')
+        ]),
       ),
-      body: TabBarView(controller: _controller, children: const [
-        // const CameraScreen(),
-        // ChatScreen(
-        //   chatModels: widget.chatModels,
-        //   sourceChat: widget.sourceChat,
-        // ),
-         Text('Status'),
-         Text('Calls'),
-         Text('Status'),
-         Text('Calls')
-      ]),
     );
   }
 }

@@ -18,9 +18,8 @@ class AppController extends GetxController {
   _fireRoute(logged) async {
     if (logged == LoggedStatus.loggedIn) {
       // FCMTokenManager.registerToken();
-      await Get.offAllNamed('/chat_main_layout_screen', 
-      // arguments: {'index': 0}
-      );
+      await Get.offAllNamed('/chat_main_layout_screen',
+          arguments: {'index': 1});
     } else if (logged == LoggedStatus.notLoggedIn) {
       await Get.offAllNamed("/signin_screen");
     }

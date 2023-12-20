@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nms_chat/managers/sharedpreferences/sharedpreferences.dart';
 import 'package:nms_chat/utils/utils.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../controller/app_controller.dart';
 import '../../dtos/login/login.dart';
@@ -53,27 +52,6 @@ class SignInController extends GetxController with SnackbarMixin {
     isChecked.value = value!;
     update();
   }
-
-//rememberMe
-  // _saveCredentials() async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   if (isChecked.value) {
-  //     await prefs.setString('email', emailController.text);
-  //     await prefs.setString('password', passwordController.text);
-  //   } else {
-  //     await prefs.remove('email');
-  //     await prefs.remove('password');
-  //   }
-  //   _printSharedPreferencesContents(prefs); // Print contents to terminal
-  // }
-
-  // _printSharedPreferencesContents(SharedPreferences prefs) {
-  //   final keys = prefs.getKeys();
-  //   debugPrint("SharedPreferences contents:");
-  //   for (String key in keys) {
-  //     debugPrint("$key: ${prefs.get(key)}");
-  //   }
-  // }
 
   String? emailValidator(String value) {
     if (value.isEmpty) {
@@ -146,7 +124,7 @@ class SignInController extends GetxController with SnackbarMixin {
           String refreshToken = response.data['refreshToken'];
           await nmsSharedPreferences.saveTokensToPrefs(
               accessToken, refreshToken);
-          // await _saveCredentials();
+
           await AppController.to.signedIn();
 
           emailController.clear();
@@ -183,12 +161,6 @@ class SignInController extends GetxController with SnackbarMixin {
 
             return;
           }
-          // else if (errors.containsKey("USER NOT FOUND")) {
-          //   showErrorSnackbar(
-          //     title: "Error",
-          //     message: "user not found",
-          //   );
-          // }
         }
       } catch (e) {
         debugPrint('Error decoding JSON: ${e.toString()}');
