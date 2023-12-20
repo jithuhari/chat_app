@@ -16,6 +16,9 @@ class SignInController extends GetxController with SnackbarMixin {
   final _isLoadingOverlay = false.obs;
   bool get isLoadingOverlay => _isLoadingOverlay.value;
 
+  final _retryCount = 3.obs;
+  int get retryCount => _retryCount.value;
+
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -110,7 +113,7 @@ class SignInController extends GetxController with SnackbarMixin {
             // 'francis@nintriva.com',
             password: passwordController.text,
             // 'admin',
-            retryCount: 3);
+            retryCount: retryCount);
 
         final response =
             await ApiRepository.to.logInWithEmail(request: request);
@@ -153,10 +156,21 @@ class SignInController extends GetxController with SnackbarMixin {
             String errorMessage = errors["errorMessage"];
 
             if (errorMessage.contains("Bad Credentials")) {
-              showErrorSnackbar(
-                title: "Error",
-                message: "Email-id or password is incorrect",
-              );
+              if (retryCount > 0) {
+                _retryCount.value = retryCount - 1;
+                update();
+                showErrorSnackbar(
+                  title: "Error",
+                  message:
+                      "Email-id or password is incorrect \n you have $retryCount more attempts remaing  ",
+                );
+              } else if (retryCount == 0) {
+                showErrorSnackbar(
+                  title: "Error",
+                  message:
+                      "You have exceeded the total number of attempts. Please Change your password",
+                );
+              }
             }
 
             return;
