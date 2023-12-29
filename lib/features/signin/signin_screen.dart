@@ -92,14 +92,6 @@ class SignInScreen extends StatelessWidget {
                               labelText: emailLabel,
                               keyboardType: TextInputType.emailAddress,
                               textInputAction: TextInputAction.next,
-                              prefixIcon: IconButton(
-                                  icon: const Icon(
-                                    Icons.mail_outline,
-                                    color: secondaryMediumColor,
-                                  ),
-                                  onPressed: () {
-                                    controller.onPasswordVisible();
-                                  }),
                               obscureText: false,
                               autovalidateMode: controller.validationDisplay
                                   ? AutovalidateMode.always
@@ -120,56 +112,8 @@ class SignInScreen extends StatelessWidget {
                               suffixIcon: IconButton(
                                   icon: Icon(
                                     controller.isObscure
-                                        ? Icons.visibility
-                                        : Icons.visibility_off,
-                                    color: secondaryMediumColor,
-                                  ),
-                                  onPressed: () {
-                                    controller.onPasswordVisible();
-                                  }),
-                              //  SizedBox(
-                              //   width: 0,
-                              //   child: InkWell(
-                              //     onTap: () {
-                              //       controller.onPasswordVisible();
-                              //     },
-                              //     child: controller.isObscure
-                              //         ? const Padding(
-                              //             padding: EdgeInsets.only(right: 5),
-                              //             child: Row(
-                              //               mainAxisAlignment:
-                              //                   MainAxisAlignment.end,
-                              //               children: [
-                              //                 Center(
-                              //                     child: Text(
-                              //                   'Show',
-                              //                   style: TextStyle(
-                              //                       color: primaryColor),
-                              //                 )),
-                              //               ],
-                              //             ),
-                              //           )
-                              //         : const Padding(
-                              //             padding: EdgeInsets.all(8.0),
-                              //             child: Row(
-                              //               mainAxisAlignment:
-                              //                   MainAxisAlignment.end,
-                              //               children: [
-                              //                 Center(
-                              //                     child: Text(
-                              //                   'Hide',
-                              //                   style: TextStyle(
-                              //                       color: primaryColor),
-                              //                 )),
-                              //               ],
-                              //             ),
-                              //           ),
-                              //   ),
-                              // ),
-
-                              prefixIcon: IconButton(
-                                  icon: const Icon(
-                                    Icons.lock_outline,
+                                        ? Icons.visibility_outlined
+                                        : Icons.visibility_off_outlined,
                                     color: secondaryMediumColor,
                                   ),
                                   onPressed: () {
@@ -188,7 +132,7 @@ class SignInScreen extends StatelessWidget {
                             CorneredButton(
                               height: 40,
                               color: primaryColor,
-                              title: Login,
+                              title: login,
                               textcolor: backgroundColor,
                               onPress: (() => controller.login()),
                             )

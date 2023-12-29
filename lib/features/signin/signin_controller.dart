@@ -58,7 +58,7 @@ class SignInController extends GetxController with SnackbarMixin {
 
   String? emailValidator(String value) {
     if (value.isEmpty) {
-      return "email-id required";
+      return emailRequiredText;
     } else if (!isValidEmail(emailController.text)) {
       return invalidEmail;
     }
@@ -69,9 +69,9 @@ class SignInController extends GetxController with SnackbarMixin {
     if (value.isEmpty
         //  || value.length < 7
         ) {
-      return "password required";
+      return passwordRequiredText;
     } else if (value.length < 5) {
-      return "minimum 5 Characters";
+      return "Minimum 5 Characters";
     }
     return null;
   }
@@ -87,7 +87,7 @@ class SignInController extends GetxController with SnackbarMixin {
     } else if (emailController.value.text.isNotEmpty &&
         passwordController.value.text.isEmpty) {
       if (!isValidEmail(emailController.value.text)) {
-        showErrorSnackbar(title: errorText, message: invalidEmail);
+        showErrorSnackbar(message: invalidEmail);
         return false;
       } else {
         _validationDisplay.value = true;
@@ -96,7 +96,7 @@ class SignInController extends GetxController with SnackbarMixin {
     } else if (emailController.value.text.isNotEmpty &&
         passwordController.value.text.isNotEmpty) {
       if (!isValidEmail(emailController.value.text)) {
-        showErrorSnackbar(title: errorText, message: invalidEmail);
+        showErrorSnackbar(message: invalidEmail);
         return false;
       } else {
         return true;
@@ -134,7 +134,7 @@ class SignInController extends GetxController with SnackbarMixin {
           passwordController.clear();
         } else if (response.message == "Failed") {
           debugPrint(response.errors['errorMessage']);
-          showErrorSnackbar(title: errorText, message: errorOccuredText);
+          showErrorSnackbar( message: errorOccuredText);
         }
       } catch (e) {
         return catchErrorSection(e);
@@ -160,13 +160,13 @@ class SignInController extends GetxController with SnackbarMixin {
                 _retryCount.value = retryCount - 1;
                 update();
                 showErrorSnackbar(
-                  title: "Error",
+                 
                   message:
-                      "Email-id or password is incorrect \n you have $retryCount more attempts remaing  ",
+                      "incorrect Email-id or password, $retryCount attempts remaing  ",
                 );
               } else if (retryCount == 0) {
                 showErrorSnackbar(
-                  title: "Error",
+                  
                   message:
                       "You have exceeded the total number of attempts. Please Change your password",
                 );
@@ -179,7 +179,7 @@ class SignInController extends GetxController with SnackbarMixin {
       } catch (e) {
         debugPrint('Error decoding JSON: ${e.toString()}');
         showErrorSnackbar(
-          title: "Catch",
+          
           message: e.toString(),
         );
         return e.toString();

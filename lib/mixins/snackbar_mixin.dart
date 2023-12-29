@@ -6,15 +6,15 @@ import 'package:another_flushbar/flushbar.dart';
 import '../utils/utils.dart';
 
 mixin SnackbarMixin on GetxController {
-  showErrorSnackbar({required String title, required String message}) {
+  showErrorSnackbar({required String message}) {
     Flushbar(
       padding: const EdgeInsets.fromLTRB(20, 16, 16, 16),
       titleColor: secondaryColor,
-      messageColor: secondaryColor,
+      messageColor: errorColorText,
       icon: SvgPicture.asset(
         "assets/svg/error.svg",
       ),
-      title: title,
+      // title: title,
       titleSize: 18,
       message: message,
       messageSize: 12,
@@ -25,7 +25,7 @@ mixin SnackbarMixin on GetxController {
       borderColor: Colors.transparent,
       isDismissible: true,
       blockBackgroundInteraction: true,
-      leftBarIndicatorColor: Colors.red,
+      
     ).show(Get.context!);
   }
 

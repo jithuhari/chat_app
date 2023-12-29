@@ -11,7 +11,8 @@ const Color secondaryshadeColor = Color(0xFFF6F6F6);
 
 const Color tertiaryColor = Color(0xFFF0B268);
 
-const Color errorColor = Color(0xffFF7676);
+const Color errorColor = Color(0xffF93232);
+const Color errorColorText = Color(0xffF93232);
 
 
                                 

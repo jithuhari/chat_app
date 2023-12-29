@@ -6,7 +6,7 @@ const String appName = 'NMS Chat';
 //button Text
 
 // const String signUp = 'Sign Up';
-const String Login = 'Login';
+const String login = 'Login';
 // const String alredyAccount = 'Already have a account? ';
 
 // const String dontHaveAccount = 'Don’t have a account? ';

@@ -61,9 +61,11 @@ class CustomLoginTextField extends StatelessWidget {
               borderSide:
                   const BorderSide(width: 1, color: secondaryLightColor),
               borderRadius: BorderRadius.circular(5)),
+          focusedErrorBorder: OutlineInputBorder(
+              borderSide: const BorderSide(width: 1, color: errorColor),
+              borderRadius: BorderRadius.circular(5)),
           errorBorder: OutlineInputBorder(
-              borderSide:
-                  BorderSide(width: 1, color: errorColor.withOpacity(0.9)),
+              borderSide: const BorderSide(width: 1, color: errorColor),
               borderRadius: BorderRadius.circular(5)),
           focusedBorder: OutlineInputBorder(
               borderSide: const BorderSide(width: 1, color: primaryColor),
@@ -71,7 +73,7 @@ class CustomLoginTextField extends StatelessWidget {
           labelStyle: AppTheme.lightTheme.textTheme.labelMedium
               ?.copyWith(color: secondaryMediumColor),
           suffixIcon: suffixIcon,
-          prefixIcon: prefixIcon,
+          // prefixIcon: prefixIcon,
           enabledBorder: OutlineInputBorder(
               borderSide: const BorderSide(color: secondaryLightColor),
               borderRadius: BorderRadius.circular(5)),

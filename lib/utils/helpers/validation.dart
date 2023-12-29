@@ -2,9 +2,9 @@ import 'package:get/utils.dart';
 
 const String firstnameRequiredText = 'First-name required';
 const String lastnameRequiredText = 'Last-name required';
-const String emailRequiredText = 'Email-id required';
+const String emailRequiredText = 'Email Required';
 const String phonenoRequiredText = 'Phone-number required';
-const String passwordRequiredText = 'Password required';
+const String passwordRequiredText = 'Password Required';
 const String confirmRequiredText = 'Confirm password required';
 const String emiratesRequiredText = 'Emirates-id or Passport required';
 
