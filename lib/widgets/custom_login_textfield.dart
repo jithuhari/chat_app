@@ -48,10 +48,12 @@ class CustomLoginTextField extends StatelessWidget {
         controller: controller,
         cursorColor: primaryColor,
         obscureText: obscureText,
+        obscuringCharacter: '*',
         autovalidateMode: autovalidateMode,
         decoration: InputDecoration(
+
           errorStyle: AppTheme.lightTheme.textTheme.labelSmall
-              ?.copyWith(color: errorColor),
+              ?.copyWith(color: errorColor,fontSize: 12),
           fillColor: backgroundColor,
           filled: true,
           labelText: labelText,

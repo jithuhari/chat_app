@@ -134,7 +134,7 @@ class SignInController extends GetxController with SnackbarMixin {
           passwordController.clear();
         } else if (response.message == "Failed") {
           debugPrint(response.errors['errorMessage']);
-          showErrorSnackbar( message: errorOccuredText);
+          showErrorSnackbar(message: errorOccuredText);
         }
       } catch (e) {
         return catchErrorSection(e);
@@ -159,14 +159,19 @@ class SignInController extends GetxController with SnackbarMixin {
               if (retryCount > 0) {
                 _retryCount.value = retryCount - 1;
                 update();
-                showErrorSnackbar(
-                 
-                  message:
-                      "incorrect Email-id or password, $retryCount attempts remaing  ",
-                );
+                if (retryCount == 0) {
+                  showErrorSnackbar(
+                    message:
+                        "incorrect Email-id or password, No attempts remaing",
+                  );
+                } else {
+                  showErrorSnackbar(
+                    message:
+                        "incorrect Email-id or password, $retryCount attempts remaing  ",
+                  );
+                }
               } else if (retryCount == 0) {
                 showErrorSnackbar(
-                  
                   message:
                       "You have exceeded the total number of attempts. Please Change your password",
                 );
@@ -179,7 +184,6 @@ class SignInController extends GetxController with SnackbarMixin {
       } catch (e) {
         debugPrint('Error decoding JSON: ${e.toString()}');
         showErrorSnackbar(
-          
           message: e.toString(),
         );
         return e.toString();

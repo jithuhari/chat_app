@@ -62,12 +62,14 @@ class SignInScreen extends StatelessWidget {
                           // SvgPicture.asset(
                           //   "assets/svg/NMS.svg",
                           // ),
-                          Text('Hi there !',
+                          Text('Hi there!',
                               style: AppTheme.lightTheme.textTheme.headlineLarge
-                                  ?.copyWith(color: Colors.black)),
+                                  ?.copyWith(
+                                      color: Colors.black, fontSize: 32)),
                           Text('Welcome back.',
                               style: AppTheme.lightTheme.textTheme.headlineLarge
-                                  ?.copyWith(color: Colors.black)),
+                                  ?.copyWith(
+                                      color: Colors.black, fontSize: 32)),
                         ],
                       ),
                     ),
@@ -115,6 +117,7 @@ class SignInScreen extends StatelessWidget {
                                         ? Icons.visibility_outlined
                                         : Icons.visibility_off_outlined,
                                     color: secondaryMediumColor,
+                                    size: 24,
                                   ),
                                   onPressed: () {
                                     controller.onPasswordVisible();

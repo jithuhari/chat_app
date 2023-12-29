@@ -8,14 +8,14 @@ import '../utils/utils.dart';
 mixin SnackbarMixin on GetxController {
   showErrorSnackbar({required String message}) {
     Flushbar(
-      padding: const EdgeInsets.fromLTRB(20, 16, 16, 16),
+      padding: const EdgeInsets.fromLTRB(20, 18, 18, 18),
       titleColor: secondaryColor,
       messageColor: errorColorText,
       icon: SvgPicture.asset(
         "assets/svg/error.svg",
       ),
       // title: title,
-      titleSize: 18,
+      // titleSize: 18,
       message: message,
       messageSize: 12,
       duration: const Duration(seconds: 3),
@@ -25,7 +25,6 @@ mixin SnackbarMixin on GetxController {
       borderColor: Colors.transparent,
       isDismissible: true,
       blockBackgroundInteraction: true,
-      
     ).show(Get.context!);
   }
 
