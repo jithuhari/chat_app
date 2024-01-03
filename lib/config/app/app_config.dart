@@ -6,12 +6,16 @@ class NMSAppConfig {
   final String backendBaseURL;
   final String serviceUrl;
   final String httpScheme;
+  final String nmsChatAppBaseURL;
+  final String nmsChatAppServiceUrl;
   // final String encryptKey;
   // final String googleApiKey;
 
   const NMSAppConfig(
       {required this.backendBaseURL,
+      required this.nmsChatAppServiceUrl,
       required this.serviceUrl,
+      required this.nmsChatAppBaseURL,
       required this.httpScheme,
       // required this.encryptKey,
       // required this.googleApiKey
@@ -22,6 +26,8 @@ class NMSAppConfigManager {
   static NMSAppConfig _getDevConfig() {
     return const NMSAppConfig(
       backendBaseURL: "13.200.132.41:7070",
+      nmsChatAppBaseURL:"103.12.1.151:4321",
+      nmsChatAppServiceUrl:"api",
       serviceUrl: "api/v1",
       httpScheme: "http",
       // encryptKey: "jsbrandomsecretk",
@@ -32,6 +38,8 @@ class NMSAppConfigManager {
   static NMSAppConfig _getProdConfig() {
     return const NMSAppConfig(
       backendBaseURL: "13.200.132.41:7070",
+      nmsChatAppBaseURL:"103.12.1.151:4321",
+      nmsChatAppServiceUrl:"api",
       serviceUrl: "api/v1",
       httpScheme: "http",
       // encryptKey: "jsbrandomsecretk",

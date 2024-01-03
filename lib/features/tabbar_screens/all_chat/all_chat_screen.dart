@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:get/get.dart';
 
@@ -93,13 +94,51 @@ class AllChatScreen extends StatelessWidget {
             body: ListView.builder(
                 itemCount: 10,
                 itemBuilder: (context, index) {
-                  return CustomCard(
-                      // chatModel: widget.chatModels[index],
-                      // sourceChat: widget.sourceChat,
-                      );
+                  return Slidable(
+                    startActionPane:
+                        ActionPane(motion: const StretchMotion(), children: [
+                      SlidableAction(
+                        onPressed: (context) {
+                          controller.onDissmissed();
+                        },
+                        backgroundColor: Colors.green,
+                        icon: Icons.share,
+                        label: 'Share',
+                      ),
+                       SlidableAction(
+                        onPressed: (context) {
+                          controller.onDissmissed();
+                        },
+                        backgroundColor: Colors.blue,
+                        icon: Icons.archive,
+                        label: 'archive',
+                      ),
+                      
+                    ]),
+
+                    endActionPane:ActionPane(motion: const BehindMotion(), children: [
+                      SlidableAction(
+                        onPressed: (context) {
+                          controller.onDissmissed();
+                        },
+                        backgroundColor: Colors.red,
+                        icon: Icons.delete,
+                        label: 'Delete',
+                      ),
+                      
+                      
+                    ]) ,
+
+                    child: const CustomCard(
+                        // chatModel: widget.chatModels[index],
+                        // sourceChat: widget.sourceChat,
+                        ),
+                  );
                 }),
           );
           // );
         });
   }
 }
+
+
