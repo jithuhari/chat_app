@@ -38,28 +38,46 @@ class AllChatScreen extends StatelessWidget {
               buttonSize: const Size(48, 48),
               //animatedIcon: AnimatedIcons.add_event,
               icon: Icons.add,
-              overlayColor: Colors.black,
+              overlayColor: Colors.white,
               overlayOpacity: 0.4,
               spacing: 5,
               spaceBetweenChildren: 5,
               //openCloseDial: controller.isDialOpen,
               iconTheme: const IconThemeData(
                 color: Colors.white,
-                size: 36,
+                size: 24,
               ),
               backgroundColor: primaryColor,
               children: [
                 SpeedDialChild(
-                    child: const Icon(Icons.mail),
+                    backgroundColor: primaryColor,
+                    labelBackgroundColor: Colors.transparent,
+                    labelStyle: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700),
+                    child: const Icon(
+                      Icons.group_outlined,
+                      color: Colors.white,
+                      size: 24,
+                    ),
+                    label: 'New Group',
                     onTap: () {
                       debugPrint('tapped');
                     }),
                 SpeedDialChild(
-                  child: const Icon(Icons.call),
-                ),
-                SpeedDialChild(
-                  child: const Icon(Icons.copy),
-                ),
+                    backgroundColor: primaryColor,
+                    child: const Icon(
+                      Icons.add,
+                      color: Colors.white,
+                      size: 24,
+                    ),
+                    labelBackgroundColor: Colors.transparent,
+                    labelStyle: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700),
+                    label: 'New Chat'),
               ],
             ),
 
