@@ -33,6 +33,50 @@ class _ChatMainLayoutScreenState extends State<ChatMainLayoutScreen>
           return SafeArea(
             child: Scaffold(
               appBar: AppBar(
+                bottom: PreferredSize(
+                  preferredSize: Size.fromHeight(AppBar().preferredSize.height/1.5),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 22, right: 21,bottom: 5),
+                    child: Container(
+                      height: 34,
+                      width: 189,
+                      decoration: BoxDecoration(
+                        color: messageColor,
+                        borderRadius: BorderRadius.circular(
+                          5.0,
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: TabBar(
+                          controller: _controller,
+                          indicator: BoxDecoration(
+                            borderRadius: BorderRadius.circular(
+                              5.0,
+                            ),
+                            color: Colors.white,
+                          ),
+                          labelColor: primaryColor,
+                          labelStyle: const TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.w700),
+                          unselectedLabelStyle: const TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.w400),
+                          dividerColor: messageColor,
+                          indicatorSize: TabBarIndicatorSize.tab,
+                          unselectedLabelColor: Colors.white,
+                          tabs: const [
+                            Tab(
+                              text: 'All Chats',
+                            ),
+                            Tab(
+                              text: 'Groups',
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
                 backgroundColor: const Color(0xffFAFAFA),
                 title: const Padding(
                   padding: EdgeInsets.only(left: 10.0),
@@ -100,7 +144,6 @@ class _ChatMainLayoutScreenState extends State<ChatMainLayoutScreen>
                       })
                 ],
               ),
-
               body: Column(
                 children: [
                   // Row(
@@ -124,74 +167,58 @@ class _ChatMainLayoutScreenState extends State<ChatMainLayoutScreen>
                   //     )
                   //   ],
                   // ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 22, right: 21),
-                    child: Container(
-                      height: 34,
-                      width: 189,
-                      decoration: BoxDecoration(
-                        color: messageColor,
-                        borderRadius: BorderRadius.circular(
-                          5.0,
-                        ),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(2.0),
-                        child: TabBar(
-                          controller: _controller,
-                          indicator: BoxDecoration(
-                            borderRadius: BorderRadius.circular(
-                              5.0,
-                            ),
-                            color: Colors.white,
-                          ),
-                          labelColor: primaryColor,
-                          labelStyle: const TextStyle(fontSize: 14,fontWeight: FontWeight.w700),
-                          unselectedLabelStyle:const TextStyle(fontSize: 14,fontWeight: FontWeight.w400) ,
-                          dividerColor: messageColor,
-                          indicatorSize: TabBarIndicatorSize.tab,
-                          unselectedLabelColor: Colors.white,
-                          tabs: const [
-                            Tab(
-                              text: 'All Chats',
-                            ),
-                            Tab(
-                              text: 'Groups',
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
+                  // Padding(
+                  //   padding: const EdgeInsets.only(left: 22, right: 21),
+                  //   child: Container(
+                  //     height: 34,
+                  //     width: 189,
+                  //     decoration: BoxDecoration(
+                  //       color: messageColor,
+                  //       borderRadius: BorderRadius.circular(
+                  //         5.0,
+                  //       ),
+                  //     ),
+                  //     child: Padding(
+                  //       padding: const EdgeInsets.all(2.0),
+                  //       child: TabBar(
+                  //         controller: _controller,
+                  //         indicator: BoxDecoration(
+                  //           borderRadius: BorderRadius.circular(
+                  //             5.0,
+                  //           ),
+                  //           color: Colors.white,
+                  //         ),
+                  //         labelColor: primaryColor,
+                  //         labelStyle: const TextStyle(
+                  //             fontSize: 14, fontWeight: FontWeight.w700),
+                  //         unselectedLabelStyle: const TextStyle(
+                  //             fontSize: 14, fontWeight: FontWeight.w400),
+                  //         dividerColor: messageColor,
+                  //         indicatorSize: TabBarIndicatorSize.tab,
+                  //         unselectedLabelColor: Colors.white,
+                  //         tabs: const [
+                  //           Tab(
+                  //             text: 'All Chats',
+                  //           ),
+                  //           Tab(
+                  //             text: 'Groups',
+                  //           ),
+                  //         ],
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
                   Expanded(
                     child: TabBarView(
                         physics: const NeverScrollableScrollPhysics(),
                         controller: _controller,
                         children: const [
-                          // const CameraScreen(),
-                          // ChatScreen(
-                          //   chatModels: widget.chatModels,
-                          //   sourceChat: widget.sourceChat,
-                          // ),
                           AllChatScreen(),
                           Center(child: Text('Groups')),
                         ]),
                   ),
                 ],
               ),
-              // body:
-
-              // TabBarView(controller: _controller, children: const [
-              //   // const CameraScreen(),
-              //   // ChatScreen(
-              //   //   chatModels: widget.chatModels,
-              //   //   sourceChat: widget.sourceChat,
-              //   // ),
-              //   AllChatScreen(),
-              //   Center(child: Text('Groups')),
-
-              // ]
-              // ),
             ),
           );
         });
