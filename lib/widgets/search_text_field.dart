@@ -37,7 +37,7 @@ class SearchTextField extends StatelessWidget {
         style: Theme.of(context)
             .textTheme
             .bodyMedium
-            ?.copyWith(color: Colors.grey),
+            ?.copyWith(color: Colors.black,fontSize: 16,fontWeight: FontWeight.w400),
         decoration: InputDecoration(
           hintText: "Search",
           contentPadding:
@@ -49,8 +49,8 @@ class SearchTextField extends StatelessWidget {
               onPressed: onClear,
               icon: Image.asset("assets/png/search.png")),
           focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Color(0xFFE4E4E4), width: 1.0),
-            borderRadius: BorderRadius.circular(10),
+            borderSide: const BorderSide(color: primaryColor, width: 1.0),
+            borderRadius: BorderRadius.circular(5),
           ),
           enabledBorder: OutlineInputBorder(
             borderSide: const BorderSide(color: Color(0xFFE4E4E4), width: 1.0),
