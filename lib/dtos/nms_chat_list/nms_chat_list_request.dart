@@ -7,7 +7,7 @@ class NMSChatListRequest {
 
   Map<String, String> toMap() {
     return {
-      'senderId': senderId,
+      'sender_id': senderId,
     };
   }
 }

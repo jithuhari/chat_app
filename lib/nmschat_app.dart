@@ -4,6 +4,7 @@ import 'controller/app_controller.dart';
 import 'flavors.dart';
 import 'package:flutter/services.dart';
 import 'repository/api_repository.dart';
+import 'repository/nms_chat_api_repository.dart';
 import 'utils/routes.dart';
 import 'utils/screen_orientation.dart';
 import 'utils/theme/app_theme.dart';
@@ -19,8 +20,9 @@ Future<void> initNMSChatApp() async {
 Future<void> initializeAppControllers() async {
   Get.put<ApiRepository>(ApiRepositoryImpl(), permanent: true);
   debugPrint("NMS chat app : Initialized");
-   Get.put(AppController(), permanent: true);
-  debugPrint("JustBorrowApp : AppController sucessfully initialized");
+  Get.put<NMSChatApiRepository>(NMSApiRepositoryImpl(), permanent: true);
+  Get.put(AppController(), permanent: true);
+  debugPrint("NMS chat app : AppController sucessfully initialized");
 }
 
 class NMSChatApp extends StatelessWidget {

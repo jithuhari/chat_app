@@ -35,12 +35,14 @@ class AllChatScreen extends StatelessWidget {
 
             floatingActionButton: SpeedDial(
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
+                  borderRadius: BorderRadius.circular(7)),
               buttonSize: const Size(48, 48),
               //animatedIcon: AnimatedIcons.add_event,
               icon: Icons.add,
-              overlayColor: Colors.white,
-              overlayOpacity: 0.4,
+              activeIcon: Icons.close,
+              childrenButtonSize: const Size(48, 58),
+              overlayColor: Colors.black,
+              overlayOpacity: 0.8,
               spacing: 5,
               spaceBetweenChildren: 5,
               //openCloseDial: controller.isDialOpen,
@@ -51,15 +53,18 @@ class AllChatScreen extends StatelessWidget {
               backgroundColor: primaryColor,
               children: [
                 SpeedDialChild(
-                    backgroundColor: primaryColor,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(7)),
+                    backgroundColor: Colors.white,
                     labelBackgroundColor: Colors.transparent,
+                    labelShadow: [],
                     labelStyle: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 18,
+                        color: Colors.white,
+                        fontSize: 16,
                         fontWeight: FontWeight.w700),
                     child: const Icon(
                       Icons.group_outlined,
-                      color: Colors.white,
+                      color: primaryColor,
                       size: 24,
                     ),
                     label: 'New Group',
@@ -67,16 +72,19 @@ class AllChatScreen extends StatelessWidget {
                       debugPrint('tapped');
                     }),
                 SpeedDialChild(
-                    backgroundColor: primaryColor,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(7)),
+                    backgroundColor: Colors.white,
                     child: const Icon(
-                      Icons.add,
-                      color: Colors.white,
+                      Icons.chat_bubble_outline,
+                      color: primaryColor,
                       size: 24,
                     ),
                     labelBackgroundColor: Colors.transparent,
+                    labelShadow: [],
                     labelStyle: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 18,
+                        color: Colors.white,
+                        fontSize: 16,
                         fontWeight: FontWeight.w700),
                     label: 'New Chat'),
               ],
@@ -105,7 +113,7 @@ class AllChatScreen extends StatelessWidget {
                         icon: Icons.share,
                         label: 'Share',
                       ),
-                       SlidableAction(
+                      SlidableAction(
                         onPressed: (context) {
                           controller.onDissmissed();
                         },
@@ -113,10 +121,9 @@ class AllChatScreen extends StatelessWidget {
                         icon: Icons.archive,
                         label: 'archive',
                       ),
-                      
                     ]),
-
-                    endActionPane:ActionPane(motion: const BehindMotion(), children: [
+                    endActionPane:
+                        ActionPane(motion: const BehindMotion(), children: [
                       SlidableAction(
                         onPressed: (context) {
                           controller.onDissmissed();
@@ -125,14 +132,13 @@ class AllChatScreen extends StatelessWidget {
                         icon: Icons.delete,
                         label: 'Delete',
                       ),
-                      
-                      
-                    ]) ,
-
+                    ]),
                     child: const CustomCard(
-                        // chatModel: widget.chatModels[index],
-                        // sourceChat: widget.sourceChat,
-                        ),
+                      name: 'Cody Fisher',
+                      // name: 'controller.chatListModelData!.firstName',
+                      // chatModel: widget.chatModels[index],
+                      // sourceChat: widget.sourceChat,
+                    ),
                   );
                 }),
           );
@@ -140,5 +146,3 @@ class AllChatScreen extends StatelessWidget {
         });
   }
 }
-
-

@@ -24,11 +24,13 @@ class NMSChatApiBaseHelper {
 
       if (params == {}) {
         completeUrl = '$_baseUrl$endpoint';
+        
       } else {
         String queryString = params.entries
             .map((entry) => '${entry.key}=${Uri.encodeComponent(entry.value)}')
             .join('&');
         completeUrl = '$_baseUrl$endpoint?$queryString';
+        debugPrint(completeUrl);
       }
 
       var response = await http.get(Uri.parse(completeUrl),

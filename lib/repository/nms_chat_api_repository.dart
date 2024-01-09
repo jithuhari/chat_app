@@ -11,7 +11,7 @@ abstract class NMSChatApiRepository extends GetxController {
       {required NMSChatListRequest request});
 }
 
-class ApiRepositoryImpl extends GetxController implements NMSChatApiRepository {
+class NMSApiRepositoryImpl extends GetxController implements NMSChatApiRepository {
   final _helper = NMSChatApiBaseHelper();
 
   final Map<String, String> _headersWithoutToken = {
@@ -22,6 +22,7 @@ class ApiRepositoryImpl extends GetxController implements NMSChatApiRepository {
   Future<NMSChatListResponse> fetchChatList(
       {required NMSChatListRequest request}) async {
     final response = await _helper.get(
+      headers: _headersWithoutToken,
       endpoint: ApiEndPoints.chatList,
       params: request.toMap(),
     );

@@ -9,10 +9,10 @@ class ChatListModel {
     String phone;
     int status;
     dynamic profileImage;
-    DateTime createdAt;
-    DateTime updatedAt;
+    String createdAt;
+    String updatedAt;
     String message;
-    DateTime lastMessageTime;
+    String lastMessageTime;
     String rowNum;
 
     ChatListModel({
@@ -44,10 +44,10 @@ class ChatListModel {
         phone: json["phone"],
         status: json["status"],
         profileImage: json["profile_image"],
-        createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"]),
+        createdAt: json["created_at"],
+        updatedAt: json["updated_at"],
         message: json["message"],
-        lastMessageTime: DateTime.parse(json["last_message_time"]),
+        lastMessageTime: json["last_message_time"],
         rowNum: json["row_num"],
     );
 
@@ -62,10 +62,10 @@ class ChatListModel {
         "phone": phone,
         "status": status,
         "profile_image": profileImage,
-        "created_at": createdAt.toIso8601String(),
-        "updated_at": updatedAt.toIso8601String(),
+        "created_at": createdAt,
+        "updated_at": updatedAt,
         "message": message,
-        "last_message_time": lastMessageTime.toIso8601String(),
+        "last_message_time": lastMessageTime,
         "row_num": rowNum,
     };
 }

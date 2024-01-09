@@ -4,11 +4,11 @@ import 'package:nms_chat/utils/utils.dart';
 // import 'package:whatts_app/screens/individual_screen/individual_screen.dart';
 
 class CustomCard extends StatelessWidget {
-  const CustomCard({super.key});
+  const CustomCard({super.key, required this.name});
 
   // final ChatModel chatModel;
   // final ChatModel sourceChat;
-
+  final String name;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -25,10 +25,10 @@ class CustomCard extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
               color: cardColor, borderRadius: BorderRadius.circular(10)),
-          child: const Column(
+          child:  Column(
             children: [
               ListTile(
-                leading: CircleAvatar(
+                leading: const CircleAvatar(
                     radius: 30,
                     
                     backgroundColor: Colors.blueGrey,
@@ -37,17 +37,17 @@ class CustomCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Cody Fisher',
-                      style: TextStyle(
+                      name,
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
 
-                   Text('4.00 pm',style: TextStyle(fontSize: 12,color:messageColor ),),
+                   const Text('4.00 pm',style: TextStyle(fontSize: 12,color:messageColor ),),
                   ],
                 ),
-                subtitle: Row(
+                subtitle: const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
