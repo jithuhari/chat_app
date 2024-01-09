@@ -8,3 +8,6 @@ FutureOr<void> main() async {
   await initNMSChatApp();
   runApp(const NMSChatApp());
 }
+
+// testing first commit
+// testing second commit
