@@ -1,13 +1,21 @@
 class NMSChatListRequest {
-  String senderId;
-
   NMSChatListRequest({
     required this.senderId,
+    required this.page,
+    required this.size,
   });
 
-  Map<String, String> toMap() {
-    return {
-      'sender_id': senderId,
+  String senderId;
+  String page;
+  String size;
+
+  Map<String, dynamic> toBody() {
+    final map = {
+      "data": {
+        "sender_id": senderId,
+      },
+      "pagination": {"page": page, "size": size}
     };
+    return map;
   }
 }

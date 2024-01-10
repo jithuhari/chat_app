@@ -4,11 +4,12 @@ import 'package:nms_chat/utils/utils.dart';
 // import 'package:whatts_app/screens/individual_screen/individual_screen.dart';
 
 class CustomCard extends StatelessWidget {
-  const CustomCard({super.key, required this.name});
+  const CustomCard({super.key, required this.name, required this.message});
 
   // final ChatModel chatModel;
   // final ChatModel sourceChat;
   final String name;
+  final String message;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -25,12 +26,11 @@ class CustomCard extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
               color: cardColor, borderRadius: BorderRadius.circular(10)),
-          child:  Column(
+          child: Column(
             children: [
               ListTile(
                 leading: const CircleAvatar(
                     radius: 30,
-                    
                     backgroundColor: Colors.blueGrey,
                     backgroundImage: AssetImage('assets/png/person.jpg')),
                 title: Row(
@@ -43,17 +43,19 @@ class CustomCard extends StatelessWidget {
                         fontWeight: FontWeight.w700,
                       ),
                     ),
-
-                   const Text('4.00 pm',style: TextStyle(fontSize: 12,color:messageColor ),),
+                    const Text(
+                      '4.00 pm',
+                      style: TextStyle(fontSize: 12, color: messageColor),
+                    ),
                   ],
                 ),
-                subtitle: const Row(
+                subtitle: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
                       child: Text(
-                        'Ut enim ad minim veniam, quis nost',
-                        style: TextStyle(
+                        message,
+                        style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
                             color: messageColor),
@@ -61,18 +63,24 @@ class CustomCard extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    Icon(
+                    const Icon(
                       Icons.done_all,
                       color: messageColor,
                       size: 18,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 3,
                     ),
-                    CircleAvatar(
+                    const CircleAvatar(
                       radius: 12,
                       backgroundColor: primaryColor,
-                      child: Text('38',style: TextStyle(fontSize: 12,fontWeight: FontWeight.w500,color: Colors.white),),
+                      child: Text(
+                        '38',
+                        style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white),
+                      ),
                     )
                   ],
                 ),

@@ -100,7 +100,7 @@ class AllChatScreen extends StatelessWidget {
             //       //         builder: (builder) => const SelectContactScreen()));
             //     }),
             body: ListView.builder(
-                itemCount: 10,
+                itemCount: controller.chatListModelData.length,
                 itemBuilder: (context, index) {
                   return Slidable(
                     startActionPane:
@@ -133,9 +133,10 @@ class AllChatScreen extends StatelessWidget {
                         label: 'Delete',
                       ),
                     ]),
-                    child: const CustomCard(
-                      name: 'Cody Fisher',
-                      // name: 'controller.chatListModelData!.firstName',
+                    child: CustomCard(
+                      // name: 'Cody Fisher',
+                      name: controller.chatListModelData[index].firstName,
+                      message: controller.chatListModelData[index].message,
                       // chatModel: widget.chatModels[index],
                       // sourceChat: widget.sourceChat,
                     ),

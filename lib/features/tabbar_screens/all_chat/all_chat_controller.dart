@@ -7,8 +7,13 @@ import '../../../models/chat_list/chat_list_model.dart';
 import '../../../repository/nms_chat_api_repository.dart';
 
 class AllChatController extends GetxController with SnackbarMixin {
-  final _chatListModelData = Rx<ChatListModel?>(null);
-  ChatListModel? get chatListModelData => _chatListModelData.value;
+  // final _chatListModelData = Rx<ChatData?>(null);
+  // ChatData? get chatListModelData => _chatListModelData.value;
+
+   final _chatListModelData =
+      (List<ChatData>.empty()).obs;
+  List<ChatData> get chatListModelData =>
+      _chatListModelData;
 
   final isDialOpen = ValueNotifier(false);
 
@@ -27,21 +32,14 @@ class AllChatController extends GetxController with SnackbarMixin {
   fetchChatList() async {
     _isLoading.value = true;
     try {
-      final request = NMSChatListRequest(senderId: '1');
+      final request = NMSChatListRequest(senderId: '1', page: '1', size: '10');
       final response =
           await NMSChatApiRepository.to.fetchChatList(request: request);
       if (response.status == 200) {
-        if (response.data != null && response.data.isNotEmpty) {
-          _chatListModelData.value =
-              response.data[0]; // Assuming you want the first item
-          debugPrint(
-              "Categorylist-- length  ${_chatListModelData.value!.firstName}");
-        } else {
-          // Handle the case where the response data is empty or null
-        }
-        // _chatListModelData.value = response.data;
-        // debugPrint(
-        //     "Categorylist-- length  ${_chatListModelData.value!.firstName}");
+        
+        _chatListModelData.value = response.data;
+        debugPrint(
+            "Categorylist-- length  ${_chatListModelData[0].firstName}");
         // if (_chatListModelData!.content.isNotEmpty) {
         //   for (int i = 0; i < categoryListModelData!.content.length; i++) {
         //     _categoryListModelDataContent

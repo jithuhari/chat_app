@@ -1,4 +1,36 @@
-class ChatListModel {
+// class ChatListModel {
+//     // String timestamp;
+//     // int status;
+//     // String message;
+//     // List<ChatData> data;
+//     // Pagination pagination;
+
+//     ChatListModel({
+//         // required this.timestamp,
+//         // required this.status,
+//         // required this.message,
+//         // required this.data,
+//         // required this.pagination,
+//     });
+
+//     factory ChatListModel.fromJson(Map<String, dynamic> json) => ChatListModel(
+//         // timestamp: json["timestamp"],
+//         // status: json["status"],
+//         // message: json["message"],
+//         // data: List<ChatData>.from(json["data"].map((x) => ChatData.fromJson(x))),
+//         // pagination: Pagination.fromJson(json["pagination"]),
+//     );
+
+//     Map<String, dynamic> toJson() => {
+//         // "timestamp": timestamp,
+//         // "status": status,
+//         // "message": message,
+//         // "data": List<dynamic>.from(data.map((x) => x.toJson())),
+//         // "pagination": pagination.toJson(),
+//     };
+// }
+
+class ChatData {
     int userId;
     String userUniqueId;
     String orgId;
@@ -9,13 +41,13 @@ class ChatListModel {
     String phone;
     int status;
     dynamic profileImage;
-    String createdAt;
-    String updatedAt;
+    DateTime createdAt;
+    DateTime updatedAt;
     String message;
-    String lastMessageTime;
+    DateTime lastMessageTime;
     String rowNum;
 
-    ChatListModel({
+    ChatData({
         required this.userId,
         required this.userUniqueId,
         required this.orgId,
@@ -33,7 +65,7 @@ class ChatListModel {
         required this.rowNum,
     });
 
-    factory ChatListModel.fromJson(Map<String, dynamic> json) => ChatListModel(
+    factory ChatData.fromJson(Map<String, dynamic> json) => ChatData(
         userId: json["user_id"],
         userUniqueId: json["user_unique_id"],
         orgId: json["orgId"],
@@ -44,10 +76,10 @@ class ChatListModel {
         phone: json["phone"],
         status: json["status"],
         profileImage: json["profile_image"],
-        createdAt: json["created_at"],
-        updatedAt: json["updated_at"],
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
         message: json["message"],
-        lastMessageTime: json["last_message_time"],
+        lastMessageTime: DateTime.parse(json["last_message_time"]),
         rowNum: json["row_num"],
     );
 
@@ -62,10 +94,38 @@ class ChatListModel {
         "phone": phone,
         "status": status,
         "profile_image": profileImage,
-        "created_at": createdAt,
-        "updated_at": updatedAt,
+        "created_at": createdAt.toIso8601String(),
+        "updated_at": updatedAt.toIso8601String(),
         "message": message,
-        "last_message_time": lastMessageTime,
+        "last_message_time": lastMessageTime.toIso8601String(),
         "row_num": rowNum,
+    };
+}
+
+class Pagination {
+    int totalPages;
+    String totalElements;
+    String currentPage;
+    String pageSize;
+
+    Pagination({
+        required this.totalPages,
+        required this.totalElements,
+        required this.currentPage,
+        required this.pageSize,
+    });
+
+    factory Pagination.fromJson(Map<String, dynamic> json) => Pagination(
+        totalPages: json["totalPages"],
+        totalElements: json["totalElements"],
+        currentPage: json["currentPage"],
+        pageSize: json["pageSize"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "totalPages": totalPages,
+        "totalElements": totalElements,
+        "currentPage": currentPage,
+        "pageSize": pageSize,
     };
 }

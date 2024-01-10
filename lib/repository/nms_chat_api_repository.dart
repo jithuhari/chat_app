@@ -21,13 +21,14 @@ class NMSApiRepositoryImpl extends GetxController implements NMSChatApiRepositor
   @override
   Future<NMSChatListResponse> fetchChatList(
       {required NMSChatListRequest request}) async {
-    final response = await _helper.get(
+      
+    final response = await _helper.postWithBody(
       headers: _headersWithoutToken,
       endpoint: ApiEndPoints.chatList,
-      params: request.toMap(),
+      params: {},
+      body: request.toBody(),
     );
-    debugPrint("fetch category- $response");
-
+    debugPrint("response $response");
     return NMSChatListResponse.fromJson(response);
   }
 }
