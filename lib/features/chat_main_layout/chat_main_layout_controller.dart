@@ -18,7 +18,7 @@ class ChatMainLayOutController extends GetxController {
   bool get searchDisplayValue => _searchDisplayValue.value;
 
   searchDisplay() {
-    _searchDisplayValue.value = true;
+    _searchDisplayValue.value = !_searchDisplayValue.value;
     update();
   }
 }

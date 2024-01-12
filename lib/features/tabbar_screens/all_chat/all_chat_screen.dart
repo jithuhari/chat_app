@@ -137,6 +137,7 @@ class AllChatScreen extends StatelessWidget {
                       // name: 'Cody Fisher',
                       name: controller.chatListModelData[index].firstName,
                       message: controller.chatListModelData[index].message,
+                      lastMessageTime: controller.formattedLastMessageTime[index],
                       // chatModel: widget.chatModels[index],
                       // sourceChat: widget.sourceChat,
                     ),

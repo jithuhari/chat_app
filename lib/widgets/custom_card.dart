@@ -4,12 +4,17 @@ import 'package:nms_chat/utils/utils.dart';
 // import 'package:whatts_app/screens/individual_screen/individual_screen.dart';
 
 class CustomCard extends StatelessWidget {
-  const CustomCard({super.key, required this.name, required this.message});
+  const CustomCard(
+      {super.key,
+      required this.name,
+      required this.message,
+      required this.lastMessageTime});
 
   // final ChatModel chatModel;
   // final ChatModel sourceChat;
   final String name;
   final String message;
+  final String lastMessageTime;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -43,9 +48,9 @@ class CustomCard extends StatelessWidget {
                         fontWeight: FontWeight.w700,
                       ),
                     ),
-                    const Text(
-                      '4.00 pm',
-                      style: TextStyle(fontSize: 12, color: messageColor),
+                    Text(
+                      lastMessageTime,
+                      style: const TextStyle(fontSize: 12, color: messageColor),
                     ),
                   ],
                 ),

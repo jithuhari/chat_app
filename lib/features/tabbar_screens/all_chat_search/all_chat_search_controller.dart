@@ -7,10 +7,7 @@ import '../../../mixins/snackbar_mixin.dart';
 import '../../../models/chat_list/chat_list_model.dart';
 import '../../../repository/nms_chat_api_repository.dart';
 
-class AllChatController extends GetxController with SnackbarMixin {
-  // final _chatListModelData = Rx<ChatData?>(null);
-  // ChatData? get chatListModelData => _chatListModelData.value;
-
+class AllChatSearchController extends GetxController with SnackbarMixin {
   final _formattedLastMessageTime = (List<dynamic>.empty()).obs;
   List<dynamic> get formattedLastMessageTime => _formattedLastMessageTime;
 
@@ -42,11 +39,9 @@ class AllChatController extends GetxController with SnackbarMixin {
         debugPrint("Categorylist-- length  ${_chatListModelData[0].firstName}");
         if (_chatListModelData.isNotEmpty) {
           for (int i = 0; i < chatListModelData.length; i++) {
-            // Parse lastMessageTime string to DateTime
             DateTime lastMessageDateTime =
                 DateTime.parse(chatListModelData[i].lastMessageTime.toString());
 
-            // Add 5 hours and 30 minutes
             lastMessageDateTime = lastMessageDateTime.add(
               const Duration(hours: 5, minutes: 30),
             );
@@ -59,10 +54,6 @@ class AllChatController extends GetxController with SnackbarMixin {
         } else {}
         _isLoading.value = false;
         update();
-        // }
-        // else {
-        //   _isLoading.value = false;
-        //   debugPrint("Error");
       }
     } catch (e) {
       showErrorSnackbar(message: e.toString());
