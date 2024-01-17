@@ -109,24 +109,17 @@ class _ChatMainLayoutScreenState extends State<ChatMainLayoutScreen>
                           Padding(
                             padding: const EdgeInsets.only(right: 16.0),
                             child: InkWell(
-                              onTap: () {
-                                debugPrint('Search');
-                                controller.searchDisplay();
-                              },
-                              child: const Icon(
-                                Icons.search,
-                                size: 24,
-                              ),
-                            ),
+                                onTap: () {
+                                  debugPrint('Search');
+                                  controller.searchDisplay();
+                                },
+                                child: Image.asset("assets/png/search1.png")),
                           ),
-                          const Padding(
-                            padding: EdgeInsets.only(right: 24.0),
-                            child: Icon(
-                              Icons.filter_list,
-                              size: 24,
-                            ),
-                          ),
+                          Padding(
+                              padding: const EdgeInsets.only(right: 24.0),
+                              child: Image.asset("assets/png/sort.png")),
                           PopupMenuButton(
+                              iconColor: iconColor,
                               iconSize: 24,
                               onSelected: (value) {
                                 debugPrint(value);
@@ -171,46 +164,54 @@ class _ChatMainLayoutScreenState extends State<ChatMainLayoutScreen>
                         bottom: PreferredSize(
                             preferredSize: Size.fromHeight(
                                 AppBar().preferredSize.height / .5),
-                            child: Wrap(
-                                direction: Axis.horizontal,
-                                spacing: 8,
-                                alignment: WrapAlignment.start,
-                                children: controller.items
-                                    .map(
-                                      (e) => FilterChip(
-                                        shape: RoundedRectangleBorder(
-                                            side: const BorderSide(
-                                                color: Colors.transparent),
-                                            borderRadius:
-                                                BorderRadius.circular(50)),
-                                        backgroundColor:
-                                            const Color(0xffF1F1F1),
-                                        selectedColor: primaryColor,
-                                        showCheckmark: false,
-                                        label: Text(
-                                          e,
-                                          style: TextStyle(
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.w400,
-                                              color: controller.selectedItem
-                                                      .contains(e)
-                                                  ? Colors.white
-                                                  : const Color(0xff7A7A7A)),
-                                        ),
-                                        selected:
-                                            controller.selectedItem.contains(e),
-                                        onSelected: (value) {
-                                          if (controller.selectedItem
-                                              .contains(e)) {
-                                            controller.selectedItem.remove(e);
-                                          } else {
-                                            controller.selectedItem.add(e);
-                                          }
-                                          controller.update();
-                                        },
-                                      ),
-                                    )
-                                    .toList())),
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 20),
+                              child: SizedBox(
+                                width: MediaQuery.of(context).size.width - 15,
+                                child: Wrap(
+                                    direction: Axis.horizontal,
+                                    spacing: 20,
+                                    alignment: WrapAlignment.start,
+                                    children: controller.items
+                                        .map(
+                                          (e) => FilterChip(
+                                            shape: RoundedRectangleBorder(
+                                                side: const BorderSide(
+                                                    color: Colors.transparent),
+                                                borderRadius:
+                                                    BorderRadius.circular(50)),
+                                            backgroundColor:
+                                                const Color(0xffF1F1F1),
+                                            selectedColor: primaryColor,
+                                            showCheckmark: false,
+                                            label: Text(
+                                              e,
+                                              style: TextStyle(
+                                                  fontSize: 13,
+                                                  fontWeight: FontWeight.w400,
+                                                  color: controller.selectedItem
+                                                          .contains(e)
+                                                      ? Colors.white
+                                                      : const Color(
+                                                          0xff7A7A7A)),
+                                            ),
+                                            selected: controller.selectedItem
+                                                .contains(e),
+                                            onSelected: (value) {
+                                              if (controller.selectedItem
+                                                  .contains(e)) {
+                                                controller.selectedItem
+                                                    .remove(e);
+                                              } else {
+                                                controller.selectedItem.add(e);
+                                              }
+                                              controller.update();
+                                            },
+                                          ),
+                                        )
+                                        .toList()),
+                              ),
+                            )),
                         backgroundColor: const Color(0xffFAFAFA),
                         actions: [
                           Expanded(

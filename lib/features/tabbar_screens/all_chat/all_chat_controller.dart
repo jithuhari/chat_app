@@ -34,7 +34,7 @@ class AllChatController extends GetxController with SnackbarMixin {
   fetchChatList() async {
     _isLoading.value = true;
     try {
-      final request = NMSChatListRequest(senderId: '1', page: '1', size: '10');
+      final request = NMSChatListRequest(senderId: '1', page: '1', size: '100');
       final response =
           await NMSChatApiRepository.to.fetchChatList(request: request);
       if (response.status == 200) {
@@ -51,18 +51,47 @@ class AllChatController extends GetxController with SnackbarMixin {
               const Duration(hours: 5, minutes: 30),
             );
 
-            _formattedLastMessageTime
-                .add(DateFormat('HH:mm').format(lastMessageDateTime));
+            // Get today's date
+            DateTime now = DateTime.now();
+            DateTime today = DateTime(now.year, now.month, now.day);
 
-            debugPrint('-----time------$formattedLastMessageTime');
+            // Calculate the date a week ago
+            DateTime oneWeekAgo = today.subtract(const Duration(days: 7));
+
+            // Format DateTime to a string with the desired format
+            String formattedTime =
+                DateFormat('dd/MM/yyyy').format(lastMessageDateTime);
+
+            // Check if the message was sent today
+            if (lastMessageDateTime.isAfter(today)) {
+              String formattedDay = 'Today';
+              _formattedLastMessageTime.add(formattedDay);
+            } else {
+              // Check if the message was sent yesterday
+              DateTime yesterday = today.subtract(const Duration(days: 1));
+              if (lastMessageDateTime.isAfter(yesterday)) {
+                String formattedDay = 'Yesterday';
+                _formattedLastMessageTime.add(formattedDay);
+              } else {
+                // Check if the message was sent before a week
+                if (lastMessageDateTime.isAfter(oneWeekAgo)) {
+                  // If yes, show the date
+
+                  String formattedDay =
+                      DateFormat('EEEE').format(lastMessageDateTime);
+                  _formattedLastMessageTime.add(formattedDay);
+                } else {
+                  // If not today, yesterday, or before a week, add the formatted time
+                  _formattedLastMessageTime.add(formattedTime);
+                }
+              }
+            }
+
+            debugPrint('-----time/day------${_formattedLastMessageTime[i]}');
           }
         } else {}
         _isLoading.value = false;
         update();
-        // }
-        // else {
-        //   _isLoading.value = false;
-        //   debugPrint("Error");
       }
     } catch (e) {
       showErrorSnackbar(message: e.toString());
