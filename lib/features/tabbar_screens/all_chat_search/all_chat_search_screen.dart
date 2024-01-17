@@ -117,7 +117,7 @@ class AllChatSearchScreen extends StatelessWidget {
                                 ),
                               ]),
                           child: CustomCard(
-                            name: controller.chatListModelData[index].firstName,
+                            name: controller.chatListModelData[index].userName,
                             message:
                                 controller.chatListModelData[index].message,
                             lastMessageTime:
@@ -126,8 +126,8 @@ class AllChatSearchScreen extends StatelessWidget {
                         );
                       }),
                 ),
-                Expanded(
-                  child: const Padding(
+                const Expanded(
+                  child: Padding(
                     padding: EdgeInsets.only(left: 16.0),
                     child: Text('Messages'),
                   ),
