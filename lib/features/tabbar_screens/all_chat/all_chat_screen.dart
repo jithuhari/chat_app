@@ -39,7 +39,7 @@ class AllChatScreen extends StatelessWidget {
               buttonSize: const Size(48, 48),
               //animatedIcon: AnimatedIcons.add_event,
               icon: Icons.add,
-              childPadding: const EdgeInsets.only(right: 5,left: 5),
+              childPadding: const EdgeInsets.only(right: 5, left: 5),
               activeIcon: Icons.close,
               childrenButtonSize: const Size(48, 38),
               overlayColor: Colors.black,
@@ -63,11 +63,7 @@ class AllChatScreen extends StatelessWidget {
                         color: Colors.white,
                         fontSize: 16,
                         fontWeight: FontWeight.w700),
-                    child: const Icon(
-                      Icons.group_outlined,
-                      color: primaryColor,
-                      size: 24,
-                    ),
+                    child: Image.asset("assets/png/groups.png"),
                     label: 'New Group',
                     onTap: () {
                       debugPrint('tapped');
@@ -76,11 +72,7 @@ class AllChatScreen extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(7)),
                     backgroundColor: Colors.white,
-                    child: const Icon(
-                      Icons.chat_bubble_outline,
-                      color: primaryColor,
-                      size: 24,
-                    ),
+                    child: Image.asset("assets/png/chat.png"),
                     labelBackgroundColor: Colors.transparent,
                     labelShadow: [],
                     labelStyle: const TextStyle(
@@ -138,7 +130,8 @@ class AllChatScreen extends StatelessWidget {
                       // name: 'Cody Fisher',
                       name: controller.chatListModelData[index].userName,
                       message: controller.chatListModelData[index].message,
-                      lastMessageTime: controller.formattedLastMessageTime[index],
+                      lastMessageTime:
+                          controller.formattedLastMessageTime[index],
                       // chatModel: widget.chatModels[index],
                       // sourceChat: widget.sourceChat,
                     ),
