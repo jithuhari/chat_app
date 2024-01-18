@@ -22,6 +22,9 @@ class AllChatController extends GetxController with SnackbarMixin {
   final _isLoading = false.obs;
   bool get isLoading => _isLoading.value;
 
+  final _chatUserListLength = 1000.obs;
+  int get chatUserListLength => _chatUserListLength.value;
+
   @override
   void onInit() async {
     await fetchChatList();
@@ -34,14 +37,17 @@ class AllChatController extends GetxController with SnackbarMixin {
   fetchChatList() async {
     _isLoading.value = true;
     try {
-      final request = NMSChatListRequest(senderId: '1', page: '1', size: '100');
+      final request = NMSChatListRequest(
+          senderId: '1', page: 1, size: chatUserListLength);
       final response =
           await NMSChatApiRepository.to.fetchChatList(request: request);
       if (response.status == 200) {
         _chatListModelData.value = response.data;
-        debugPrint("Categorylist-- length  ${_chatListModelData[0].firstName}");
+
+        debugPrint("Categorylist-- length  ${_chatListModelData.length}");
         if (_chatListModelData.isNotEmpty) {
           for (int i = 0; i < chatListModelData.length; i++) {
+            _chatUserListLength.value = _chatListModelData.length;
             // Parse lastMessageTime string to DateTime
             DateTime lastMessageDateTime =
                 DateTime.parse(chatListModelData[i].lastMessageTime.toString());

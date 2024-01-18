@@ -19,6 +19,15 @@ class AllChatSearchController extends GetxController with SnackbarMixin {
   final _isLoading = false.obs;
   bool get isLoading => _isLoading.value;
 
+  final _isSeeMoreActive = false.obs;
+  bool get isSeeMoreActive => _isSeeMoreActive.value;
+
+  final _sizeValue = 1.obs;
+  int get sizeValue => _sizeValue.value;
+
+  final _pageValue = 5.obs;
+  int get pageValue => _pageValue.value;
+
   @override
   void onInit() async {
     await fetchChatList();
@@ -26,17 +35,28 @@ class AllChatSearchController extends GetxController with SnackbarMixin {
     super.onInit();
   }
 
+  onSeeMoreActive() {
+    _isSeeMoreActive.value = true;
+    fetchChatList();
+    update();
+  }
+
   onDissmissed() {}
 
   fetchChatList() async {
     _isLoading.value = true;
     try {
-      final request = NMSChatListRequest(senderId: '1', page: '1', size: '5');
+      final request = NMSChatListRequest(
+          senderId: '1',
+          page:isSeeMoreActive == false ? sizeValue : _sizeValue.value++ ,
+          size: isSeeMoreActive == false ? pageValue : _pageValue.value+5
+          // isSeeMoreActive == false ? sizeValue : _sizeValue.value++
+          );
       final response =
           await NMSChatApiRepository.to.fetchChatList(request: request);
       if (response.status == 200) {
         _chatListModelData.value = response.data;
-        debugPrint("Categorylist-- length  ${_chatListModelData[0].firstName}");
+        debugPrint("Categorylist-- length  ${_chatListModelData.length}");
         if (_chatListModelData.isNotEmpty) {
           for (int i = 0; i < chatListModelData.length; i++) {
             // Parse lastMessageTime string to DateTime

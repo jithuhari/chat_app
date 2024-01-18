@@ -6,8 +6,8 @@ class NMSChatListRequest {
   });
 
   String senderId;
-  String page;
-  String size;
+  int page;
+  int size;
 
   Map<String, dynamic> toBody() {
     final map = {

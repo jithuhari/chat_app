@@ -71,16 +71,17 @@ class AllChatSearchScreen extends StatelessWidget {
                     label: 'New Chat'),
               ],
             ),
-            body: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Padding(
-                  padding: EdgeInsets.only(left: 16.0),
-                  child: Text('Contacts'),
-                ),
-                Expanded(
-                  flex: 2,
-                  child: ListView.builder(
+            body: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(left: 16.0),
+                    child: Text('Contacts'),
+                  ),
+                  ListView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
                       itemCount: controller.chatListModelData.length,
                       itemBuilder: (context, index) {
                         return Slidable(
@@ -125,14 +126,30 @@ class AllChatSearchScreen extends StatelessWidget {
                           ),
                         );
                       }),
-                ),
-                const Expanded(
-                  child: Padding(
+                  TextButton(
+                    onPressed: () {
+                      controller.onSeeMoreActive();
+                      // setState(() {
+                      //   // Toggle between showing 5 cards and all cards
+                      //   showAllCards = !showAllCards;
+
+                      //   if (showAllCards) {
+                      //     visibleCards = allCards;
+                      //   } else {
+                      //     visibleCards = allCards.sublist(0, 5);
+                      //   }
+                      // });
+                    },
+                    child: const Text(
+                        // showAllCards ? 'Show Less' :
+                        'See More'),
+                  ),
+                  const Padding(
                     padding: EdgeInsets.only(left: 16.0),
                     child: Text('Messages'),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           );
           // );
