@@ -6,6 +6,7 @@ import 'package:nms_chat/features/tabbar_screens/all_chat_search/all_chat_search
 
 import '../../../utils/utils.dart';
 import '../../../widgets/custom_card.dart';
+import '../../../widgets/custom_message_card.dart';
 
 class AllChatSearchScreen extends StatelessWidget {
   const AllChatSearchScreen({super.key});
@@ -131,7 +132,7 @@ class AllChatSearchScreen extends StatelessWidget {
                       controller.onSeeMoreActive();
                     },
                     child: const Padding(
-                      padding: EdgeInsets.only(top:8,bottom: 8,right: 16),
+                      padding: EdgeInsets.only(top: 8, bottom: 8, right: 16),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
@@ -151,6 +152,53 @@ class AllChatSearchScreen extends StatelessWidget {
                     padding: EdgeInsets.only(left: 16.0),
                     child: Text('Messages'),
                   ),
+                  ListView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: controller.chatListModelData.length,
+                      itemBuilder: (context, index) {
+                        return Slidable(
+                          startActionPane: ActionPane(
+                              motion: const StretchMotion(),
+                              children: [
+                                SlidableAction(
+                                  onPressed: (context) {
+                                    controller.onDissmissed();
+                                  },
+                                  backgroundColor: Colors.green,
+                                  icon: Icons.share,
+                                  label: 'Share',
+                                ),
+                                SlidableAction(
+                                  onPressed: (context) {
+                                    controller.onDissmissed();
+                                  },
+                                  backgroundColor: Colors.blue,
+                                  icon: Icons.archive,
+                                  label: 'archive',
+                                ),
+                              ]),
+                          endActionPane: ActionPane(
+                              motion: const BehindMotion(),
+                              children: [
+                                SlidableAction(
+                                  onPressed: (context) {
+                                    controller.onDissmissed();
+                                  },
+                                  backgroundColor: Colors.red,
+                                  icon: Icons.delete,
+                                  label: 'Delete',
+                                ),
+                              ]),
+                          child: CustomMessageCard(
+                            name: controller.chatListModelData[index].userName,
+                            message:
+                                controller.chatListModelData[index].message,
+                            lastMessageTime:
+                                controller.formattedLastMessageTime[index],
+                          ),
+                        );
+                      }),
                 ],
               ),
             ),
