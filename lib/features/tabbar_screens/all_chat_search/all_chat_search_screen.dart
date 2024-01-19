@@ -126,23 +126,26 @@ class AllChatSearchScreen extends StatelessWidget {
                           ),
                         );
                       }),
-                  TextButton(
-                    onPressed: () {
+                  GestureDetector(
+                    onTap: () {
                       controller.onSeeMoreActive();
-                      // setState(() {
-                      //   // Toggle between showing 5 cards and all cards
-                      //   showAllCards = !showAllCards;
-
-                      //   if (showAllCards) {
-                      //     visibleCards = allCards;
-                      //   } else {
-                      //     visibleCards = allCards.sublist(0, 5);
-                      //   }
-                      // });
                     },
-                    child: const Text(
-                        // showAllCards ? 'Show Less' :
-                        'See More'),
+                    child: const Padding(
+                      padding: EdgeInsets.only(top:8,bottom: 8,right: 16),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text(
+                            // showAllCards ? 'Show Less' :
+                            'See More',
+                            style: TextStyle(
+                                color: iconColor,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w400),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                   const Padding(
                     padding: EdgeInsets.only(left: 16.0),

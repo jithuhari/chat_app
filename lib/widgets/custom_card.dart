@@ -30,7 +30,7 @@ class CustomCard extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
         child: Container(
           decoration: BoxDecoration(
-              color: cardColor, borderRadius: BorderRadius.circular(10)),
+              color: Colors.white, borderRadius: BorderRadius.circular(10)),
           child: Column(
             children: [
               ListTile(
@@ -50,7 +50,10 @@ class CustomCard extends StatelessWidget {
                     ),
                     Text(
                       lastMessageTime,
-                      style: const TextStyle(fontSize: 12, color: messageColor),
+                      style: const TextStyle(
+                          fontSize: 12,
+                          color: iconColor,
+                          fontWeight: FontWeight.w400),
                     ),
                   ],
                 ),
