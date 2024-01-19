@@ -16,25 +16,11 @@ class NMSSharedPreferences {
     debugPrint('Tokens saved to SharedPreferences');
   }
 
-  //save fcm tocken to shared preference
-  // Future<void> saveFCMTokensToPrefs(String fcmFirebaseToken) async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   await prefs.setString(
-  //       'fcmToken', fcmFirebaseToken);
-  //   debugPrint('fcmToken saved to SharedPreferences');
-  // }
-
 // Get access token from SharedPreferences
   Future<String?> getTokenFromPrefs() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString('accessToken') ?? null;
   }
-
-  //Get FCM token from sharedPreferences
-  // Future<String?> getFCMTokenFromPrefs() async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   return prefs.getString('fcmToken');
-  // }
 
   // Get refresh token from SharedPreferences
   Future<String?> getRefreshTokenFromPrefs() async {
@@ -61,6 +47,8 @@ class JBJWTDecoder {
     // await RefreshTokenApiCall().checkTokenExpiration();
     final authToken = await NMSSharedPreferences().getTokenFromPrefs();
     if (authToken != null) {
+      print(
+          '******************************************************${JwtDecoder.decode(authToken)}++++++++++++');
       return JwtDecoder.decode(authToken);
     }
     return null;
