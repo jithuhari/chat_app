@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'controller/app_controller.dart';
 import 'flavors.dart';
 import 'package:flutter/services.dart';
+import 'managers/auth_token_header/auth_token_header.dart';
 import 'repository/api_repository.dart';
 import 'repository/nms_chat_api_repository.dart';
 import 'utils/routes.dart';
@@ -23,6 +24,8 @@ Future<void> initializeAppControllers() async {
   Get.put<NMSChatApiRepository>(NMSApiRepositoryImpl(), permanent: true);
   Get.put(AppController(), permanent: true);
   debugPrint("NMS chat app : AppController sucessfully initialized");
+  Get.put(NMSAuthTokenHeader(), permanent: true);
+  debugPrint("JNMS chat app : NMSAuthTokenHeader sucessfully initialized");
 }
 
 class NMSChatApp extends StatelessWidget {

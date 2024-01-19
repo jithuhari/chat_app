@@ -4,4 +4,5 @@ class ApiEndPoints {
 
   static const String login = 'auth/login';
   static const String chatList = 'users/messages/list';
+  static const String getEmploy = 'employee/get';
 }

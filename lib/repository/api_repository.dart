@@ -1,6 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../dtos/login/login.dart';
+import '../dtos/login/get_employ/get_employ.dart';
+import '../dtos/login/login_dtos/login.dart';
 import '../managers/api/api.dart';
 
 abstract class ApiRepository extends GetxController {
@@ -11,6 +13,9 @@ abstract class ApiRepository extends GetxController {
   //Signin_Screen 
   Future<SubmitLoginResponse> logInWithEmail(
       {required SubmitLoginRequest request});
+  // signin_employ_details
+  Future<GetEmployResponse> getEmployDetails(
+      {required GetEmpoyRequest request});
 }
 
 class ApiRepositoryImpl extends GetxController implements ApiRepository {
@@ -18,7 +23,7 @@ class ApiRepositoryImpl extends GetxController implements ApiRepository {
 
   final Map<String, String> _headersWithoutToken = {
     'Content-Type': 'application/json',
-    'org-id': 'nintriva'
+    'org-id': 'nintriva',
   };
 
   // final Map<String, String> _header = {'org-id': 'nintriva'};
@@ -34,5 +39,15 @@ class ApiRepositoryImpl extends GetxController implements ApiRepository {
       params: {},
     );
     return SubmitLoginResponse.fromJson(response);
+  }
+
+  @override
+  Future<GetEmployResponse> getEmployDetails(
+      {required GetEmpoyRequest request}) async {
+    final response = await _helper.getWithId(
+      // headers: _headersWithoutToken,
+        endpoint: ApiEndPoints.getEmploy, id: request.toMap());
+    debugPrint("response $response");
+    return GetEmployResponse.fromJson(response);
   }
 }

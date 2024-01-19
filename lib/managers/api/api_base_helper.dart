@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 import '../../config/app/app_config.dart';
+import '../auth_token_header/auth_token_header.dart';
 import 'api.dart';
 
 class ApiBaseHelper {
@@ -32,6 +33,25 @@ class ApiBaseHelper {
           // ?? await JBAuthTokenHeader.to.getAuthTokenHeader(),
           body: jsonEncode(body));
 
+      responseJson = _returnResponse(response);
+    } on SocketException {
+      throw NoNetworkException();
+    }
+    return responseJson;
+  }
+
+  Future<dynamic> getWithId(
+      {required String endpoint,
+      required dynamic id,
+      Map<String, String>? headers}) async {
+    dynamic responseJson;
+    try {
+      String completeUrl = "";
+      completeUrl = '$_baseUrl$endpoint/$id';
+      var response = await http.get(Uri.parse(completeUrl),
+          headers: headers 
+          ?? await NMSAuthTokenHeader.to.getAuthTokenHeader()
+          );
       responseJson = _returnResponse(response);
     } on SocketException {
       throw NoNetworkException();
