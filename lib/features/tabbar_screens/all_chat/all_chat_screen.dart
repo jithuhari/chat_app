@@ -66,7 +66,7 @@ class AllChatScreen extends StatelessWidget {
                     child: Image.asset("assets/png/groups.png"),
                     label: 'New Group',
                     onTap: () {
-                      debugPrint('tapped');
+                      Get.toNamed('new_group_screen');
                     }),
                 SpeedDialChild(
                     onTap: () {
