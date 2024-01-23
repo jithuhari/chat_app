@@ -69,6 +69,9 @@ class AllChatScreen extends StatelessWidget {
                       debugPrint('tapped');
                     }),
                 SpeedDialChild(
+                    onTap: () {
+                      Get.toNamed('/new_chat_screen');
+                    },
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(7)),
                     backgroundColor: Colors.white,

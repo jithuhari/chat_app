@@ -1,34 +1,34 @@
-// class GetEmployModel {
-//     String timestamp;
-//     String requestId;
-//     int status;
-//     String message;
-//     Data data;
+class GetEmployModel {
+    String? timestamp;
+    String? requestId;
+    int? status;
+    String? message;
+    Data data;
 
-//     GetEmployModel({
-//         required this.timestamp,
-//         required this.requestId,
-//         required this.status,
-//         required this.message,
-//         required this.data,
-//     });
+    GetEmployModel({
+         this.timestamp,
+         this.requestId,
+         this.status,
+         this.message,
+        required this.data,
+    });
 
-//     factory GetEmployModel.fromJson(Map<String, dynamic> json) => GetEmployModel(
-//         timestamp: json["timestamp"],
-//         requestId: json["requestId"],
-//         status: json["status"],
-//         message: json["message"],
-//         data: Data.fromJson(json["data"]),
-//     );
+    factory GetEmployModel.fromJson(Map<String, dynamic> json) => GetEmployModel(
+        timestamp: json["timestamp"],
+        requestId: json["requestId"],
+        status: json["status"],
+        message: json["message"],
+        data: Data.fromJson(json["data"]),
+    );
 
-//     Map<String, dynamic> toJson() => {
-//         "timestamp": timestamp,
-//         "requestId": requestId,
-//         "status": status,
-//         "message": message,
-//         "data": data.toJson(),
-//     };
-// }
+    Map<String, dynamic> toJson() => {
+        "timestamp": timestamp,
+        "requestId": requestId,
+        "status": status,
+        "message": message,
+        "data": data.toJson(),
+    };
+}
 
 class CorporateDetails {
     String employeeCode;

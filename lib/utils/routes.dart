@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:nms_chat/features/signin/signin.dart';
 
 import '../features/chat_main_layout/chat_main_layout.dart';
+import '../features/new_chat/new_chat.dart';
 
 List<GetPage> routes() => [
       GetPage(
@@ -12,6 +13,11 @@ List<GetPage> routes() => [
       GetPage(
           name: "/chat_main_layout_screen",
           page: () => const ChatMainLayoutScreen(),
+          transition: Transition.cupertino),
+
+      GetPage(
+          name: "/new_chat_screen",
+          page: () => const NewChatScreen(),
           transition: Transition.cupertino),
 
       //  Sign In/Sign Up Section

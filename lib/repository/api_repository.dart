@@ -44,9 +44,11 @@ class ApiRepositoryImpl extends GetxController implements ApiRepository {
   @override
   Future<GetEmployResponse> getEmployDetails(
       {required GetEmpoyRequest request}) async {
-    final response = await _helper.getWithId(
+    final response = await _helper.get(
       // headers: _headersWithoutToken,
-        endpoint: ApiEndPoints.getEmploy, id: request.toMap());
+        endpoint: ApiEndPoints.getEmploy,
+        params: request.toMap(),
+        );
     debugPrint("response $response");
     return GetEmployResponse.fromJson(response);
   }

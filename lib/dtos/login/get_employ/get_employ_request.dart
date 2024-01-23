@@ -1,9 +1,9 @@
 class GetEmpoyRequest {
-  String? userId;
+  String userId;
 
-  GetEmpoyRequest({this.userId});
+  GetEmpoyRequest({required this.userId});
 
-  dynamic toMap() {
-    return userId;
+   Map<String, String> toMap() {
+    return {"userId": userId,};
   }
 }

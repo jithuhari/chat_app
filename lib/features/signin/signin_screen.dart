@@ -137,7 +137,10 @@ class SignInScreen extends StatelessWidget {
                               color: primaryColor,
                               title: login,
                               textcolor: backgroundColor,
-                              onPress: (() => controller.login()),
+                              onPress: () async {
+                                await controller.login();
+                                // await controller.getEmployDetails();
+                              },
                             )
                           ],
                         ),

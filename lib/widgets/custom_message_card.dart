@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:nms_chat/utils/utils.dart';
-// import 'package:whatts_app/model/chat_model/chat_model.dart';
-// import 'package:whatts_app/screens/individual_screen/individual_screen.dart';
 
 class CustomMessageCard extends StatelessWidget {
   const CustomMessageCard(
@@ -71,7 +69,6 @@ class CustomMessageCard extends StatelessWidget {
                    
                   ],
                 ),
-                // trailing: Text('4.00 pm',style: TextStyle(fontSize: 12),),
               ),
             ],
           ),

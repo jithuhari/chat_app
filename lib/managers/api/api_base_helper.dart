@@ -40,6 +40,33 @@ class ApiBaseHelper {
     return responseJson;
   }
 
+  Future<dynamic> get(
+      {required String endpoint,
+      required Map<String, String> params,
+      Map<String, String>? headers}) async {
+    dynamic responseJson;
+    try {
+      String completeUrl = "";
+
+      if (params == {}) {
+        completeUrl = '$_baseUrl$endpoint';
+      } else {
+        String queryString = params.entries
+            .map((entry) => '${entry.key}=${Uri.encodeComponent(entry.value)}')
+            .join('&');
+        completeUrl = '$_baseUrl$endpoint?$queryString';
+      }
+
+      var response = await http.get(Uri.parse(completeUrl),
+          headers: headers ?? await NMSAuthTokenHeader.to.getAuthTokenHeader());
+      responseJson = _returnResponse(response);
+    } on SocketException {
+      throw NoNetworkException();
+    }
+    return responseJson;
+  }
+
+
   Future<dynamic> getWithId(
       {required String endpoint,
       required dynamic id,

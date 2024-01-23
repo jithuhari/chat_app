@@ -18,60 +18,6 @@ class AllChatSearchScreen extends StatelessWidget {
         builder: (controller) {
           return Scaffold(
             backgroundColor: Colors.white,
-            floatingActionButton: SpeedDial(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(7)),
-              buttonSize: const Size(48, 48),
-              icon: Icons.add,
-              activeIcon: Icons.close,
-              childrenButtonSize: const Size(48, 58),
-              overlayColor: Colors.black,
-              overlayOpacity: 0.8,
-              spacing: 5,
-              spaceBetweenChildren: 5,
-              iconTheme: const IconThemeData(
-                color: Colors.white,
-                size: 24,
-              ),
-              backgroundColor: primaryColor,
-              children: [
-                SpeedDialChild(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(7)),
-                    backgroundColor: Colors.white,
-                    labelBackgroundColor: Colors.transparent,
-                    labelShadow: [],
-                    labelStyle: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700),
-                    child: const Icon(
-                      Icons.group_outlined,
-                      color: primaryColor,
-                      size: 24,
-                    ),
-                    label: 'New Group',
-                    onTap: () {
-                      debugPrint('tapped');
-                    }),
-                SpeedDialChild(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(7)),
-                    backgroundColor: Colors.white,
-                    child: const Icon(
-                      Icons.chat_bubble_outline,
-                      color: primaryColor,
-                      size: 24,
-                    ),
-                    labelBackgroundColor: Colors.transparent,
-                    labelShadow: [],
-                    labelStyle: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700),
-                    label: 'New Chat'),
-              ],
-            ),
             body: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

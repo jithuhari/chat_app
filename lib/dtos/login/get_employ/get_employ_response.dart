@@ -10,9 +10,9 @@ class GetEmployResponse extends ApiResponse {
     return GetEmployResponse(
       message: json["message"],
       status: json["status"],
-      data: List<CorporateDetails>.from(
-          json["data"].map((x) => CorporateDetails.fromJson(x))),
-      // data: UserAccountModel.fromJson(json["data"]),
+      // data: List<CorporateDetails>.from(
+      //     json["data"].map((x) => CorporateDetails.fromJson(x))),
+      data: GetEmployModel.fromJson(json["data"]),
     );
   }
 }
