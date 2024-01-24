@@ -22,8 +22,8 @@ class SignInController extends GetxController with SnackbarMixin {
   // final _getEmployData = (List<CorporateDetails>.empty()).obs;
   // List<CorporateDetails> get getEmployData => _getEmployData;
 
-  final _getEmployData = Rx<GetEmployModel?>(null);
-  GetEmployModel? get getEmployData => _getEmployData.value;
+  final _getEmployData = Rx<Data?>(null);
+  Data? get getEmployData => _getEmployData.value;
 
   final loginFormKey = GlobalKey<FormState>();
   final _isLoadingOverlay = false.obs;
@@ -219,7 +219,7 @@ class SignInController extends GetxController with SnackbarMixin {
         if (response.status == 200) {
           _getEmployData.value = response.data;
 
-          debugPrint("Employ-- length  ${_getEmployData.value!.data.personalDetails.aadhaarNumber}");
+          debugPrint("Employ-- length  ${_getEmployData.value!.corporateDetails!.employeeCode}");
 
           update();
         }

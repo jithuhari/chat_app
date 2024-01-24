@@ -12,7 +12,8 @@ class GetEmployResponse extends ApiResponse {
       status: json["status"],
       // data: List<CorporateDetails>.from(
       //     json["data"].map((x) => CorporateDetails.fromJson(x))),
-      data: GetEmployModel.fromJson(json["data"]),
+      // data: GetEmployModel.fromJson(json["data"]),
+      data:json["data"] == null ? null : Data.fromJson(json["data"]),
     );
   }
 }

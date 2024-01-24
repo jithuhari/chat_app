@@ -34,10 +34,8 @@ class SearchTextField extends StatelessWidget {
         onTap: onTap,
         textCapitalization: TextCapitalization.words,
         keyboardType: TextInputType.text,
-        style: Theme.of(context)
-            .textTheme
-            .bodyMedium
-            ?.copyWith(color: Colors.black,fontSize: 16,fontWeight: FontWeight.w400),
+        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+            color: Colors.black, fontSize: 16, fontWeight: FontWeight.w400),
         decoration: InputDecoration(
           hintText: "Search",
           contentPadding:
@@ -46,8 +44,7 @@ class SearchTextField extends StatelessWidget {
                 color: Colors.grey,
               ),
           prefixIcon: IconButton(
-              onPressed: onClear,
-              icon: Image.asset("assets/png/search.png")),
+              onPressed: onClear, icon: Image.asset("assets/png/search.png")),
           focusedBorder: OutlineInputBorder(
             borderSide: const BorderSide(color: primaryColor, width: 1.0),
             borderRadius: BorderRadius.circular(5),
