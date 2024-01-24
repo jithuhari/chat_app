@@ -5,8 +5,8 @@ import 'package:nms_chat/managers/sharedpreferences/sharedpreferences.dart';
 import 'package:nms_chat/utils/utils.dart';
 
 import '../../controller/app_controller.dart';
-import '../../dtos/login/get_employ/get_employ.dart';
-import '../../dtos/login/login_dtos/login.dart';
+import '../../dtos/nms_dtos/login/get_employ/get_employ.dart';
+import '../../dtos/nms_dtos/login/login_dtos/login.dart';
 import '../../mixins/snackbar_mixin.dart';
 import '../../models/login_screen/get_employ_model.dart';
 import '../../repository/api_repository.dart';

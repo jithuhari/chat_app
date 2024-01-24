@@ -1,6 +1,6 @@
 import 'package:nms_chat/dtos/api_response.dart';
 
-import '../../../models/login_screen/get_employ_model.dart';
+import '../../../../models/login_screen/get_employ_model.dart';
 
 class GetEmployResponse extends ApiResponse {
   GetEmployResponse({message, status, data, errors})

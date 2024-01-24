@@ -1,5 +1,5 @@
 import 'package:nms_chat/dtos/api_response.dart';
-import '../../../models/login_screen/login_model.dart';
+import '../../../../models/login_screen/login_model.dart';
 
 class SubmitLoginResponse extends ApiResponse {
   SubmitLoginResponse({message, status, data, errors})

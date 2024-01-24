@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../dtos/login/get_employ/get_employ.dart';
-import '../dtos/login/login_dtos/login.dart';
+import '../dtos/nms_dtos/login/get_employ/get_employ.dart';
+import '../dtos/nms_dtos/login/login_dtos/login.dart';
 import '../managers/api/api.dart';
 
 abstract class ApiRepository extends GetxController {

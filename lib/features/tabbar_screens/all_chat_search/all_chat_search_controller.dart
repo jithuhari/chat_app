@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-import '../../../dtos/nms_chat_list/nms_chat_list.dart';
+import '../../../dtos/chat_app_dtos/nms_chat_list/nms_chat_list.dart';
 import '../../../mixins/snackbar_mixin.dart';
 import '../../../models/chat_list/chat_list_model.dart';
 import '../../../repository/nms_chat_api_repository.dart';

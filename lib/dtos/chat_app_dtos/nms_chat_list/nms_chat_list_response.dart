@@ -1,5 +1,5 @@
-import '../../models/chat_list/chat_list_model.dart';
-import '../api_response.dart';
+import '../../../models/chat_list/chat_list_model.dart';
+import '../../api_response.dart';
 
 class NMSChatListResponse extends ApiResponse {
   NMSChatListResponse({message, status, data})
