@@ -8,5 +8,6 @@ class ApiEndPoints {
   //nms chat
   static const String chatList = 'users/messages/list';
   static const String searchContact = 'users/contacts/search';
+  static const String searchMessage = 'users/messages/search';
   
 }

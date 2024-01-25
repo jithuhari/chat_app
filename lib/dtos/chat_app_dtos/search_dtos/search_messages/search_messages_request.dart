@@ -15,8 +15,8 @@ class SearchMessagesRequest {
   Map<String, dynamic> toBody() {
     final map = {
       "data": {"user_id": userId, "search_key": searchKey, "options": options},
-      "nmsPagination": {"page": page, "size": size},
-      "contactsPagination": {"page": page, "size": size}
+      "messagesPagination": {"page": page, "size": size},
+      "linksPagination": {"page": page, "size": size}
     };
     return map;
   }

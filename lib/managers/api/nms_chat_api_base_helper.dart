@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 import '../../config/app/app_config.dart';
+import '../auth_token_header/auth_token_header.dart';
 import 'api.dart';
 
 class NMSChatApiBaseHelper {
@@ -24,7 +25,6 @@ class NMSChatApiBaseHelper {
 
       if (params == {}) {
         completeUrl = '$_baseUrl$endpoint';
-        
       } else {
         String queryString = params.entries
             .map((entry) => '${entry.key}=${Uri.encodeComponent(entry.value)}')
@@ -33,8 +33,7 @@ class NMSChatApiBaseHelper {
         debugPrint(completeUrl);
       }
 
-      var response = await http.get(Uri.parse(completeUrl),
-          headers: headers 
+      var response = await http.get(Uri.parse(completeUrl), headers: headers
           // ?? await JBAuthTokenHeader.to.getAuthTokenHeader()
           );
       responseJson = _returnResponse(response);
@@ -57,9 +56,7 @@ class NMSChatApiBaseHelper {
       var url = Uri.parse('$_baseUrl$endpoint?$params');
 
       var response = await http.post(url,
-          headers: headers,
-
-          // ?? await JBAuthTokenHeader.to.getAuthTokenHeader(),
+          headers: headers ?? await NMSAuthTokenHeader.to.getAuthTokenHeader(),
           body: jsonEncode(body));
 
       responseJson = _returnResponse(response);
