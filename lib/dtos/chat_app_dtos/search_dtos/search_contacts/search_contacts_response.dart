@@ -10,9 +10,9 @@ class SearchContactsResponse extends ApiResponse {
     return SearchContactsResponse(
       message: json["message"],
       status: json["status"],
-      data: List<ContactData>.from(
-          json["data"].map((x) => ContactData.fromJson(x))),
-      // data:  ChatListModel.fromJson(json["data"]),
+      // data: List<ContactData>.from(
+      //     json["data"].map((x) => ContactData.fromJson(x))),
+      data: ChatAndNMsContactData.fromJson(json["data"]),
     );
   }
 }

@@ -1,111 +1,202 @@
-// // To parse this JSON data, do
-// //
-// //     final contactsSearchModel = contactsSearchModelFromJson(jsonString);
+class ChatAndNMsContactData {
+  Contacts contacts;
+  Nmscontacts nmscontacts;
 
-// import 'dart:convert';
+  ChatAndNMsContactData({
+    required this.contacts,
+    required this.nmscontacts,
+  });
 
-// ContactsSearchModel contactsSearchModelFromJson(String str) => ContactsSearchModel.fromJson(json.decode(str));
-
-// String contactsSearchModelToJson(ContactsSearchModel data) => json.encode(data.toJson());
-
-// class ContactsSearchModel {
-//     String timestamp;
-//     int status;
-//     String message;
-//     Data data;
-
-//     ContactsSearchModel({
-//         required this.timestamp,
-//         required this.status,
-//         required this.message,
-//         required this.data,
-//     });
-
-//     factory ContactsSearchModel.fromJson(Map<String, dynamic> json) => ContactsSearchModel(
-//         timestamp: json["timestamp"],
-//         status: json["status"],
-//         message: json["message"],
-//         data: Data.fromJson(json["data"]),
-//     );
-
-//     Map<String, dynamic> toJson() => {
-//         "timestamp": timestamp,
-//         "status": status,
-//         "message": message,
-//         "data": data.toJson(),
-//     };
-// }
-
-class ContactData {
-    Contacts contacts;
-    Contacts nmscontacts;
-
-    ContactData({
-        required this.contacts,
-        required this.nmscontacts,
-    });
-
-    factory ContactData.fromJson(Map<String, dynamic> json) => ContactData(
+  factory ChatAndNMsContactData.fromJson(Map<String, dynamic> json) =>
+      ChatAndNMsContactData(
         contacts: Contacts.fromJson(json["contacts"]),
-        nmscontacts: Contacts.fromJson(json["nmscontacts"]),
-    );
+        nmscontacts: Nmscontacts.fromJson(json["nmscontacts"]),
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "contacts": contacts.toJson(),
         "nmscontacts": nmscontacts.toJson(),
-    };
+      };
 }
 
 class Contacts {
-    List<SearchContactData> data;
-    Pagination pagination;
+  List<ContactsDatum> data;
+  ContactsPagination pagination;
 
-    Contacts({
-        required this.data,
-        required this.pagination,
-    });
+  Contacts({
+    required this.data,
+    required this.pagination,
+  });
 
-    factory Contacts.fromJson(Map<String, dynamic> json) => Contacts(
-        data: List<SearchContactData>.from(json["data"].map((x) => SearchContactData.fromJson(x))),
-        pagination: Pagination.fromJson(json["pagination"]),
-    );
+  factory Contacts.fromJson(Map<String, dynamic> json) => Contacts(
+        data: List<ContactsDatum>.from(
+            json["data"].map((x) => ContactsDatum.fromJson(x))),
+        pagination: ContactsPagination.fromJson(json["pagination"]),
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "data": List<dynamic>.from(data.map((x) => x.toJson())),
         "pagination": pagination.toJson(),
-    };
+      };
 }
 
-class SearchContactData {
-    String userId;
-    dynamic unitId;
-    dynamic orgId;
-    dynamic profileImg;
-    dynamic profileImgUrl;
-    PersonalDetails personalDetails;
-    dynamic corporateDetails;
-    dynamic isActive;
-    dynamic isArchived;
-    dynamic archiveDate;
-    dynamic archiveType;
-    dynamic archiveReason;
+class ContactsDatum {
+  int userId;
+  String userUniqueId;
+  String orgId;
+  String userName;
+  String firstName;
+  String lastName;
+  String email;
+  String phone;
+  int status;
+  dynamic profileImage;
+  String createdAt;
+  String updatedAt;
+  String message;
+  String lastMessageTime;
+  String rowNum;
+  String totalRows;
 
-    SearchContactData({
-        required this.userId,
-        required this.unitId,
-        required this.orgId,
-        required this.profileImg,
-        required this.profileImgUrl,
-        required this.personalDetails,
-        required this.corporateDetails,
-        required this.isActive,
-        required this.isArchived,
-        required this.archiveDate,
-        required this.archiveType,
-        required this.archiveReason,
-    });
+  ContactsDatum({
+    required this.userId,
+    required this.userUniqueId,
+    required this.orgId,
+    required this.userName,
+    required this.firstName,
+    required this.lastName,
+    required this.email,
+    required this.phone,
+    required this.status,
+    required this.profileImage,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.message,
+    required this.lastMessageTime,
+    required this.rowNum,
+    required this.totalRows,
+  });
 
-    factory SearchContactData.fromJson(Map<String, dynamic> json) => SearchContactData(
+  factory ContactsDatum.fromJson(Map<String, dynamic> json) => ContactsDatum(
+        userId: json["user_id"],
+        userUniqueId: json["user_unique_id"],
+        orgId: json["orgId"],
+        userName: json["user_name"],
+        firstName: json["first_name"],
+        lastName: json["last_name"],
+        email: json["email"],
+        phone: json["phone"],
+        status: json["status"],
+        profileImage: json["profile_image"],
+        createdAt: json["created_at"],
+        updatedAt: json["updated_at"],
+        message: json["message"],
+        lastMessageTime: json["last_message_time"],
+        rowNum: json["row_num"],
+        totalRows: json["total_rows"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "user_id": userId,
+        "user_unique_id": userUniqueId,
+        "orgId": orgId,
+        "user_name": userName,
+        "first_name": firstName,
+        "last_name": lastName,
+        "email": email,
+        "phone": phone,
+        "status": status,
+        "profile_image": profileImage,
+        "created_at": createdAt,
+        "updated_at": updatedAt,
+        "message": message,
+        "last_message_time": lastMessageTime,
+        "row_num": rowNum,
+        "total_rows": totalRows,
+      };
+}
+
+class ContactsPagination {
+  int totalPages;
+  int totalElements;
+  String currentPage;
+  String pageSize;
+
+  ContactsPagination({
+    required this.totalPages,
+    required this.totalElements,
+    required this.currentPage,
+    required this.pageSize,
+  });
+
+  factory ContactsPagination.fromJson(Map<String, dynamic> json) =>
+      ContactsPagination(
+        totalPages: json["totalPages"],
+        totalElements: json["totalElements"],
+        currentPage: json["currentPage"],
+        pageSize: json["pageSize"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "totalPages": totalPages,
+        "totalElements": totalElements,
+        "currentPage": currentPage,
+        "pageSize": pageSize,
+      };
+}
+
+class Nmscontacts {
+  List<NmscontactsDatum> data;
+  NMSContactsPagination pagination;
+
+  Nmscontacts({
+    required this.data,
+    required this.pagination,
+  });
+
+  factory Nmscontacts.fromJson(Map<String, dynamic> json) => Nmscontacts(
+        data: List<NmscontactsDatum>.from(
+            json["data"].map((x) => NmscontactsDatum.fromJson(x))),
+        pagination: NMSContactsPagination.fromJson(json["pagination"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "data": List<dynamic>.from(data.map((x) => x.toJson())),
+        "pagination": pagination.toJson(),
+      };
+}
+
+class NmscontactsDatum {
+  String userId;
+  dynamic unitId;
+  dynamic orgId;
+  dynamic profileImg;
+  dynamic profileImgUrl;
+  PersonalDetails personalDetails;
+  dynamic corporateDetails;
+  dynamic isActive;
+  dynamic isArchived;
+  dynamic archiveDate;
+  dynamic archiveType;
+  dynamic archiveReason;
+
+  NmscontactsDatum({
+    required this.userId,
+    required this.unitId,
+    required this.orgId,
+    required this.profileImg,
+    required this.profileImgUrl,
+    required this.personalDetails,
+    required this.corporateDetails,
+    required this.isActive,
+    required this.isArchived,
+    required this.archiveDate,
+    required this.archiveType,
+    required this.archiveReason,
+  });
+
+  factory NmscontactsDatum.fromJson(Map<String, dynamic> json) =>
+      NmscontactsDatum(
         userId: json["userId"],
         unitId: json["unitId"],
         orgId: json["orgId"],
@@ -118,9 +209,9 @@ class SearchContactData {
         archiveDate: json["archiveDate"],
         archiveType: json["archiveType"],
         archiveReason: json["archiveReason"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "userId": userId,
         "unitId": unitId,
         "orgId": orgId,
@@ -133,49 +224,79 @@ class SearchContactData {
         "archiveDate": archiveDate,
         "archiveType": archiveType,
         "archiveReason": archiveReason,
-    };
+      };
+}
+
+class NMSContactsPagination {
+  int totalPages;
+  int totalElements;
+  String currentPage;
+  String pageSize;
+
+  NMSContactsPagination({
+    required this.totalPages,
+    required this.totalElements,
+    required this.currentPage,
+    required this.pageSize,
+  });
+
+  factory NMSContactsPagination.fromJson(Map<String, dynamic> json) =>
+      NMSContactsPagination(
+        totalPages: json["totalPages"],
+        totalElements: json["totalElements"],
+        currentPage: json["currentPage"],
+        pageSize: json["pageSize"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "totalPages": totalPages,
+        "totalElements": totalElements,
+        "currentPage": currentPage,
+        "pageSize": pageSize,
+      };
 }
 
 class PersonalDetails {
-    String firstname;
-    String lastname;
-    dynamic dateOfBirth;
-    dynamic gender;
-    dynamic personalMobileNumber;
-    dynamic personalEmail;
-    dynamic residentialAddress;
-    dynamic bloodGroup;
-    dynamic emergencyContact;
-    dynamic bankAccountNumber;
-    dynamic bankName;
-    dynamic ifscCode;
-    dynamic panNumber;
-    dynamic aadhaarNumber;
-    dynamic esiNumber;
-    dynamic providentFundNumber;
-    dynamic medicalInsuranceNumber;
+  String firstname;
+  String lastname;
+  dynamic dateOfBirth;
+  dynamic gender;
+  dynamic personalMobileNumber;
+  dynamic personalEmail;
+  dynamic residentialAddress;
+  dynamic bloodGroup;
+  dynamic emergencyContact;
+  dynamic bankAccountNumber;
+  dynamic bankName;
+  dynamic ifscCode;
+  dynamic panNumber;
+  dynamic aadhaarNumber;
+  dynamic esiNumber;
+  dynamic providentFundNumber;
+  dynamic medicalInsuranceNumber;
 
-    PersonalDetails({
-        required this.firstname,
-        required this.lastname,
-        required this.dateOfBirth,
-        required this.gender,
-        required this.personalMobileNumber,
-        required this.personalEmail,
-        required this.residentialAddress,
-        required this.bloodGroup,
-        required this.emergencyContact,
-        required this.bankAccountNumber,
-        required this.bankName,
-        required this.ifscCode,
-        required this.panNumber,
-        required this.aadhaarNumber,
-        required this.esiNumber,
-        required this.providentFundNumber,
-        required this.medicalInsuranceNumber,
-    });
+  PersonalDetails({
+    required this.firstname,
+    required this.lastname,
+    required this.dateOfBirth,
+    required this.gender,
+    required this.personalMobileNumber,
+    required this.personalEmail,
+    required this.residentialAddress,
+    required this.bloodGroup,
+    required this.emergencyContact,
+    required this.bankAccountNumber,
+    required this.bankName,
+    required this.ifscCode,
+    required this.panNumber,
+    required this.aadhaarNumber,
+    required this.esiNumber,
+    required this.providentFundNumber,
+    required this.medicalInsuranceNumber,
+  });
 
-    factory PersonalDetails.fromJson(Map<String, dynamic> json) => PersonalDetails(
+  factory PersonalDetails.fromJson(Map<String, dynamic> json) =>
+      PersonalDetails(
         firstname: json["firstname"],
         lastname: json["lastname"],
         dateOfBirth: json["dateOfBirth"],
@@ -193,9 +314,9 @@ class PersonalDetails {
         esiNumber: json["esiNumber"],
         providentFundNumber: json["providentFundNumber"],
         medicalInsuranceNumber: json["medicalInsuranceNumber"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "firstname": firstname,
         "lastname": lastname,
         "dateOfBirth": dateOfBirth,
@@ -213,33 +334,5 @@ class PersonalDetails {
         "esiNumber": esiNumber,
         "providentFundNumber": providentFundNumber,
         "medicalInsuranceNumber": medicalInsuranceNumber,
-    };
-}
-
-class Pagination {
-    int totalPages;
-    int totalElements;
-    String currentPage;
-    String pageSize;
-
-    Pagination({
-        required this.totalPages,
-        required this.totalElements,
-        required this.currentPage,
-        required this.pageSize,
-    });
-
-    factory Pagination.fromJson(Map<String, dynamic> json) => Pagination(
-        totalPages: json["totalPages"],
-        totalElements: json["totalElements"],
-        currentPage: json["currentPage"],
-        pageSize: json["pageSize"],
-    );
-
-    Map<String, dynamic> toJson() => {
-        "totalPages": totalPages,
-        "totalElements": totalElements,
-        "currentPage": currentPage,
-        "pageSize": pageSize,
-    };
+      };
 }

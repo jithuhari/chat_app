@@ -6,6 +6,7 @@ import 'package:nms_chat/features/tabbar_screens/all_chat_search/all_chat_search
 import '../../../utils/utils.dart';
 import '../../../widgets/custom_card.dart';
 import '../../../widgets/custom_message_card.dart';
+import '../../../widgets/other_contacts_card.dart';
 
 class AllChatSearchScreen extends StatelessWidget {
   const AllChatSearchScreen({super.key});
@@ -39,7 +40,7 @@ class AllChatSearchScreen extends StatelessWidget {
                   ListView.builder(
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
-                      itemCount: controller.messageData!.data.length,
+                      itemCount: controller.contactsData!.data.length,
                       itemBuilder: (context, index) {
                         return Slidable(
                           startActionPane: ActionPane(
@@ -75,8 +76,9 @@ class AllChatSearchScreen extends StatelessWidget {
                                 ),
                               ]),
                           child: CustomCard(
-                            name: controller.messageData!.data[index].userName,
-                            message: controller.messageData!.data[index].message
+                            name: controller.contactsData!.data[index].userName,
+                            message: controller
+                                .contactsData!.data[index].message
                                 .toString(),
                             lastMessageTime: controller
                                 .messageData!.data[index].lastMessageTime,
@@ -86,12 +88,12 @@ class AllChatSearchScreen extends StatelessWidget {
                   seeMore(controller),
                   const Padding(
                     padding: EdgeInsets.only(left: 16.0),
-                    child: Text('Nms Contacts'),
+                    child: Text('Other Contacts'),
                   ),
                   ListView.builder(
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
-                      itemCount: controller.messageData!.data.length,
+                      itemCount: controller.nmsContactsData!.data.length,
                       itemBuilder: (context, index) {
                         return Slidable(
                           startActionPane: ActionPane(
@@ -126,12 +128,9 @@ class AllChatSearchScreen extends StatelessWidget {
                                   label: 'Delete',
                                 ),
                               ]),
-                          child: CustomCard(
-                            name: controller.messageData!.data[index].userName,
-                            message: controller.messageData!.data[index].message
-                                .toString(),
-                            lastMessageTime: controller
-                                .messageData!.data[index].lastMessageTime,
+                          child: OtherContactsCard(
+                            name: controller.nmsContactsData!.data[index]
+                                .personalDetails.firstname,
                           ),
                         );
                       }),
