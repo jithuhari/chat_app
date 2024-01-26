@@ -189,21 +189,23 @@ class _ChatMainLayoutScreenState extends State<ChatMainLayoutScreen>
                                               style: TextStyle(
                                                   fontSize: 13,
                                                   fontWeight: FontWeight.w400,
-                                                  color: controller.selectedItem
+                                                  color: controller.contactsOptionList
                                                           .contains(e)
                                                       ? Colors.white
                                                       : const Color(
                                                           0xff7A7A7A)),
                                             ),
-                                            selected: controller.selectedItem
+                                            selected: controller.contactsOptionList
                                                 .contains(e),
                                             onSelected: (value) {
-                                              if (controller.selectedItem
+                                              if (controller.contactsOptionList
                                                   .contains(e)) {
-                                                controller.selectedItem
+                                                controller.contactsOptionList
                                                     .remove(e);
+                                                    print(controller.contactsOptionList);
                                               } else {
-                                                controller.selectedItem.add(e);
+                                                controller.contactsOptionList.add(e);
+                                                print(controller.contactsOptionList);
                                               }
                                               controller.update();
                                             },

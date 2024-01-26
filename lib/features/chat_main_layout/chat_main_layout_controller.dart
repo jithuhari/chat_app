@@ -3,14 +3,17 @@ import 'package:get/get.dart';
 
 class ChatMainLayOutController extends GetxController {
   final items = [
-    "Contacts",
-    "Message",
+    "contacts",
+    "messages",
     "groups",
-    "Documents",
-    "Links",
+    "documents",
+    "links",
   ];
 
-  List<String> selectedItem = [];
+  final _contactsOptionList = (List<String>.empty()).obs;
+  List<String> get contactsOptionList => _contactsOptionList;
+
+  // List<String> selectedItem = [];
 
   final TextEditingController chatSearchController = TextEditingController();
 

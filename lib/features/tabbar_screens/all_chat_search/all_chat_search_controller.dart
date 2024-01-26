@@ -6,10 +6,18 @@ import '../../../mixins/snackbar_mixin.dart';
 import '../../../models/search_models/search_contacts/search_contacts_model.dart';
 import '../../../models/search_models/search_messages/search_messages_model.dart';
 import '../../../repository/nms_chat_api_repository.dart';
+import '../../chat_main_layout/chat_main_layout.dart';
 
 class AllChatSearchController extends GetxController with SnackbarMixin {
+
+  final ChatMainLayOutController chatMainLayoutController = Get.find<ChatMainLayOutController>();
+
   final _formattedLastMessageTime = (List<dynamic>.empty()).obs;
   List<dynamic> get formattedLastMessageTime => _formattedLastMessageTime;
+
+
+  // final _contactsOptionList = (List<String>.empty()).obs;
+  // List<String> get contactsOptionList => _contactsOptionList;
 
   //search messages and links models
 
@@ -58,6 +66,7 @@ class AllChatSearchController extends GetxController with SnackbarMixin {
 
   onSeeMoreActive() {
     _isSeeMoreActive.value = true;
+    
     // fetchChatList();
     update();
   }
@@ -68,16 +77,21 @@ class AllChatSearchController extends GetxController with SnackbarMixin {
 
   searchMessageList() async {
     _isLoading.value = true;
+     print('option list---${chatMainLayoutController.contactsOptionList}');
     try {
       final request = SearchMessagesRequest(
           userId: '8',
           searchKey: 'chat',
           page: '1',
           size: '5',
-          options: ["messages", "links"]);
+          options: 
+          // ["messages", "links"],
+          chatMainLayoutController.contactsOptionList.toList()
+          );
       final response =
           await NMSChatApiRepository.to.searchMessagesList(request: request);
       if (response.status == 200) {
+       
         _searchMessageData.value = response.data;
         debugPrint("Categorylist-- length  ${_searchMessageData.toJson()}");
 
