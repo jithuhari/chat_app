@@ -2,13 +2,13 @@ class SearchContactsRequest {
   SearchContactsRequest(
       {required this.userId,
       required this.searchKey,
-      required this.options,
+       this.options,
       required this.page,
       required this.size});
 
   String userId;
   String searchKey;
-  List<String> options;
+  List<String>? options;
   String page;
   String size;
 

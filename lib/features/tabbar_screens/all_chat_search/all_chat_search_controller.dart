@@ -9,12 +9,11 @@ import '../../../repository/nms_chat_api_repository.dart';
 import '../../chat_main_layout/chat_main_layout.dart';
 
 class AllChatSearchController extends GetxController with SnackbarMixin {
-
-  final ChatMainLayOutController chatMainLayoutController = Get.find<ChatMainLayOutController>();
+  final ChatMainLayOutController chatMainLayoutController =
+      Get.find<ChatMainLayOutController>();
 
   final _formattedLastMessageTime = (List<dynamic>.empty()).obs;
   List<dynamic> get formattedLastMessageTime => _formattedLastMessageTime;
-
 
   // final _contactsOptionList = (List<String>.empty()).obs;
   // List<String> get contactsOptionList => _contactsOptionList;
@@ -66,7 +65,7 @@ class AllChatSearchController extends GetxController with SnackbarMixin {
 
   onSeeMoreActive() {
     _isSeeMoreActive.value = true;
-    
+
     // fetchChatList();
     update();
   }
@@ -77,21 +76,20 @@ class AllChatSearchController extends GetxController with SnackbarMixin {
 
   searchMessageList() async {
     _isLoading.value = true;
-     print('option list---${chatMainLayoutController.contactsOptionList}');
+    //  print('option list---${chatMainLayoutController.contactsOptionList}');
     try {
       final request = SearchMessagesRequest(
-          userId: '8',
-          searchKey: 'chat',
-          page: '1',
-          size: '5',
-          options: 
-          // ["messages", "links"],
-          chatMainLayoutController.contactsOptionList.toList()
-          );
+        userId: '8',
+        searchKey: 'chat',
+        page: '1',
+        size: '5',
+        // options:
+        // ["messages", "links"],
+        // chatMainLayoutController.contactsOptionList.toList()
+      );
       final response =
           await NMSChatApiRepository.to.searchMessagesList(request: request);
       if (response.status == 200) {
-       
         _searchMessageData.value = response.data;
         debugPrint("Categorylist-- length  ${_searchMessageData.toJson()}");
 
@@ -117,11 +115,12 @@ class AllChatSearchController extends GetxController with SnackbarMixin {
     _isLoading.value = true;
     try {
       final request = SearchContactsRequest(
-          userId: '8',
-          searchKey: 'nim',
-          page: '1',
-          size: '5',
-          options: ["contacts", "nmscontacts"]);
+        userId: '8',
+        searchKey: 'nim',
+        page: '1',
+        size: '5',
+        // options: ["contacts", "nmscontacts"]
+      );
       final response =
           await NMSChatApiRepository.to.searchContactsList(request: request);
       if (response.status == 200) {
@@ -132,7 +131,8 @@ class AllChatSearchController extends GetxController with SnackbarMixin {
           _contactsData.value = searchContactsData!.contacts;
           debugPrint('contact mesage--- ${contactsData!.data[0].message}');
           _nmsContactsData.value = searchContactsData!.nmscontacts;
-          debugPrint('nms contact userids--- ${nmsContactsData!.data[0].userId}');
+          debugPrint(
+              'nms contact userids--- ${nmsContactsData!.data[0].userId}');
         } else {}
         _isLoading.value = false;
         update();
