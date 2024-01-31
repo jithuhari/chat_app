@@ -30,14 +30,15 @@ class AllChatSearchScreen extends StatelessWidget {
           return Scaffold(
             backgroundColor: Colors.white,
             body: SingleChildScrollView(
-              child: controller.isSearchActive==true
+              child: controller.isSearchActive == true
                   ? Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        controller.isContactAvailable==true?
                         const Padding(
                           padding: EdgeInsets.only(left: 16.0),
                           child: Text('Contacts'),
-                        ),
+                        ):Container(),
                         ListView.builder(
                             physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
@@ -82,16 +83,17 @@ class AllChatSearchScreen extends StatelessWidget {
                                   message: controller
                                       .contactsData!.data[index].message
                                       .toString(),
-                                  lastMessageTime: controller
-                                      .contactsData!.data[index].lastMessageTime,
+                                  lastMessageTime: controller.contactsData!
+                                      .data[index].lastMessageTime,
                                 ),
                               );
                             }),
-                        seeMore(controller),
+                        controller.isContactAvailable==true?seeMore(controller):Container(),
+                        controller.isNmsContactAvailable==true?
                         const Padding(
                           padding: EdgeInsets.only(left: 16.0),
                           child: Text('Other Contacts'),
-                        ),
+                        ):Container(),
                         ListView.builder(
                             physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
@@ -110,7 +112,7 @@ class AllChatSearchScreen extends StatelessWidget {
                                         label: 'Share',
                                       ),
                                       SlidableAction(
-                                        onPressed: (context) {               
+                                        onPressed: (context) {
                                           controller.onDissmissed();
                                         },
                                         backgroundColor: Colors.blue,
@@ -136,7 +138,7 @@ class AllChatSearchScreen extends StatelessWidget {
                                 ),
                               );
                             }),
-                        seeMore(controller),
+                        controller.isContactAvailable==true?seeMore(controller):Container(),
                         const Padding(
                           padding: EdgeInsets.only(left: 16.0),
                           child: Text('Messages'),
@@ -248,15 +250,15 @@ class AllChatSearchScreen extends StatelessWidget {
                       ],
                     )
                   : Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Padding(
                           padding: EdgeInsets.only(left: 16.0),
                           child: Text('Contacts'),
                         ),
                         ListView.builder(
-                          physics: const NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
                             itemCount: controller.chatListModelData.length,
                             itemBuilder: (context, index) {
                               return Slidable(

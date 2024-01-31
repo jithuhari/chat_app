@@ -60,6 +60,12 @@ class AllChatSearchController extends GetxController with SnackbarMixin {
   final _isSearchActive = false.obs;
   bool get isSearchActive => _isSearchActive.value;
 
+  final _isContactAvailable = true.obs;
+  bool get isContactAvailable => _isContactAvailable.value;
+
+  final _isNmsContactAvailable = true.obs;
+  bool get isNmsContactAvailable => _isNmsContactAvailable.value;
+
   final _sizeValue = 1.obs;
   int get sizeValue => _sizeValue.value;
 
@@ -84,6 +90,26 @@ class AllChatSearchController extends GetxController with SnackbarMixin {
 
   onSearchTap() {
     _isSearchActive.value = true;
+    update();
+  }
+
+  onContactNotAvailable() {
+    _isContactAvailable.value = false;
+    update();
+  }
+
+  onContactAvailable() {
+    _isContactAvailable.value = true;
+    update();
+  }
+
+  onNmsContactNotAvailable() {
+    _isNmsContactAvailable.value = false;
+    update();
+  }
+
+  onNmsContactAvailable() {
+    _isNmsContactAvailable.value = true;
     update();
   }
 
@@ -121,8 +147,12 @@ class AllChatSearchController extends GetxController with SnackbarMixin {
             debugPrint('contact mesage--- ${messageData!.data[0].message}');
 
             // debugPrint('nms contact userids--- ${linksData!.data[0].links}');
-          }else if(messageData!.data.isEmpty && linksData!.data.isEmpty){
+          } else if (messageData!.data.isEmpty && linksData!.data.isEmpty) {
             showErrorSnackbar(message: 'Both message and link data is empty');
+          } else if (messageData!.data.isEmpty && linksData!.data.isNotEmpty) {
+            showErrorSnackbar(message: 'message data is empty');
+          } else if (messageData!.data.isNotEmpty && linksData!.data.isEmpty) {
+            showErrorSnackbar(message: 'Link data is empty');
           }
         } else {}
         _isLoading.value = false;
@@ -163,12 +193,18 @@ class AllChatSearchController extends GetxController with SnackbarMixin {
 
             debugPrint(
                 'nms contact userids--- ${nmsContactsData!.data[0].userId}');
+            await onContactAvailable();
+            await onNmsContactAvailable();
           } else if (contactsData!.data.isEmpty &&
               nmsContactsData!.data.isEmpty) {
+            await onContactNotAvailable();
+            await onNmsContactNotAvailable();
+
             showErrorSnackbar(
                 message: 'contact list and other contacts are empty');
           } else if (contactsData!.data.isNotEmpty &&
               nmsContactsData!.data.isEmpty) {
+            await onContactAvailable();
             showErrorSnackbar(message: 'other contact list is empty');
           } else if (contactsData!.data.isEmpty &&
               nmsContactsData!.data.isNotEmpty) {
