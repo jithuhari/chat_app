@@ -34,11 +34,12 @@ class AllChatSearchScreen extends StatelessWidget {
                   ? Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        controller.isContactAvailable==true?
-                        const Padding(
-                          padding: EdgeInsets.only(left: 16.0),
-                          child: Text('Contacts'),
-                        ):Container(),
+                        controller.isContactAvailable == true
+                            ? const Padding(
+                                padding: EdgeInsets.only(left: 16.0),
+                                child: Text('Contacts'),
+                              )
+                            : Container(),
                         ListView.builder(
                             physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
@@ -88,12 +89,15 @@ class AllChatSearchScreen extends StatelessWidget {
                                 ),
                               );
                             }),
-                        controller.isContactAvailable==true?seeMore(controller):Container(),
-                        controller.isNmsContactAvailable==true?
-                        const Padding(
-                          padding: EdgeInsets.only(left: 16.0),
-                          child: Text('Other Contacts'),
-                        ):Container(),
+                        controller.isContactAvailable == true
+                            ? seeMore(controller)
+                            : Container(),
+                        controller.isNmsContactAvailable == true
+                            ? const Padding(
+                                padding: EdgeInsets.only(left: 16.0),
+                                child: Text('Other Contacts'),
+                              )
+                            : Container(),
                         ListView.builder(
                             physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
@@ -138,11 +142,15 @@ class AllChatSearchScreen extends StatelessWidget {
                                 ),
                               );
                             }),
-                        controller.isContactAvailable==true?seeMore(controller):Container(),
-                        const Padding(
-                          padding: EdgeInsets.only(left: 16.0),
-                          child: Text('Messages'),
-                        ),
+                        controller.isContactAvailable == true
+                            ? seeMore(controller)
+                            : Container(),
+                        controller.isMessageAvailable == true
+                            ? const Padding(
+                                padding: EdgeInsets.only(left: 16.0),
+                                child: Text('Messages'),
+                              )
+                            : Container(),
                         ListView.builder(
                             physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
@@ -192,11 +200,15 @@ class AllChatSearchScreen extends StatelessWidget {
                                 ),
                               );
                             }),
-                        seeMore(controller),
-                        const Padding(
-                          padding: EdgeInsets.only(left: 16.0),
-                          child: Text('Links'),
-                        ),
+                        controller.isMessageAvailable == true
+                            ? seeMore(controller)
+                            : Container(),
+                        controller.isLinkAvailable == true
+                            ? const Padding(
+                                padding: EdgeInsets.only(left: 16.0),
+                                child: Text('Links'),
+                              )
+                            : Container(),
                         ListView.builder(
                             physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
@@ -246,7 +258,9 @@ class AllChatSearchScreen extends StatelessWidget {
                                 ),
                               );
                             }),
-                        seeMore(controller),
+                        controller.isLinkAvailable == true
+                            ? seeMore(controller)
+                            : Container(),
                       ],
                     )
                   : Column(

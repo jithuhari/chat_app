@@ -66,6 +66,12 @@ class AllChatSearchController extends GetxController with SnackbarMixin {
   final _isNmsContactAvailable = true.obs;
   bool get isNmsContactAvailable => _isNmsContactAvailable.value;
 
+  final _isMessageAvailable = true.obs;
+  bool get isMessageAvailable => _isMessageAvailable.value;
+
+  final _isLinkAvailable = true.obs;
+  bool get isLinkAvailable => _isLinkAvailable.value;
+
   final _sizeValue = 1.obs;
   int get sizeValue => _sizeValue.value;
 
@@ -75,8 +81,6 @@ class AllChatSearchController extends GetxController with SnackbarMixin {
   @override
   void onInit() async {
     await fetchChatList();
-    // await searchMessageList();
-    // await searchContactsList();
 
     super.onInit();
   }
@@ -113,6 +117,26 @@ class AllChatSearchController extends GetxController with SnackbarMixin {
     update();
   }
 
+  onMessageNotAvailable() {
+    _isMessageAvailable.value = false;
+    update();
+  }
+
+  onMessageAvailable() {
+    _isMessageAvailable.value = true;
+    update();
+  }
+
+  onLinkNotAvailable() {
+    _isLinkAvailable.value = false;
+    update();
+  }
+
+  onLinkAvailable() {
+    _isLinkAvailable.value = true;
+    update();
+  }
+
   onDissmissed() {}
 
   // search messages
@@ -143,16 +167,19 @@ class AllChatSearchController extends GetxController with SnackbarMixin {
 
           _linksData.value = searchMessageData!.links;
 
-          if (messageData!.data.isNotEmpty) {
+          if (messageData!.data.isNotEmpty && linksData!.data.isNotEmpty) {
+            await onMessageAvailable();
+            await onLinkAvailable();
             debugPrint('contact mesage--- ${messageData!.data[0].message}');
-
-            // debugPrint('nms contact userids--- ${linksData!.data[0].links}');
           } else if (messageData!.data.isEmpty && linksData!.data.isEmpty) {
-            showErrorSnackbar(message: 'Both message and link data is empty');
+            await onMessageNotAvailable();
+            await onLinkNotAvailable();
           } else if (messageData!.data.isEmpty && linksData!.data.isNotEmpty) {
-            showErrorSnackbar(message: 'message data is empty');
+            await onMessageNotAvailable();
+            await onLinkAvailable();
           } else if (messageData!.data.isNotEmpty && linksData!.data.isEmpty) {
-            showErrorSnackbar(message: 'Link data is empty');
+            await onMessageAvailable();
+            await onLinkNotAvailable();
           }
         } else {}
         _isLoading.value = false;
@@ -187,10 +214,7 @@ class AllChatSearchController extends GetxController with SnackbarMixin {
           _contactsData.value = searchContactsData!.contacts;
           _nmsContactsData.value = searchContactsData!.nmscontacts;
           if (contactsData!.data.isNotEmpty) {
-            // _contactsData.value = searchContactsData!.contacts;
-            // _nmsContactsData.value = searchContactsData!.nmscontacts;
             debugPrint('contact mesage--- ${contactsData!.data[0].message}');
-
             debugPrint(
                 'nms contact userids--- ${nmsContactsData!.data[0].userId}');
             await onContactAvailable();
@@ -199,29 +223,20 @@ class AllChatSearchController extends GetxController with SnackbarMixin {
               nmsContactsData!.data.isEmpty) {
             await onContactNotAvailable();
             await onNmsContactNotAvailable();
-
-            showErrorSnackbar(
-                message: 'contact list and other contacts are empty');
           } else if (contactsData!.data.isNotEmpty &&
               nmsContactsData!.data.isEmpty) {
             await onContactAvailable();
-            showErrorSnackbar(message: 'other contact list is empty');
+            await onNmsContactNotAvailable();
           } else if (contactsData!.data.isEmpty &&
               nmsContactsData!.data.isNotEmpty) {
-            showErrorSnackbar(message: 'contact list is empty');
+            await onContactNotAvailable();
+            await onNmsContactAvailable();
           }
-          // debugPrint('contact mesage--- ${contactsData!.data[0].message}');
-
-          // debugPrint(
-          //     'nms contact userids--- ${nmsContactsData!.data[0].userId}');
         } else {}
         _isLoading.value = false;
         update();
       }
     } catch (e) {
-      // showErrorSnackbar(message: e.toString());
-      // _isLoading.value = false;
-      // debugPrint(e.toString());
       return catchErrorSection(e);
     }
   }
