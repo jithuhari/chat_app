@@ -18,6 +18,10 @@ class ChatMainLayoutScreen extends StatefulWidget {
   State<ChatMainLayoutScreen> createState() => _ChatMainLayoutScreenState();
 }
 
+//fetch data from all chat search controller
+final AllChatSearchController allChatSearchController =
+    Get.find<AllChatSearchController>();
+
 class _ChatMainLayoutScreenState extends State<ChatMainLayoutScreen>
     with SingleTickerProviderStateMixin {
   TabController? _controller;
@@ -109,9 +113,8 @@ class _ChatMainLayoutScreenState extends State<ChatMainLayoutScreen>
                           Padding(
                             padding: const EdgeInsets.only(right: 16.0),
                             child: InkWell(
-                                onTap: () {
-                                  debugPrint('Search');
-                                  controller.searchDisplay();
+                                onTap: () async {
+                                  await controller.searchDisplay();
                                 },
                                 child: Image.asset("assets/png/search1.png")),
                           ),
@@ -189,23 +192,24 @@ class _ChatMainLayoutScreenState extends State<ChatMainLayoutScreen>
                                               style: TextStyle(
                                                   fontSize: 13,
                                                   fontWeight: FontWeight.w400,
-                                                  color: controller.contactsOptionList
+                                                  color: controller
+                                                          .contactsOptionList
                                                           .contains(e)
                                                       ? Colors.white
                                                       : const Color(
                                                           0xff7A7A7A)),
                                             ),
-                                            selected: controller.contactsOptionList
+                                            selected: controller
+                                                .contactsOptionList
                                                 .contains(e),
                                             onSelected: (value) {
                                               if (controller.contactsOptionList
                                                   .contains(e)) {
                                                 controller.contactsOptionList
                                                     .remove(e);
-                                                    print(controller.contactsOptionList);
                                               } else {
-                                                controller.contactsOptionList.add(e);
-                                                print(controller.contactsOptionList);
+                                                controller.contactsOptionList
+                                                    .add(e);
                                               }
                                               controller.update();
                                             },
@@ -221,6 +225,12 @@ class _ChatMainLayoutScreenState extends State<ChatMainLayoutScreen>
                               padding: const EdgeInsets.only(
                                   top: 10, left: 22, right: 23.8, bottom: 4),
                               child: SearchTextField(
+                                onSubmitted: (value) async{
+                                  await allChatSearchController.onSearchTap();
+                                  await allChatSearchController.searchContactsList();
+                                  await allChatSearchController.searchMessageList();
+                                  controller.chatSearchController.clear();
+                                },
                                 controller: controller.chatSearchController,
                               ),
                             ),
@@ -237,68 +247,6 @@ class _ChatMainLayoutScreenState extends State<ChatMainLayoutScreen>
                 body: controller.searchDisplayValue == false
                     ? Column(
                         children: [
-                          // Row(
-                          //   children: [
-                          //     Expanded(
-                          //       child: Padding(
-                          //         padding: const EdgeInsets.only(
-                          //             left: 22, right: 23.8, bottom: 10),
-                          //         child: SearchTextField(
-                          //           controller: controller.chatSearchController,
-                          //         ),
-                          //       ),
-                          //     ),
-                          //     Padding(
-                          //       padding: const EdgeInsets.only(right: 21),
-                          //       child: IconButton(
-                          //         iconSize: 24,
-                          //         onPressed: () {},
-                          //         icon: const Icon(Icons.filter_list),
-                          //       ),
-                          //     )
-                          //   ],
-                          // ),
-                          // Padding(
-                          //   padding: const EdgeInsets.only(left: 22, right: 21),
-                          //   child: Container(
-                          //     height: 34,
-                          //     width: 189,
-                          //     decoration: BoxDecoration(
-                          //       color: messageColor,
-                          //       borderRadius: BorderRadius.circular(
-                          //         5.0,
-                          //       ),
-                          //     ),
-                          //     child: Padding(
-                          //       padding: const EdgeInsets.all(2.0),
-                          //       child: TabBar(
-                          //         controller: _controller,
-                          //         indicator: BoxDecoration(
-                          //           borderRadius: BorderRadius.circular(
-                          //             5.0,
-                          //           ),
-                          //           color: Colors.white,
-                          //         ),
-                          //         labelColor: primaryColor,
-                          //         labelStyle: const TextStyle(
-                          //             fontSize: 14, fontWeight: FontWeight.w700),
-                          //         unselectedLabelStyle: const TextStyle(
-                          //             fontSize: 14, fontWeight: FontWeight.w400),
-                          //         dividerColor: messageColor,
-                          //         indicatorSize: TabBarIndicatorSize.tab,
-                          //         unselectedLabelColor: Colors.white,
-                          //         tabs: const [
-                          //           Tab(
-                          //             text: 'All Chats',
-                          //           ),
-                          //           Tab(
-                          //             text: 'Groups',
-                          //           ),
-                          //         ],
-                          //       ),
-                          //     ),
-                          //   ),
-                          // ),
                           Expanded(
                             child: TabBarView(
                                 physics: const NeverScrollableScrollPhysics(),

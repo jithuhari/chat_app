@@ -34,6 +34,11 @@ const String errorOccuredText = 'Error Occured';
 const String currentRequiredText = 'Current password required';
 const String newRequiredText = 'New password required';
 
+//search validation
+
+const String minimumSearchCharacters = 'You should need minimum 3 characters';
+
+
 abstract class ValidationStatus {}
 
 class ValidationSuccess extends ValidationStatus {

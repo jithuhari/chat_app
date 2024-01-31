@@ -22,7 +22,7 @@ class AllChatSearchScreen extends StatelessWidget {
             );
           }
 
-          if (controller.messageData == null) {
+          if (controller.chatListModelData.isEmpty) {
             return const Center(
               child: Text('No data available'),
             );
@@ -30,217 +30,283 @@ class AllChatSearchScreen extends StatelessWidget {
           return Scaffold(
             backgroundColor: Colors.white,
             body: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.only(left: 16.0),
-                    child: Text('Contacts'),
-                  ),
-                  ListView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: controller.contactsData!.data.length,
-                      itemBuilder: (context, index) {
-                        return Slidable(
-                          startActionPane: ActionPane(
-                              motion: const StretchMotion(),
-                              children: [
-                                SlidableAction(
-                                  onPressed: (context) {
-                                    controller.onDissmissed();
-                                  },
-                                  backgroundColor: Colors.green,
-                                  icon: Icons.share,
-                                  label: 'Share',
+              child: controller.isSearchActive==true
+                  ? Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.only(left: 16.0),
+                          child: Text('Contacts'),
+                        ),
+                        ListView.builder(
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: controller.contactsData!.data.length,
+                            itemBuilder: (context, index) {
+                              return Slidable(
+                                startActionPane: ActionPane(
+                                    motion: const StretchMotion(),
+                                    children: [
+                                      SlidableAction(
+                                        onPressed: (context) {
+                                          controller.onDissmissed();
+                                        },
+                                        backgroundColor: Colors.green,
+                                        icon: Icons.share,
+                                        label: 'Share',
+                                      ),
+                                      SlidableAction(
+                                        onPressed: (context) {
+                                          controller.onDissmissed();
+                                        },
+                                        backgroundColor: Colors.blue,
+                                        icon: Icons.archive,
+                                        label: 'archive',
+                                      ),
+                                    ]),
+                                endActionPane: ActionPane(
+                                    motion: const BehindMotion(),
+                                    children: [
+                                      SlidableAction(
+                                        onPressed: (context) {
+                                          controller.onDissmissed();
+                                        },
+                                        backgroundColor: Colors.red,
+                                        icon: Icons.delete,
+                                        label: 'Delete',
+                                      ),
+                                    ]),
+                                child: CustomCard(
+                                  name: controller
+                                      .contactsData!.data[index].userName,
+                                  message: controller
+                                      .contactsData!.data[index].message
+                                      .toString(),
+                                  lastMessageTime: controller
+                                      .contactsData!.data[index].lastMessageTime,
                                 ),
-                                SlidableAction(
-                                  onPressed: (context) {
-                                    controller.onDissmissed();
-                                  },
-                                  backgroundColor: Colors.blue,
-                                  icon: Icons.archive,
-                                  label: 'archive',
+                              );
+                            }),
+                        seeMore(controller),
+                        const Padding(
+                          padding: EdgeInsets.only(left: 16.0),
+                          child: Text('Other Contacts'),
+                        ),
+                        ListView.builder(
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: controller.nmsContactsData!.data.length,
+                            itemBuilder: (context, index) {
+                              return Slidable(
+                                startActionPane: ActionPane(
+                                    motion: const StretchMotion(),
+                                    children: [
+                                      SlidableAction(
+                                        onPressed: (context) {
+                                          controller.onDissmissed();
+                                        },
+                                        backgroundColor: Colors.green,
+                                        icon: Icons.share,
+                                        label: 'Share',
+                                      ),
+                                      SlidableAction(
+                                        onPressed: (context) {               
+                                          controller.onDissmissed();
+                                        },
+                                        backgroundColor: Colors.blue,
+                                        icon: Icons.archive,
+                                        label: 'archive',
+                                      ),
+                                    ]),
+                                endActionPane: ActionPane(
+                                    motion: const BehindMotion(),
+                                    children: [
+                                      SlidableAction(
+                                        onPressed: (context) {
+                                          controller.onDissmissed();
+                                        },
+                                        backgroundColor: Colors.red,
+                                        icon: Icons.delete,
+                                        label: 'Delete',
+                                      ),
+                                    ]),
+                                child: OtherContactsCard(
+                                  name: controller.nmsContactsData!.data[index]
+                                      .personalDetails.firstname,
                                 ),
-                              ]),
-                          endActionPane: ActionPane(
-                              motion: const BehindMotion(),
-                              children: [
-                                SlidableAction(
-                                  onPressed: (context) {
-                                    controller.onDissmissed();
-                                  },
-                                  backgroundColor: Colors.red,
-                                  icon: Icons.delete,
-                                  label: 'Delete',
+                              );
+                            }),
+                        seeMore(controller),
+                        const Padding(
+                          padding: EdgeInsets.only(left: 16.0),
+                          child: Text('Messages'),
+                        ),
+                        ListView.builder(
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: controller.messageData!.data.length,
+                            itemBuilder: (context, index) {
+                              return Slidable(
+                                startActionPane: ActionPane(
+                                    motion: const StretchMotion(),
+                                    children: [
+                                      SlidableAction(
+                                        onPressed: (context) {
+                                          controller.onDissmissed();
+                                        },
+                                        backgroundColor: Colors.green,
+                                        icon: Icons.share,
+                                        label: 'Share',
+                                      ),
+                                      SlidableAction(
+                                        onPressed: (context) {
+                                          controller.onDissmissed();
+                                        },
+                                        backgroundColor: Colors.blue,
+                                        icon: Icons.archive,
+                                        label: 'archive',
+                                      ),
+                                    ]),
+                                endActionPane: ActionPane(
+                                    motion: const BehindMotion(),
+                                    children: [
+                                      SlidableAction(
+                                        onPressed: (context) {
+                                          controller.onDissmissed();
+                                        },
+                                        backgroundColor: Colors.red,
+                                        icon: Icons.delete,
+                                        label: 'Delete',
+                                      ),
+                                    ]),
+                                child: CustomMessageCard(
+                                  name: controller
+                                      .messageData!.data[index].userName,
+                                  message: controller
+                                      .messageData!.data[index].message
+                                      .toString(),
+                                  lastMessageTime: controller
+                                      .messageData!.data[index].lastMessageTime,
                                 ),
-                              ]),
-                          child: CustomCard(
-                            name: controller.contactsData!.data[index].userName,
-                            message: controller
-                                .contactsData!.data[index].message
-                                .toString(),
-                            lastMessageTime: controller
-                                .messageData!.data[index].lastMessageTime,
-                          ),
-                        );
-                      }),
-                  seeMore(controller),
-                  const Padding(
-                    padding: EdgeInsets.only(left: 16.0),
-                    child: Text('Other Contacts'),
-                  ),
-                  ListView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: controller.nmsContactsData!.data.length,
-                      itemBuilder: (context, index) {
-                        return Slidable(
-                          startActionPane: ActionPane(
-                              motion: const StretchMotion(),
-                              children: [
-                                SlidableAction(
-                                  onPressed: (context) {
-                                    controller.onDissmissed();
-                                  },
-                                  backgroundColor: Colors.green,
-                                  icon: Icons.share,
-                                  label: 'Share',
+                              );
+                            }),
+                        seeMore(controller),
+                        const Padding(
+                          padding: EdgeInsets.only(left: 16.0),
+                          child: Text('Links'),
+                        ),
+                        ListView.builder(
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: controller.linksData!.data.length,
+                            itemBuilder: (context, index) {
+                              return Slidable(
+                                startActionPane: ActionPane(
+                                    motion: const StretchMotion(),
+                                    children: [
+                                      SlidableAction(
+                                        onPressed: (context) {
+                                          controller.onDissmissed();
+                                        },
+                                        backgroundColor: Colors.green,
+                                        icon: Icons.share,
+                                        label: 'Share',
+                                      ),
+                                      SlidableAction(
+                                        onPressed: (context) {
+                                          controller.onDissmissed();
+                                        },
+                                        backgroundColor: Colors.blue,
+                                        icon: Icons.archive,
+                                        label: 'archive',
+                                      ),
+                                    ]),
+                                endActionPane: ActionPane(
+                                    motion: const BehindMotion(),
+                                    children: [
+                                      SlidableAction(
+                                        onPressed: (context) {
+                                          controller.onDissmissed();
+                                        },
+                                        backgroundColor: Colors.red,
+                                        icon: Icons.delete,
+                                        label: 'Delete',
+                                      ),
+                                    ]),
+                                child: CustomMessageCard(
+                                  name: controller
+                                      .linksData!.data[index].userName,
+                                  message: controller
+                                      .linksData!.data[index].links
+                                      .toString(),
+                                  lastMessageTime: controller
+                                      .linksData!.data[index].lastMessageTime,
                                 ),
-                                SlidableAction(
-                                  onPressed: (context) {
-                                    controller.onDissmissed();
-                                  },
-                                  backgroundColor: Colors.blue,
-                                  icon: Icons.archive,
-                                  label: 'archive',
+                              );
+                            }),
+                        seeMore(controller),
+                      ],
+                    )
+                  : Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.only(left: 16.0),
+                          child: Text('Contacts'),
+                        ),
+                        ListView.builder(
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                            itemCount: controller.chatListModelData.length,
+                            itemBuilder: (context, index) {
+                              return Slidable(
+                                startActionPane: ActionPane(
+                                    motion: const StretchMotion(),
+                                    children: [
+                                      SlidableAction(
+                                        onPressed: (context) {
+                                          controller.onDissmissed();
+                                        },
+                                        backgroundColor: Colors.green,
+                                        icon: Icons.share,
+                                        label: 'Share',
+                                      ),
+                                      SlidableAction(
+                                        onPressed: (context) {
+                                          controller.onDissmissed();
+                                        },
+                                        backgroundColor: Colors.blue,
+                                        icon: Icons.archive,
+                                        label: 'archive',
+                                      ),
+                                    ]),
+                                endActionPane: ActionPane(
+                                    motion: const BehindMotion(),
+                                    children: [
+                                      SlidableAction(
+                                        onPressed: (context) {
+                                          controller.onDissmissed();
+                                        },
+                                        backgroundColor: Colors.red,
+                                        icon: Icons.delete,
+                                        label: 'Delete',
+                                      ),
+                                    ]),
+                                child: CustomCard(
+                                  // name: 'Cody Fisher',
+                                  name: controller
+                                      .chatListModelData[index].userName,
+                                  message: controller
+                                      .chatListModelData[index].message,
+                                  lastMessageTime: controller
+                                      .formattedLastMessageTime[index],
+                                  // chatModel: widget.chatModels[index],
+                                  // sourceChat: widget.sourceChat,
                                 ),
-                              ]),
-                          endActionPane: ActionPane(
-                              motion: const BehindMotion(),
-                              children: [
-                                SlidableAction(
-                                  onPressed: (context) {
-                                    controller.onDissmissed();
-                                  },
-                                  backgroundColor: Colors.red,
-                                  icon: Icons.delete,
-                                  label: 'Delete',
-                                ),
-                              ]),
-                          child: OtherContactsCard(
-                            name: controller.nmsContactsData!.data[index]
-                                .personalDetails.firstname,
-                          ),
-                        );
-                      }),
-                  seeMore(controller),
-                  const Padding(
-                    padding: EdgeInsets.only(left: 16.0),
-                    child: Text('Messages'),
-                  ),
-                  ListView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: controller.messageData!.data.length,
-                      itemBuilder: (context, index) {
-                        return Slidable(
-                          startActionPane: ActionPane(
-                              motion: const StretchMotion(),
-                              children: [
-                                SlidableAction(
-                                  onPressed: (context) {
-                                    controller.onDissmissed();
-                                  },
-                                  backgroundColor: Colors.green,
-                                  icon: Icons.share,
-                                  label: 'Share',
-                                ),
-                                SlidableAction(
-                                  onPressed: (context) {
-                                    controller.onDissmissed();
-                                  },
-                                  backgroundColor: Colors.blue,
-                                  icon: Icons.archive,
-                                  label: 'archive',
-                                ),
-                              ]),
-                          endActionPane: ActionPane(
-                              motion: const BehindMotion(),
-                              children: [
-                                SlidableAction(
-                                  onPressed: (context) {
-                                    controller.onDissmissed();
-                                  },
-                                  backgroundColor: Colors.red,
-                                  icon: Icons.delete,
-                                  label: 'Delete',
-                                ),
-                              ]),
-                          child: CustomMessageCard(
-                            name: controller.messageData!.data[index].userName,
-                            message: controller.messageData!.data[index].message
-                                .toString(),
-                            lastMessageTime: controller
-                                .messageData!.data[index].lastMessageTime,
-                          ),
-                        );
-                      }),
-                  seeMore(controller),
-                  const Padding(
-                    padding: EdgeInsets.only(left: 16.0),
-                    child: Text('Links'),
-                  ),
-                  ListView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: controller.linksData!.data.length,
-                      itemBuilder: (context, index) {
-                        return Slidable(
-                          startActionPane: ActionPane(
-                              motion: const StretchMotion(),
-                              children: [
-                                SlidableAction(
-                                  onPressed: (context) {
-                                    controller.onDissmissed();
-                                  },
-                                  backgroundColor: Colors.green,
-                                  icon: Icons.share,
-                                  label: 'Share',
-                                ),
-                                SlidableAction(
-                                  onPressed: (context) {
-                                    controller.onDissmissed();
-                                  },
-                                  backgroundColor: Colors.blue,
-                                  icon: Icons.archive,
-                                  label: 'archive',
-                                ),
-                              ]),
-                          endActionPane: ActionPane(
-                              motion: const BehindMotion(),
-                              children: [
-                                SlidableAction(
-                                  onPressed: (context) {
-                                    controller.onDissmissed();
-                                  },
-                                  backgroundColor: Colors.red,
-                                  icon: Icons.delete,
-                                  label: 'Delete',
-                                ),
-                              ]),
-                          child: CustomMessageCard(
-                            name: controller.linksData!.data[index].userName,
-                            message: controller.linksData!.data[index].links
-                                .toString(),
-                            lastMessageTime: controller
-                                .linksData!.data[index].lastMessageTime,
-                          ),
-                        );
-                      }),
-                  seeMore(controller),
-                ],
-              ),
+                              );
+                            }),
+                      ],
+                    ),
             ),
           );
           // );
@@ -250,7 +316,7 @@ class AllChatSearchScreen extends StatelessWidget {
   GestureDetector seeMore(AllChatSearchController controller) {
     return GestureDetector(
       onTap: () {
-        controller.onSeeMoreActive();
+        controller.onSeeMorePaginationActive();
       },
       child: const Padding(
         padding: EdgeInsets.only(top: 8, bottom: 8, right: 16),
