@@ -19,11 +19,14 @@ class ChatMainLayoutScreen extends StatefulWidget {
 }
 
 //fetch data from all chat search controller
-final AllChatSearchController allChatSearchController =
-    Get.find<AllChatSearchController>();
+// final AllChatSearchController allChatSearchController =
+//     Get.find<AllChatSearchController>();
+    // Get.put(AllChatSearchController());
 
 class _ChatMainLayoutScreenState extends State<ChatMainLayoutScreen>
     with SingleTickerProviderStateMixin {
+      final AllChatSearchController allChatSearchController =
+    Get.put(AllChatSearchController());
   TabController? _controller;
   @override
   void initState() {

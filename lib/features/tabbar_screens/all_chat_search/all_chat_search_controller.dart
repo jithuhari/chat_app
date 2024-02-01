@@ -16,8 +16,8 @@ import '../../chat_main_layout/chat_main_layout.dart';
 
 class AllChatSearchController extends GetxController with SnackbarMixin {
   final ChatMainLayOutController chatMainLayoutController =
-      Get.find<ChatMainLayOutController>();
-
+      // Get.find<ChatMainLayOutController>();
+      Get.put(ChatMainLayOutController());
   final _formattedLastMessageTime = (List<dynamic>.empty()).obs;
   List<dynamic> get formattedLastMessageTime => _formattedLastMessageTime;
 
@@ -80,6 +80,7 @@ class AllChatSearchController extends GetxController with SnackbarMixin {
 
   @override
   void onInit() async {
+    _isSearchActive.value=false;
     await fetchChatList();
 
     super.onInit();
@@ -213,7 +214,7 @@ class AllChatSearchController extends GetxController with SnackbarMixin {
         if (searchContactsData != null) {
           _contactsData.value = searchContactsData!.contacts;
           _nmsContactsData.value = searchContactsData!.nmscontacts;
-          if (contactsData!.data.isNotEmpty) {
+          if (contactsData!.data.isNotEmpty && nmsContactsData!.data.isNotEmpty) {
             debugPrint('contact mesage--- ${contactsData!.data[0].message}');
             debugPrint(
                 'nms contact userids--- ${nmsContactsData!.data[0].userId}');
