@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../utils/utils.dart';
+import '../../widgets/cornered_button.dart';
 import '../../widgets/new_group_selection_card.dart';
 
 class NewGroupScreen extends StatelessWidget {
@@ -102,6 +103,8 @@ class NewGroupScreen extends StatelessWidget {
                     left: 16, right: 16, top: 8, bottom: 16),
                 child: TextFormField(
                   decoration: InputDecoration(
+                    
+                      contentPadding: const EdgeInsets.symmetric(vertical: 10),
                       focusedBorder: OutlineInputBorder(
                         borderSide:
                             const BorderSide(color: primaryColor, width: 1.0),
@@ -110,7 +113,8 @@ class NewGroupScreen extends StatelessWidget {
                       enabledBorder: OutlineInputBorder(
                           borderSide: const BorderSide(
                               color: Color(0xffB7B7B7), width: 1.0),
-                          borderRadius: BorderRadius.circular(5))),
+                          borderRadius: BorderRadius.circular(5)),
+                          ),
                 ),
               ),
               SizedBox(
@@ -124,6 +128,17 @@ class NewGroupScreen extends StatelessWidget {
                         name: 'Cody Fisher',
                       );
                     }),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 23, vertical: 12),
+                child: CorneredButton(
+                  title: 'Create group',
+                  onPress: () {},
+                  color: primaryColor,
+                  textcolor: Colors.white,
+                  height: 50,
+                ),
               )
             ],
           ),
