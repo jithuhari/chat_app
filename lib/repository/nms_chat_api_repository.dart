@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../dtos/chat_app_dtos/new_chat/nms_new_chat.dart';
 import '../dtos/chat_app_dtos/nms_chat_list/nms_chat_list.dart';
 import '../dtos/chat_app_dtos/search_dtos/search_contacts/search_contacts.dart';
 import '../dtos/chat_app_dtos/search_dtos/search_messages/search_messages.dart';
@@ -11,6 +12,9 @@ abstract class NMSChatApiRepository extends GetxController {
 
   Future<NMSChatListResponse> fetchChatList(
       {required NMSChatListRequest request});
+
+      Future<NMSNewChatListResponse> fetchNewChatList(
+      {required NMSNewChatListRequest request});
 
   Future<SearchContactsResponse> searchContactsList(
       {required SearchContactsRequest request});
@@ -38,6 +42,20 @@ class NMSApiRepositoryImpl extends GetxController
     );
     debugPrint("response $response");
     return NMSChatListResponse.fromJson(response);
+  }
+
+  //fetch new chat list in chat page
+  @override
+  Future<NMSNewChatListResponse> fetchNewChatList(
+      {required NMSNewChatListRequest request}) async {
+    final response = await _helper.postWithBody(
+      // headers: _headersWithoutToken,
+      endpoint: ApiEndPoints.newChatList,
+      params: {},
+      body: request.toBody(),
+    );
+    debugPrint("response $response");
+    return NMSNewChatListResponse.fromJson(response);
   }
 
   //search api for contacts

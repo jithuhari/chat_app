@@ -80,7 +80,7 @@ class AllChatSearchController extends GetxController with SnackbarMixin {
 
   @override
   void onInit() async {
-    _isSearchActive.value=false;
+    _isSearchActive.value = false;
     await fetchChatList();
 
     super.onInit();
@@ -153,8 +153,7 @@ class AllChatSearchController extends GetxController with SnackbarMixin {
             chatMainLayoutController.chatSearchController.value.text,
         page: '1',
         size: '5',
-        // options:
-        // ["messages", "links"],
+        options: [],
         // chatMainLayoutController.contactsOptionList.toList()
       );
       final response =
@@ -199,12 +198,11 @@ class AllChatSearchController extends GetxController with SnackbarMixin {
     _isLoading.value = true;
     try {
       final request = SearchContactsRequest(
-        userId: '8',
-        searchKey: chatMainLayoutController.chatSearchController.value.text,
-        page: '1',
-        size: '5',
-        // options: ["contacts", "nmscontacts"]
-      );
+          userId: '8',
+          searchKey: chatMainLayoutController.chatSearchController.value.text,
+          page: '1',
+          size: '5',
+          options: []);
       final response =
           await NMSChatApiRepository.to.searchContactsList(request: request);
       if (response.status == 200) {
@@ -214,7 +212,8 @@ class AllChatSearchController extends GetxController with SnackbarMixin {
         if (searchContactsData != null) {
           _contactsData.value = searchContactsData!.contacts;
           _nmsContactsData.value = searchContactsData!.nmscontacts;
-          if (contactsData!.data.isNotEmpty && nmsContactsData!.data.isNotEmpty) {
+          if (contactsData!.data.isNotEmpty &&
+              nmsContactsData!.data.isNotEmpty) {
             debugPrint('contact mesage--- ${contactsData!.data[0].message}');
             debugPrint(
                 'nms contact userids--- ${nmsContactsData!.data[0].userId}');

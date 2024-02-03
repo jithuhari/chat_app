@@ -7,6 +7,7 @@ class ApiEndPoints {
   static const String getEmploy = 'employee/get';
   //nms chat
   static const String chatList = 'users/messages/list';
+  static const String newChatList = 'users/new';
   static const String searchContact = 'users/contacts/search';
   static const String searchMessage = 'users/messages/search';
   

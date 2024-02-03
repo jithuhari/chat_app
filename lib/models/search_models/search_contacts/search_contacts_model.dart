@@ -1,10 +1,10 @@
 class ChatAndNMsContactData {
-  Contacts contacts;
-  Nmscontacts nmscontacts;
+  Contacts? contacts;
+  Nmscontacts? nmscontacts;
 
   ChatAndNMsContactData({
-    required this.contacts,
-    required this.nmscontacts,
+     this.contacts,
+     this.nmscontacts,
   });
 
   factory ChatAndNMsContactData.fromJson(Map<String, dynamic> json) =>
@@ -14,8 +14,8 @@ class ChatAndNMsContactData {
       );
 
   Map<String, dynamic> toJson() => {
-        "contacts": contacts.toJson(),
-        "nmscontacts": nmscontacts.toJson(),
+        "contacts": contacts!.toJson(),
+        "nmscontacts": nmscontacts!.toJson(),
       };
 }
 

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:nms_chat/features/new_chat/new_chat.dart';
 
 import '../../utils/utils.dart';
 import '../../widgets/new_chat_card.dart';
@@ -8,7 +10,21 @@ class NewChatScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return GetBuilder<NewChatSearchController>(
+        init: NewChatSearchController(),
+        builder: (controller) {
+          if (controller.isLoading) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+
+          if (controller.newChatListModelData.isEmpty) {
+            return const Center(
+              child: Text('No data available'),
+            );
+          }
+          return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
@@ -81,6 +97,6 @@ class NewChatScreen extends StatelessWidget {
               );
             }),
       ),
-    );
+    );});
   }
 }

@@ -21,12 +21,12 @@ class ChatMainLayoutScreen extends StatefulWidget {
 //fetch data from all chat search controller
 // final AllChatSearchController allChatSearchController =
 //     Get.find<AllChatSearchController>();
-    // Get.put(AllChatSearchController());
+// Get.put(AllChatSearchController());
 
 class _ChatMainLayoutScreenState extends State<ChatMainLayoutScreen>
     with SingleTickerProviderStateMixin {
-      final AllChatSearchController allChatSearchController =
-    Get.put(AllChatSearchController());
+  final AllChatSearchController allChatSearchController =
+      Get.put(AllChatSearchController());
   TabController? _controller;
   @override
   void initState() {
@@ -213,6 +213,9 @@ class _ChatMainLayoutScreenState extends State<ChatMainLayoutScreen>
                                               } else {
                                                 controller.contactsOptionList
                                                     .add(e);
+                                                debugPrint(controller
+                                                    .contactsOptionList
+                                                    .toString());
                                               }
                                               controller.update();
                                             },
@@ -228,10 +231,12 @@ class _ChatMainLayoutScreenState extends State<ChatMainLayoutScreen>
                               padding: const EdgeInsets.only(
                                   top: 10, left: 22, right: 23.8, bottom: 4),
                               child: SearchTextField(
-                                onSubmitted: (value) async{
+                                onSubmitted: (value) async {
                                   await allChatSearchController.onSearchTap();
-                                  await allChatSearchController.searchContactsList();
-                                  await allChatSearchController.searchMessageList();
+                                  await allChatSearchController
+                                      .searchContactsList();
+                                  await allChatSearchController
+                                      .searchMessageList();
                                   controller.chatSearchController.clear();
                                 },
                                 controller: controller.chatSearchController,
