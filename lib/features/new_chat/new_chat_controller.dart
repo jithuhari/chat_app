@@ -9,8 +9,8 @@ import '../../repository/nms_chat_api_repository.dart';
 class NewChatSearchController extends GetxController with SnackbarMixin {
   @override
   void onInit() async {
-    print('init on');
-    await fetchNewChatList();
+    // print('init on');
+    // await fetchNewChatList();
     super.onInit();
   }
 

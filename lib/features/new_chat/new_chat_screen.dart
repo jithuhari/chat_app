@@ -13,17 +13,17 @@ class NewChatScreen extends StatelessWidget {
     return GetBuilder<NewChatSearchController>(
         init: NewChatSearchController(),
         builder: (controller) {
-          if (controller.isLoading) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
+          // if (controller.isLoading) {
+          //   return const Center(
+          //     child: CircularProgressIndicator(),
+          //   );
+          // }
 
-          if (controller.newChatListModelData.isEmpty) {
-            return const Center(
-              child: Text('No data available'),
-            );
-          }
+          // if (controller.newChatListModelData.isEmpty) {
+          //   return const Center(
+          //     child: Text('No data available'),
+          //   );
+          // }
           return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -46,47 +46,7 @@ class NewChatScreen extends StatelessWidget {
                     // controller.searchDisplay();
                   },
                   child: Image.asset("assets/png/search1.png")),
-            ),
-            PopupMenuButton(
-                iconColor: iconColor,
-                iconSize: 24,
-                onSelected: (value) {
-                  debugPrint(value);
-                },
-                itemBuilder: (BuildContext context) {
-                  return const [
-                    PopupMenuItem(
-                      value: 'New group',
-                      child: Text(
-                        'New group',
-                      ),
-                    ),
-                    PopupMenuItem(
-                      value: 'New broadcast',
-                      child: Text(
-                        'New broadcast',
-                      ),
-                    ),
-                    PopupMenuItem(
-                      value: 'Whatsapp web',
-                      child: Text(
-                        'Whatsapp web',
-                      ),
-                    ),
-                    PopupMenuItem(
-                      value: 'Starred message',
-                      child: Text(
-                        'Starred message',
-                      ),
-                    ),
-                    PopupMenuItem(
-                      value: 'Settings',
-                      child: Text(
-                        'Settings',
-                      ),
-                    ),
-                  ];
-                })
+            )
           ],
         ),
         body: ListView.builder(

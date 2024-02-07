@@ -31,47 +31,7 @@ class NewGroupScreen extends StatelessWidget {
                     // controller.searchDisplay();
                   },
                   child: Image.asset("assets/png/search1.png")),
-            ),
-            PopupMenuButton(
-                iconColor: iconColor,
-                iconSize: 24,
-                onSelected: (value) {
-                  debugPrint(value);
-                },
-                itemBuilder: (BuildContext context) {
-                  return const [
-                    PopupMenuItem(
-                      value: 'New group',
-                      child: Text(
-                        'New group',
-                      ),
-                    ),
-                    PopupMenuItem(
-                      value: 'New broadcast',
-                      child: Text(
-                        'New broadcast',
-                      ),
-                    ),
-                    PopupMenuItem(
-                      value: 'Whatsapp web',
-                      child: Text(
-                        'Whatsapp web',
-                      ),
-                    ),
-                    PopupMenuItem(
-                      value: 'Starred message',
-                      child: Text(
-                        'Starred message',
-                      ),
-                    ),
-                    PopupMenuItem(
-                      value: 'Settings',
-                      child: Text(
-                        'Settings',
-                      ),
-                    ),
-                  ];
-                })
+            )
           ],
         ),
         body: SingleChildScrollView(
@@ -103,18 +63,17 @@ class NewGroupScreen extends StatelessWidget {
                     left: 16, right: 16, top: 8, bottom: 16),
                 child: TextFormField(
                   decoration: InputDecoration(
-                    
-                      contentPadding: const EdgeInsets.symmetric(vertical: 10),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            const BorderSide(color: primaryColor, width: 1.0),
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Color(0xffB7B7B7), width: 1.0),
-                          borderRadius: BorderRadius.circular(5)),
-                          ),
+                    contentPadding: const EdgeInsets.symmetric(vertical: 10),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide:
+                          const BorderSide(color: primaryColor, width: 1.0),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                            color: Color(0xffB7B7B7), width: 1.0),
+                        borderRadius: BorderRadius.circular(5)),
+                  ),
                 ),
               ),
               SizedBox(
