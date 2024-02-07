@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nms_chat/widgets/message_widgets/own_message_card.dart';
 
 import '../../utils/utils.dart';
+import '../../widgets/message_widgets/reply_message_card.dart';
 
 class ChatWindowScreen extends StatelessWidget {
   const ChatWindowScreen({super.key});
@@ -133,7 +135,27 @@ class ChatWindowScreen extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           child: Stack(
             children: [
-              ListView(),
+              Container(
+                height: MediaQuery.of(context).size.height - 185,
+                child: ListView(
+                  children: const [
+                    OwnMessageCard(),
+                    ReplyMessageCard(),
+                    OwnMessageCard(),
+                    ReplyMessageCard(),
+                    OwnMessageCard(),
+                    ReplyMessageCard(),
+                    OwnMessageCard(),
+                    ReplyMessageCard(),
+                    OwnMessageCard(),
+                    ReplyMessageCard(),
+                    OwnMessageCard(),
+                    ReplyMessageCard(),
+                    OwnMessageCard(),
+                    ReplyMessageCard(),
+                  ],
+                ),
+              ),
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Container(

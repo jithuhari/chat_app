@@ -18,3 +18,4 @@ const Color cardColor = Color(0xffFAFAFA);
 const Color iconColor = Color(0xff7A7A7A);
 const Color hintColor = Color(0xffB7B7B7);
 const Color ownMessageColor = Color(0xffBEFFE8);
+const Color replyMessageColor = Color(0xffF1F1F1);
