@@ -16,3 +16,5 @@ const Color errorColorText = Color(0xffF93232);
 const Color messageColor = Color(0xffB7B7B7);
 const Color cardColor = Color(0xffFAFAFA);
 const Color iconColor = Color(0xff7A7A7A);
+const Color hintColor = Color(0xffB7B7B7);
+const Color ownMessageColor = Color(0xffBEFFE8);

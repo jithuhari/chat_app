@@ -8,24 +8,27 @@ class CustomCard extends StatelessWidget {
       {super.key,
       required this.name,
       required this.message,
-      required this.lastMessageTime});
+      required this.lastMessageTime,
+      required this.onTap});
 
   // final ChatModel chatModel;
   // final ChatModel sourceChat;
   final String name;
   final String message;
   final String lastMessageTime;
+  final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        // Navigator.push(
-        //     context,
-        //     MaterialPageRoute(
-        //         builder: (context) => IndividualPage(
-        //               chatModel: chatModel, sourceChat: sourceChat,
-        //             )));
-      },
+      onTap:onTap,
+      //  () {
+      //   // Navigator.push(
+      //   //     context,
+      //   //     MaterialPageRoute(
+      //   //         builder: (context) => IndividualPage(
+      //   //               chatModel: chatModel, sourceChat: sourceChat,
+      //   //             )));
+      // },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
         child: Container(

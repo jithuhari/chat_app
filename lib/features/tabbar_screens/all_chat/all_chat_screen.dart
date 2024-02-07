@@ -129,14 +129,26 @@ class AllChatScreen extends StatelessWidget {
                         label: 'Delete',
                       ),
                     ]),
-                    child: CustomCard(
-                      // name: 'Cody Fisher',
-                      name: controller.chatListModelData[index].userName,
-                      message: controller.chatListModelData[index].message,
-                      lastMessageTime:
-                          controller.formattedLastMessageTime[index],
-                      // chatModel: widget.chatModels[index],
-                      // sourceChat: widget.sourceChat,
+                    child: InkWell(
+                      child: CustomCard(
+                        onTap: () {
+                          Get.toNamed('/chat_window_screen', arguments: {
+                            'firstName':
+                                controller.chatListModelData[index].firstName,
+                            'lastName':
+                                controller.chatListModelData[index].lastName
+                            
+                          });
+                        },
+                        // name: 'Cody Fisher',
+                        name:
+                            '${controller.chatListModelData[index].firstName} ${controller.chatListModelData[index].lastName}',
+                        message: controller.chatListModelData[index].message,
+                        lastMessageTime:
+                            controller.formattedLastMessageTime[index],
+                        // chatModel: widget.chatModels[index],
+                        // sourceChat: widget.sourceChat,
+                      ),
                     ),
                   );
                 }),

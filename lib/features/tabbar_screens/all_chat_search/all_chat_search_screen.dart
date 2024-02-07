@@ -79,6 +79,7 @@ class AllChatSearchScreen extends StatelessWidget {
                                       ),
                                     ]),
                                 child: CustomCard(
+                                  onTap: () {},
                                   name: controller
                                       .contactsData!.data[index].userName,
                                   message: controller
@@ -309,6 +310,7 @@ class AllChatSearchScreen extends StatelessWidget {
                                       ),
                                     ]),
                                 child: CustomCard(
+                                  onTap: () {},
                                   // name: 'Cody Fisher',
                                   name: controller
                                       .chatListModelData[index].userName,
