@@ -14,6 +14,8 @@ class ChatWindowScreen extends StatelessWidget {
     final Map<String, dynamic> arguments = Get.arguments;
     final String firstName = arguments['firstName'];
     final String lastName = arguments['lastName'];
+    final int receiverId = arguments['receiverId'];
+
     return GetBuilder<ChatWindowController>(
         init: ChatWindowController(),
         builder: (controller) {
@@ -236,7 +238,7 @@ class ChatWindowScreen extends StatelessWidget {
                                         controller.sendMessage(
                                             controller.msgTextController.text,
                                             1,
-                                            8,
+                                            receiverId,
                                             1);
                                         controller.msgTextController.clear();
                                       }

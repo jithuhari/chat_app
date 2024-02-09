@@ -25,7 +25,6 @@ class ChatWindowController extends GetxController {
       "autoConnect": false,
     });
     socket.connect();
-    // socket.emit("message", 'haiii how are u');
     socket.onConnect((data) => debugPrint("Connected"));
     debugPrint(socket.connected.toString());
   }
@@ -42,7 +41,8 @@ class ChatWindowController extends GetxController {
     socket.on("historicalMessages", (data) {
       //  debugPrint('Received message: $data');
       _historicmessageData.value = data.toString();
-      print('-----------Received message:$historicmessageData---------------------');
+      print(
+          '-----------Received message:$historicmessageData---------------------');
     });
   }
 

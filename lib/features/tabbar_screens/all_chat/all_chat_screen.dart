@@ -136,7 +136,9 @@ class AllChatScreen extends StatelessWidget {
                             'firstName':
                                 controller.chatListModelData[index].firstName,
                             'lastName':
-                                controller.chatListModelData[index].lastName
+                                controller.chatListModelData[index].lastName,
+                            'receiverId':controller.chatListModelData[index].userId    
+                                
                             
                           });
                         },
