@@ -139,7 +139,7 @@ class ChatWindowScreen extends StatelessWidget {
                 child: Stack(
                   children: [
                     SizedBox(
-                      height: MediaQuery.of(context).size.height - 185,
+                      height: MediaQuery.of(context).size.height - 195,
                       child: ListView(
                         children: const [
                           OwnMessageCard(
