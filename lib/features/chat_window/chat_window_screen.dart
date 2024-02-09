@@ -140,19 +140,33 @@ class ChatWindowScreen extends StatelessWidget {
                       height: MediaQuery.of(context).size.height - 185,
                       child: ListView(
                         children: const [
-                          OwnMessageCard(),
+                          OwnMessageCard(
+                            ownMessage: "controller.historicmessageData",
+                          ),
                           ReplyMessageCard(),
-                          OwnMessageCard(),
+                          OwnMessageCard(
+                            ownMessage: "controller.historicmessageData",
+                          ),
                           ReplyMessageCard(),
-                          OwnMessageCard(),
+                          OwnMessageCard(
+                            ownMessage: "controller.historicmessageData",
+                          ),
                           ReplyMessageCard(),
-                          OwnMessageCard(),
+                          OwnMessageCard(
+                            ownMessage: "controller.historicmessageData",
+                          ),
                           ReplyMessageCard(),
-                          OwnMessageCard(),
+                          OwnMessageCard(
+                            ownMessage: "controller.historicmessageData",
+                          ),
                           ReplyMessageCard(),
-                          OwnMessageCard(),
+                          OwnMessageCard(
+                            ownMessage: "controller.historicmessageData",
+                          ),
                           ReplyMessageCard(),
-                          OwnMessageCard(),
+                          OwnMessageCard(
+                            ownMessage: "controller.historicmessageData",
+                          ),
                           ReplyMessageCard(),
                         ],
                       ),
@@ -224,7 +238,7 @@ class ChatWindowScreen extends StatelessWidget {
                                             1,
                                             8,
                                             1);
-                                            controller.msgTextController.clear();
+                                        controller.msgTextController.clear();
                                       }
                                     },
                                     child: Image.asset(

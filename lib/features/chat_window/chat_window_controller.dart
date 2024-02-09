@@ -4,6 +4,8 @@ import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class ChatWindowController extends GetxController {
   TextEditingController msgTextController = TextEditingController();
+  final _historicmessageData = "".obs;
+  String get historicmessageData => _historicmessageData.value;
   final _isSendButton = false.obs;
   bool get isSendButton => _isSendButton.value;
   late IO.Socket socket;
@@ -11,14 +13,7 @@ class ChatWindowController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    // Map<String, dynamic> messageObj = {
-    //   "message": "Your message",
-    //   "user": 1,
-    //   "sender_id": 1,
-    //   "receiver_id": 2,
-    //   "page": 1,
-    // };
-    // connect(messageObj);
+
     connect();
   }
 
@@ -45,22 +40,11 @@ class ChatWindowController extends GetxController {
     };
     socket.emit("message", messageObj);
     socket.on("historicalMessages", (data) {
-       debugPrint('Received message: $data');
+      //  debugPrint('Received message: $data');
+      _historicmessageData.value = data.toString();
+      print('-----------Received message:$historicmessageData---------------------');
     });
   }
-
-  // void main() {
-  //   // Example messageObj
-  //   Map<String, dynamic> messageObj = {
-  //     "message": "Your message",
-  //     "user": 1,
-  //     "sender_id": 1,
-  //     "receiver_id": 2,
-  //     "page": 1,
-  //   };
-
-  //   connect(messageObj);
-  // }
 
   changeSendButtonStatusToTrue() {
     _isSendButton.value = true;
