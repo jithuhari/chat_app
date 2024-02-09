@@ -219,7 +219,8 @@ class SignInController extends GetxController with SnackbarMixin {
         if (response.status == 200) {
           _getEmployData.value = response.data;
 
-          debugPrint("Employ-- length  ${_getEmployData.value!.corporateDetails!.employeeCode}");
+          debugPrint(
+              "Employ-- length  ${_getEmployData.value!.corporateDetails!.employeeCode}");
 
           update();
         }

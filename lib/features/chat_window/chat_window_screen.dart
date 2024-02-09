@@ -190,7 +190,7 @@ class ChatWindowScreen extends StatelessWidget {
                                   padding:
                                       const EdgeInsets.symmetric(vertical: 13),
                                   child: Container(
-                                      height: 34,
+                                      height: 38,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(8),
                                         color: Colors.white,
@@ -211,7 +211,7 @@ class ChatWindowScreen extends StatelessWidget {
                                         },
                                         keyboardType: TextInputType.multiline,
                                         textAlignVertical:
-                                            TextAlignVertical.center,
+                                            TextAlignVertical.top,
                                         maxLines: 5,
                                         minLines: 1,
                                         decoration: const InputDecoration(
