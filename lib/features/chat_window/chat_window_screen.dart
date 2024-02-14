@@ -4,32 +4,20 @@ import 'package:nms_chat/features/chat_window/chat_window.dart';
 import 'package:nms_chat/widgets/message_widgets/own_message_card.dart';
 
 import '../../utils/utils.dart';
-import '../../widgets/message_widgets/reply_message_card.dart';
 
 class ChatWindowScreen extends StatelessWidget {
   const ChatWindowScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final Map<String, dynamic> arguments = Get.arguments;
-    final String firstName = arguments['firstName'];
-    final String lastName = arguments['lastName'];
-    final int receiverId = arguments['receiverId'];
+    // final Map<String, dynamic> arguments = Get.arguments;
+    // final String firstName = arguments['firstName'];
+    // final String lastName = arguments['lastName'];
+    // final int receiverId = arguments['receiverId'];
 
     return GetBuilder<ChatWindowController>(
         init: ChatWindowController(),
         builder: (controller) {
-          // if (controller.isLoading) {
-          //   return const Center(
-          //     child: CircularProgressIndicator(),
-          //   );
-          // }
-
-          // if (controller.newChatListModelData.isEmpty) {
-          //   return const Center(
-          //     child: Text('No data available'),
-          //   );
-          // }
           return SafeArea(
             child: Scaffold(
               backgroundColor: Colors.white,
@@ -61,25 +49,30 @@ class ChatWindowScreen extends StatelessWidget {
                         backgroundImage: AssetImage('assets/png/person.jpg')),
                   ],
                 ),
-                title: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '$firstName $lastName',
-                      style: const TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.w700),
-                    ),
-                    const SizedBox(
-                      height: 4,
-                    ),
-                    const Text(
-                      'Last seen 2 mins ago',
-                      style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          color: iconColor),
-                    )
-                  ],
+                title: InkWell(
+                  onTap: (){
+                    Get.toNamed('/profile_page_screen');
+                  },
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '${controller.firstName} ${controller.lastName}',
+                        style: const TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.w700),
+                      ),
+                      const SizedBox(
+                        height: 4,
+                      ),
+                      const Text(
+                        'Last seen 2 mins ago',
+                        style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                            color: iconColor),
+                      )
+                    ],
+                  ),
                 ),
                 actions: [
                   Padding(
@@ -139,40 +132,21 @@ class ChatWindowScreen extends StatelessWidget {
                 child: Stack(
                   children: [
                     SizedBox(
-                      height: MediaQuery.of(context).size.height - 195,
-                      child: ListView(
-                        children: const [
-                          OwnMessageCard(
-                            ownMessage: "controller.historicmessageData",
-                          ),
-                          ReplyMessageCard(),
-                          OwnMessageCard(
-                            ownMessage: "controller.historicmessageData",
-                          ),
-                          ReplyMessageCard(),
-                          OwnMessageCard(
-                            ownMessage: "controller.historicmessageData",
-                          ),
-                          ReplyMessageCard(),
-                          OwnMessageCard(
-                            ownMessage: "controller.historicmessageData",
-                          ),
-                          ReplyMessageCard(),
-                          OwnMessageCard(
-                            ownMessage: "controller.historicmessageData",
-                          ),
-                          ReplyMessageCard(),
-                          OwnMessageCard(
-                            ownMessage: "controller.historicmessageData",
-                          ),
-                          ReplyMessageCard(),
-                          OwnMessageCard(
-                            ownMessage: "controller.historicmessageData",
-                          ),
-                          ReplyMessageCard(),
-                        ],
-                      ),
-                    ),
+                        height: MediaQuery.of(context).size.height * .73,
+                        child: ListView.builder(
+                            reverse: true,
+                            shrinkWrap: true,
+                            itemCount: controller.historicalMessages.length,
+                            itemBuilder: (context, index) {
+                              return 
+                              // controller.isInitialMessageshow == true
+                              //     ? OwnMessageCard(
+                              //         ownMessage:
+                              //             controller.initialOldMessages[index])
+                                  // : 
+                                  OwnMessageCard(
+                                      ownMessage: controller.messages[index]);
+                            })),
                     Align(
                       alignment: Alignment.bottomCenter,
                       child: Container(
@@ -198,6 +172,7 @@ class ChatWindowScreen extends StatelessWidget {
                                       // shape: RoundedRectangleBorder(
                                       //     borderRadius: BorderRadius.circular(8)),
                                       child: TextFormField(
+                                        focusNode: controller.focusNode,
                                         controller:
                                             controller.msgTextController,
                                         onChanged: (value) {
@@ -235,10 +210,11 @@ class ChatWindowScreen extends StatelessWidget {
                                 child: InkWell(
                                     onTap: () {
                                       if (controller.isSendButton == true) {
+                                        controller.isInitialMessageshowfalse();
                                         controller.sendMessage(
                                             controller.msgTextController.text,
                                             1,
-                                            receiverId,
+                                            controller.receiverId,
                                             1);
                                         controller.msgTextController.clear();
                                       }

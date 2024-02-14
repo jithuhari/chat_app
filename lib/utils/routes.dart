@@ -5,6 +5,7 @@ import '../features/chat_main_layout/chat_main_layout.dart';
 import '../features/chat_window/chat_window.dart';
 import '../features/new_chat/new_chat.dart';
 import '../features/new_group/new_group.dart';
+import '../features/profile_page/profile_page.dart';
 
 List<GetPage> routes() => [
       GetPage(
@@ -29,6 +30,11 @@ List<GetPage> routes() => [
       GetPage(
           name: "/chat_window_screen",
           page: () => const ChatWindowScreen(),
+          transition: Transition.cupertino),
+
+      GetPage(
+          name: "/profile_page_screen",
+          page: () => const ProfilePageScreen(),
           transition: Transition.cupertino),
 
       //  Sign In/Sign Up Section
