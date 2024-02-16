@@ -245,7 +245,7 @@ class AllChatSearchController extends GetxController with SnackbarMixin {
     _isLoading.value = true;
     try {
       final request =
-          NMSChatListRequest(senderId: '1', page: 1, size: chatUserListLength);
+          NMSChatListRequest(senderId: '88', page: 1, size: chatUserListLength);
       final response =
           await NMSChatApiRepository.to.fetchChatList(request: request);
       if (response.status == 200) {

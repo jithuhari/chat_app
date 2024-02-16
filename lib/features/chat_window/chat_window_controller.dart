@@ -17,8 +17,20 @@ class ChatWindowController extends GetxController {
   final _messages = (List<String>.empty()).obs;
   List<String> get messages => _messages;
 
+  final _reversedOldMessages = (List<String>.empty()).obs;
+  List<String> get reversedOldMessages => _reversedOldMessages;
+
   final _initialOldMessages = (List<String>.empty()).obs;
   List<String> get initialOldMessages => _initialOldMessages;
+
+  final _oldMessageSenderId = (List<int>.empty()).obs;
+  List<int> get oldMessageSenderId => _oldMessageSenderId;
+
+  final _reversedOldMessageSenderId = (List<int>.empty()).obs;
+  List<int> get reversedOldMessageSenderId => _reversedOldMessageSenderId;
+
+  // final _oldMessageSenderId = 0.obs;
+  // int get oldMessageSenderId => _oldMessageSenderId.value;
 
   final _isInitialMessageshow = true.obs;
   bool get isInitialMessageshow => _isInitialMessageshow.value;
@@ -36,7 +48,7 @@ class ChatWindowController extends GetxController {
   void onInit() async {
     super.onInit();
     connect();
-    await fetchOldlMessage(1, receiverId);
+    await fetchOldlMessage(88, receiverId);
     // await fetchHistoricalMessage();
   }
 
@@ -61,14 +73,19 @@ class ChatWindowController extends GetxController {
 
     socket.on("oldMessages", (data) {
       _oldMessages.value = data['oldMessages'];
+      print(data);
 
       for (var message in oldMessages) {
+        int messageId = message['sender_id'];
+        oldMessageSenderId.add(messageId);
+        _reversedOldMessageSenderId.value= oldMessageSenderId.reversed.toList();
         // _initialOldMessages.value = message['message'];
         initialOldMessages.add(message['message']);
+        _reversedOldMessages.value = initialOldMessages.reversed.toList();
       }
       update();
-
-      print('------$initialOldMessages----------');
+      print('------${reversedOldMessageSenderId}----------');
+      print('------${reversedOldMessages}----------');
     });
   }
 
@@ -80,6 +97,7 @@ class ChatWindowController extends GetxController {
       "receiver_id": receiverId,
       "page": page,
     };
+    print(messageObj);
     socket.emit("message", messageObj);
     socket.on("historicalMessages", (data) {
       _historicalMessages.value = data['historicalMessages'];

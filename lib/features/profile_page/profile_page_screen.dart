@@ -194,6 +194,84 @@ class ProfilePageScreen extends StatelessWidget {
                 const SizedBox(
                   height: 24,
                 ),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Image(image: AssetImage("assets/png/link.png")),
+                        SizedBox(
+                          width: 16,
+                        ),
+                        Text('Links',
+                            style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                                color: iconColor)),
+                      ],
+                    ),
+                    Icon(
+                      Icons.arrow_forward_ios_rounded,
+                      size: 10,
+                      color: hintColor,
+                    )
+                  ],
+                ),
+                const SizedBox(
+                  height: 24,
+                ),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Image(image: AssetImage("assets/png/groups_2.png")),
+                        SizedBox(
+                          width: 16,
+                        ),
+                        Text('Groups',
+                            style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                                color: iconColor)),
+                      ],
+                    ),
+                    Icon(
+                      Icons.arrow_forward_ios_rounded,
+                      size: 10,
+                      color: hintColor,
+                    )
+                  ],
+                ),
+                const SizedBox(
+                  height: 24,
+                ),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Image(image: AssetImage("assets/png/task.png")),
+                        SizedBox(
+                          width: 16,
+                        ),
+                        Text('Tasks',
+                            style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                                color: iconColor)),
+                      ],
+                    ),
+                    Icon(
+                      Icons.arrow_forward_ios_rounded,
+                      size: 10,
+                      color: hintColor,
+                    )
+                  ],
+                ),
+                const SizedBox(
+                  height: 24,
+                ),
               ],
             ),
           ),

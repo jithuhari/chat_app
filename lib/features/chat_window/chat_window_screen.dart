@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nms_chat/features/chat_window/chat_window.dart';
 import 'package:nms_chat/widgets/message_widgets/own_message_card.dart';
+import 'package:nms_chat/widgets/message_widgets/reply_message_card.dart';
 
 import '../../utils/utils.dart';
 
@@ -50,7 +51,7 @@ class ChatWindowScreen extends StatelessWidget {
                   ],
                 ),
                 title: InkWell(
-                  onTap: (){
+                  onTap: () {
                     Get.toNamed('/profile_page_screen');
                   },
                   child: Column(
@@ -136,16 +137,24 @@ class ChatWindowScreen extends StatelessWidget {
                         child: ListView.builder(
                             reverse: true,
                             shrinkWrap: true,
-                            itemCount: controller.historicalMessages.length,
+                            itemCount: controller.initialOldMessages.length,
                             itemBuilder: (context, index) {
-                              return 
+                              if (controller.reversedOldMessageSenderId[index] == 88) {
+                                return OwnMessageCard(
+                                    ownMessage:
+                                        controller.reversedOldMessages[index]);
+                              } else {
+                                return ReplyMessageCard(
+                                  replyMessage:
+                                      controller.reversedOldMessages[index],
+                                );
+                              }
+
                               // controller.isInitialMessageshow == true
                               //     ? OwnMessageCard(
                               //         ownMessage:
                               //             controller.initialOldMessages[index])
-                                  // : 
-                                  OwnMessageCard(
-                                      ownMessage: controller.messages[index]);
+                              // :
                             })),
                     Align(
                       alignment: Alignment.bottomCenter,
@@ -213,7 +222,7 @@ class ChatWindowScreen extends StatelessWidget {
                                         controller.isInitialMessageshowfalse();
                                         controller.sendMessage(
                                             controller.msgTextController.text,
-                                            1,
+                                            88,
                                             controller.receiverId,
                                             1);
                                         controller.msgTextController.clear();
