@@ -139,14 +139,23 @@ class ChatWindowScreen extends StatelessWidget {
                             shrinkWrap: true,
                             itemCount: controller.initialOldMessages.length,
                             itemBuilder: (context, index) {
-                              if (controller.reversedOldMessageSenderId[index] == 88) {
-                                return OwnMessageCard(
+                              if (controller.isInitialMessageshow == true?controller
+                                      .reversedOldMessageSenderId[index] ==
+                                  88:controller
+                                      .reversedHistoricalMessageSenderId[index] ==
+                                  88) {
+                                return controller.isInitialMessageshow == true?OwnMessageCard(
                                     ownMessage:
-                                        controller.reversedOldMessages[index]);
+                                        controller.reversedOldMessages[index]):OwnMessageCard(
+                                    ownMessage:
+                                        controller.reversedMessages[index]);
                               } else {
-                                return ReplyMessageCard(
+                                return  controller.isInitialMessageshow == true?ReplyMessageCard(
                                   replyMessage:
                                       controller.reversedOldMessages[index],
+                                ):ReplyMessageCard(
+                                  replyMessage:
+                                      controller.reversedMessages[index],
                                 );
                               }
 

@@ -20,6 +20,9 @@ class ChatWindowController extends GetxController {
   final _reversedOldMessages = (List<String>.empty()).obs;
   List<String> get reversedOldMessages => _reversedOldMessages;
 
+  final _reversedMessages = (List<String>.empty()).obs;
+  List<String> get reversedMessages => _reversedMessages;
+
   final _initialOldMessages = (List<String>.empty()).obs;
   List<String> get initialOldMessages => _initialOldMessages;
 
@@ -28,6 +31,11 @@ class ChatWindowController extends GetxController {
 
   final _reversedOldMessageSenderId = (List<int>.empty()).obs;
   List<int> get reversedOldMessageSenderId => _reversedOldMessageSenderId;
+
+  final _historicalMessageSenderId = (List<int>.empty()).obs;
+  List<int> get historicalMessageSenderId => _historicalMessageSenderId;
+  final _reversedHistoricalMessageSenderId = (List<int>.empty()).obs;
+  List<int> get reversedHistoricalMessageSenderId => _reversedHistoricalMessageSenderId;
 
   // final _oldMessageSenderId = 0.obs;
   // int get oldMessageSenderId => _oldMessageSenderId.value;
@@ -78,7 +86,8 @@ class ChatWindowController extends GetxController {
       for (var message in oldMessages) {
         int messageId = message['sender_id'];
         oldMessageSenderId.add(messageId);
-        _reversedOldMessageSenderId.value= oldMessageSenderId.reversed.toList();
+        _reversedOldMessageSenderId.value =
+            oldMessageSenderId.reversed.toList();
         // _initialOldMessages.value = message['message'];
         initialOldMessages.add(message['message']);
         _reversedOldMessages.value = initialOldMessages.reversed.toList();
@@ -105,10 +114,16 @@ class ChatWindowController extends GetxController {
 
       for (var message in historicalMessages) {
         messages.add(message['message']);
+        _reversedMessages.value = messages.reversed.toList();
+        int historicalMessageId = message['sender_id'];
+        historicalMessageSenderId.add(historicalMessageId);
+        _reversedHistoricalMessageSenderId.value =
+            historicalMessageSenderId.reversed.toList();
       }
       update();
       // Now you have all the messages in the `messages` list
       print(messages);
+      print('-----$reversedHistoricalMessageSenderId');
 
       //  debugPrint('Received message: ${data['historicalMessages']}');
       // _historicmessageData.value = data.toString();
