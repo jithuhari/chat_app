@@ -11,11 +11,6 @@ class ChatWindowScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final Map<String, dynamic> arguments = Get.arguments;
-    // final String firstName = arguments['firstName'];
-    // final String lastName = arguments['lastName'];
-    // final int receiverId = arguments['receiverId'];
-
     return GetBuilder<ChatWindowController>(
         init: ChatWindowController(),
         builder: (controller) {
@@ -137,33 +132,35 @@ class ChatWindowScreen extends StatelessWidget {
                         child: ListView.builder(
                             reverse: true,
                             shrinkWrap: true,
-                            itemCount: controller.initialOldMessages.length,
+                            itemCount: controller.isInitialMessageshow == true
+                                ? controller.initialOldMessages.length
+                                : controller.historicalMessages.length,
                             itemBuilder: (context, index) {
-                              if (controller.isInitialMessageshow == true?controller
-                                      .reversedOldMessageSenderId[index] ==
-                                  88:controller
-                                      .reversedHistoricalMessageSenderId[index] ==
-                                  88) {
-                                return controller.isInitialMessageshow == true?OwnMessageCard(
-                                    ownMessage:
-                                        controller.reversedOldMessages[index]):OwnMessageCard(
-                                    ownMessage:
-                                        controller.reversedMessages[index]);
+                              if (controller.isInitialMessageshow == true
+                                  ? controller
+                                          .reversedOldMessageSenderId[index] ==
+                                      88
+                                  : controller.reversedHistoricalMessageSenderId[
+                                          index] ==
+                                      88) {
+                                return controller.isInitialMessageshow == true
+                                    ? OwnMessageCard(
+                                        ownMessage: controller
+                                            .reversedOldMessages[index])
+                                    : OwnMessageCard(
+                                        ownMessage:
+                                            controller.reversedMessages[index]);
                               } else {
-                                return  controller.isInitialMessageshow == true?ReplyMessageCard(
-                                  replyMessage:
-                                      controller.reversedOldMessages[index],
-                                ):ReplyMessageCard(
-                                  replyMessage:
-                                      controller.reversedMessages[index],
-                                );
+                                return controller.isInitialMessageshow == true
+                                    ? ReplyMessageCard(
+                                        replyMessage: controller
+                                            .reversedOldMessages[index],
+                                      )
+                                    : ReplyMessageCard(
+                                        replyMessage:
+                                            controller.reversedMessages[index],
+                                      );
                               }
-
-                              // controller.isInitialMessageshow == true
-                              //     ? OwnMessageCard(
-                              //         ownMessage:
-                              //             controller.initialOldMessages[index])
-                              // :
                             })),
                     Align(
                       alignment: Alignment.bottomCenter,
@@ -187,10 +184,8 @@ class ChatWindowScreen extends StatelessWidget {
                                         borderRadius: BorderRadius.circular(8),
                                         color: Colors.white,
                                       ),
-                                      // shape: RoundedRectangleBorder(
-                                      //     borderRadius: BorderRadius.circular(8)),
                                       child: TextFormField(
-                                        focusNode: controller.focusNode,
+                                        // focusNode: controller.focusNode,
                                         controller:
                                             controller.msgTextController,
                                         onChanged: (value) {
@@ -228,6 +223,7 @@ class ChatWindowScreen extends StatelessWidget {
                                 child: InkWell(
                                     onTap: () {
                                       if (controller.isSendButton == true) {
+                                        FocusScope.of(context).unfocus();
                                         controller.isInitialMessageshowfalse();
                                         controller.sendMessage(
                                             controller.msgTextController.text,

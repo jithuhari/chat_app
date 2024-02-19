@@ -35,19 +35,16 @@ class ChatWindowController extends GetxController {
   final _historicalMessageSenderId = (List<int>.empty()).obs;
   List<int> get historicalMessageSenderId => _historicalMessageSenderId;
   final _reversedHistoricalMessageSenderId = (List<int>.empty()).obs;
-  List<int> get reversedHistoricalMessageSenderId => _reversedHistoricalMessageSenderId;
-
-  // final _oldMessageSenderId = 0.obs;
-  // int get oldMessageSenderId => _oldMessageSenderId.value;
+  List<int> get reversedHistoricalMessageSenderId =>
+      _reversedHistoricalMessageSenderId;
 
   final _isInitialMessageshow = true.obs;
   bool get isInitialMessageshow => _isInitialMessageshow.value;
 
-  FocusNode focusNode = FocusNode();
+  // FocusNode focusNode = FocusNode();
 
   TextEditingController msgTextController = TextEditingController();
-  // final _historicmessageData = "".obs;
-  // String get historicmessageData => _historicmessageData.value;
+
   final _isSendButton = false.obs;
   bool get isSendButton => _isSendButton.value;
   late IO.Socket socket;
@@ -57,12 +54,9 @@ class ChatWindowController extends GetxController {
     super.onInit();
     connect();
     await fetchOldlMessage(88, receiverId);
-    // await fetchHistoricalMessage();
   }
 
-  void connect()
-  // (Map<String, dynamic> messageObj)
-  {
+  void connect() {
     socket = IO.io('http://103.12.1.151:4321', <String, dynamic>{
       "transports": ["websocket"],
       "autoConnect": false,
@@ -88,7 +82,7 @@ class ChatWindowController extends GetxController {
         oldMessageSenderId.add(messageId);
         _reversedOldMessageSenderId.value =
             oldMessageSenderId.reversed.toList();
-        // _initialOldMessages.value = message['message'];
+
         initialOldMessages.add(message['message']);
         _reversedOldMessages.value = initialOldMessages.reversed.toList();
       }
@@ -110,7 +104,6 @@ class ChatWindowController extends GetxController {
     socket.emit("message", messageObj);
     socket.on("historicalMessages", (data) {
       _historicalMessages.value = data['historicalMessages'];
-      // List<String> messages = [];
 
       for (var message in historicalMessages) {
         messages.add(message['message']);
@@ -124,25 +117,8 @@ class ChatWindowController extends GetxController {
       // Now you have all the messages in the `messages` list
       print(messages);
       print('-----$reversedHistoricalMessageSenderId');
-
-      //  debugPrint('Received message: ${data['historicalMessages']}');
-      // _historicmessageData.value = data.toString();
-      // print(
-      //     '-----------Received message:$historicmessageData---------------------');
     });
   }
-
-//   void fetchMessages(Map<String, dynamic> data) {
-//   List<dynamic> historicalMessages = data['historicalMessages'];
-//   List<String> messages = [];
-
-//   for (var message in historicalMessages) {
-//     messages.add(message['message']);
-//   }
-
-//   // Now you have all the messages in the `messages` list
-//   print(messages);
-// }
 
   changeSendButtonStatusToTrue() {
     _isSendButton.value = true;
