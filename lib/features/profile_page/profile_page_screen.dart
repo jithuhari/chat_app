@@ -145,7 +145,7 @@ class ProfilePageScreen extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Image(image: AssetImage("assets/png/video.png")),
+                        Image(image: AssetImage("assets/png/document.png")),
                         SizedBox(
                           width: 16,
                         ),
@@ -173,7 +173,7 @@ class ProfilePageScreen extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Image(image: AssetImage("assets/png/document.png")),
+                        Image(image: AssetImage("assets/png/video.png")),
                         SizedBox(
                           width: 16,
                         ),

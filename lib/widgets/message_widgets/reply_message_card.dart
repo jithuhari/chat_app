@@ -29,7 +29,7 @@ class ReplyMessageCard extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 7.5, vertical: 12),
                 child: Text(
                   replyMessage,
-                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400,color: secondaryColor),
                 ),
               ),
             ),

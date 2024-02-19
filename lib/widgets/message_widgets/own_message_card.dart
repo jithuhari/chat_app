@@ -31,7 +31,7 @@ class OwnMessageCard extends StatelessWidget {
                 child: Text(
                   ownMessage,
                   style: const TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.w400),
+                      fontSize: 16, fontWeight: FontWeight.w400,color: secondaryColor),
                 ),
               ),
             ),
