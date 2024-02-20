@@ -5,6 +5,7 @@ import 'package:nms_chat/widgets/message_widgets/own_message_card.dart';
 import 'package:nms_chat/widgets/message_widgets/reply_message_card.dart';
 
 import '../../utils/utils.dart';
+import '../../widgets/search_text_field.dart';
 
 class ChatWindowScreen extends StatelessWidget {
   const ChatWindowScreen({super.key});
@@ -17,111 +18,150 @@ class ChatWindowScreen extends StatelessWidget {
           return SafeArea(
             child: Scaffold(
               backgroundColor: Colors.white,
-              appBar: AppBar(
-                toolbarHeight: 64,
-                surfaceTintColor: Colors.white,
-                backgroundColor: cardColor,
-                iconTheme: const IconThemeData(
-                  color: iconColor,
-                ),
-                leadingWidth: 70,
-                leading: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    InkWell(
+              appBar: controller.searchDisplayValue == false
+                  ? AppBar(
+                      toolbarHeight: 64,
+                      surfaceTintColor: Colors.white,
+                      backgroundColor: cardColor,
+                      iconTheme: const IconThemeData(
+                        color: iconColor,
+                      ),
+                      leadingWidth: 70,
+                      leading: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          InkWell(
+                              onTap: () {
+                                Get.back();
+                              },
+                              child: const Icon(
+                                Icons.arrow_back,
+                                size: 24,
+                              )),
+                          const SizedBox(
+                            width: 4,
+                          ),
+                          const CircleAvatar(
+                              radius: 20,
+                              backgroundColor: Colors.blueGrey,
+                              backgroundImage:
+                                  AssetImage('assets/png/person.jpg')),
+                        ],
+                      ),
+                      title: InkWell(
                         onTap: () {
-                          Get.back();
+                          Get.toNamed('/profile_page_screen');
                         },
-                        child: const Icon(
-                          Icons.arrow_back,
-                          size: 24,
-                        )),
-                    const SizedBox(
-                      width: 4,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              '${controller.firstName} ${controller.lastName}',
+                              style: const TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.w700),
+                            ),
+                            const SizedBox(
+                              height: 4,
+                            ),
+                            const Text(
+                              'Last seen 2 mins ago',
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                  color: iconColor),
+                            )
+                          ],
+                        ),
+                      ),
+                      actions: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 16.0),
+                          child: InkWell(
+                              onTap: () {
+                                debugPrint('Search');
+                                controller.searchDisplay();
+                              },
+                              child: Image.asset("assets/png/search1.png")),
+                        ),
+                        PopupMenuButton(
+                            iconColor: iconColor,
+                            iconSize: 24,
+                            onSelected: (value) {
+                              debugPrint(value);
+                            },
+                            itemBuilder: (BuildContext context) {
+                              return const [
+                                PopupMenuItem(
+                                  value: 'New group',
+                                  child: Text(
+                                    'New group',
+                                  ),
+                                ),
+                                PopupMenuItem(
+                                  value: 'New broadcast',
+                                  child: Text(
+                                    'New broadcast',
+                                  ),
+                                ),
+                                PopupMenuItem(
+                                  value: 'Whatsapp web',
+                                  child: Text(
+                                    'Whatsapp web',
+                                  ),
+                                ),
+                                PopupMenuItem(
+                                  value: 'Starred message',
+                                  child: Text(
+                                    'Starred message',
+                                  ),
+                                ),
+                                PopupMenuItem(
+                                  value: 'Settings',
+                                  child: Text(
+                                    'Settings',
+                                  ),
+                                ),
+                              ];
+                            })
+                      ],
+                    )
+                  : AppBar(
+                      toolbarHeight: 64,
+                      surfaceTintColor: Colors.white,
+                      backgroundColor: const Color(0xffFAFAFA),
+                      leading: Container(),
+                      actions: [
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                top: 10, left: 22, right: 23.8, bottom: 4),
+                            child: SearchTextField(
+                              onSubmitted: (value) async {
+                                // await allChatSearchController.onSearchTap();
+                                // await allChatSearchController
+                                //     .searchContactsList();
+                                // await allChatSearchController
+                                //     .searchMessageList();
+                                // controller.chatSearchController.clear();
+                              },
+                              controller: controller.searchController,
+                            ),
+                          ),
+                        ),
+                         Padding(
+                          padding: const EdgeInsets.only(right: 24.0),
+                          child: InkWell(
+                            onTap: (){
+                              controller.searchDisplay();
+                            },
+                            child: const Icon(
+                              Icons.close,
+                              size: 24,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                    const CircleAvatar(
-                        radius: 20,
-                        backgroundColor: Colors.blueGrey,
-                        backgroundImage: AssetImage('assets/png/person.jpg')),
-                  ],
-                ),
-                title: InkWell(
-                  onTap: () {
-                    Get.toNamed('/profile_page_screen');
-                  },
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '${controller.firstName} ${controller.lastName}',
-                        style: const TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w700),
-                      ),
-                      const SizedBox(
-                        height: 4,
-                      ),
-                      const Text(
-                        'Last seen 2 mins ago',
-                        style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                            color: iconColor),
-                      )
-                    ],
-                  ),
-                ),
-                actions: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 16.0),
-                    child: InkWell(
-                        onTap: () {
-                          debugPrint('Search');
-                          // controller.searchDisplay();
-                        },
-                        child: Image.asset("assets/png/search1.png")),
-                  ),
-                  PopupMenuButton(
-                      iconColor: iconColor,
-                      iconSize: 24,
-                      onSelected: (value) {
-                        debugPrint(value);
-                      },
-                      itemBuilder: (BuildContext context) {
-                        return const [
-                          PopupMenuItem(
-                            value: 'New group',
-                            child: Text(
-                              'New group',
-                            ),
-                          ),
-                          PopupMenuItem(
-                            value: 'New broadcast',
-                            child: Text(
-                              'New broadcast',
-                            ),
-                          ),
-                          PopupMenuItem(
-                            value: 'Whatsapp web',
-                            child: Text(
-                              'Whatsapp web',
-                            ),
-                          ),
-                          PopupMenuItem(
-                            value: 'Starred message',
-                            child: Text(
-                              'Starred message',
-                            ),
-                          ),
-                          PopupMenuItem(
-                            value: 'Settings',
-                            child: Text(
-                              'Settings',
-                            ),
-                          ),
-                        ];
-                      })
-                ],
-              ),
               body: SizedBox(
                 height: MediaQuery.of(context).size.height,
                 width: MediaQuery.of(context).size.width,

@@ -8,6 +8,8 @@ class ChatWindowController extends GetxController {
   late final String lastName = arguments['lastName'];
   late final int receiverId = arguments['receiverId'];
 
+  final TextEditingController searchController = TextEditingController();
+
   final _oldMessages = (List<dynamic>.empty()).obs;
   List<dynamic> get oldMessages => _oldMessages;
 
@@ -40,6 +42,9 @@ class ChatWindowController extends GetxController {
 
   final _isInitialMessageshow = true.obs;
   bool get isInitialMessageshow => _isInitialMessageshow.value;
+
+  final _searchDisplayValue = false.obs;
+  bool get searchDisplayValue => _searchDisplayValue.value;
 
   // FocusNode focusNode = FocusNode();
 
@@ -132,6 +137,11 @@ class ChatWindowController extends GetxController {
 
   isInitialMessageshowfalse() {
     _isInitialMessageshow.value = false;
+    update();
+  }
+
+   searchDisplay() {
+    _searchDisplayValue.value = !_searchDisplayValue.value;
     update();
   }
 }
