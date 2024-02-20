@@ -25,38 +25,47 @@ class NewChatScreen extends StatelessWidget {
           //   );
           // }
           return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-           surfaceTintColor: Colors.white,
-          backgroundColor: cardColor,
-          iconTheme: const IconThemeData(
-            color: iconColor,
-          ),
-          title: const Text(
-            'New Chat',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
-          ),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 16.0),
-              child: InkWell(
-                  onTap: () {
-                    debugPrint('Search');
-                    // controller.searchDisplay();
-                  },
-                  child: Image.asset("assets/png/search1.png")),
-            )
-          ],
-        ),
-        body: ListView.builder(
-            itemCount: 15,
-            itemBuilder: (builder, index) {
-              return const NewChatCard(
-                name: 'Robert Fox',
-              );
-            }),
-      ),
-    );});
+            child: Scaffold(
+              backgroundColor: Colors.white,
+              appBar: AppBar(
+                surfaceTintColor: Colors.white,
+                backgroundColor: cardColor,
+                iconTheme: const IconThemeData(
+                  color: iconColor,
+                ),
+                title: SizedBox(
+                    width: MediaQuery.of(context).size.width - 140,
+                    child: const Center(
+                        child: Text(
+                      'New Chat',
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                    ))),
+                // const Text(
+                //   'New Chat',
+                //   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                // ),
+                actions: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 16.0),
+                    child: InkWell(
+                        onTap: () {
+                          debugPrint('Search');
+                          // controller.searchDisplay();
+                        },
+                        child: Image.asset("assets/png/search1.png")),
+                  )
+                ],
+              ),
+              body: ListView.builder(
+                  itemCount: 15,
+                  itemBuilder: (builder, index) {
+                    return const NewChatCard(
+                      name: 'Robert Fox',
+                    );
+                  }),
+            ),
+          );
+        });
   }
 }

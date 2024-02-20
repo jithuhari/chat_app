@@ -18,10 +18,18 @@ class NewGroupScreen extends StatelessWidget {
           iconTheme: const IconThemeData(
             color: iconColor,
           ),
-          title: const Text(
-            'New Group',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
-          ),
+          title: SizedBox(
+                    width: MediaQuery.of(context).size.width - 140,
+                    child: const Center(
+                        child: Text(
+                      'New group',
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                    ))),
+          // const Text(
+          //   'New Group',
+          //   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+          // ),
           actions: [
             Padding(
               padding: const EdgeInsets.only(right: 16.0),
