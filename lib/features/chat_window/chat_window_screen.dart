@@ -145,9 +145,16 @@ class ChatWindowScreen extends StatelessWidget {
                                       88) {
                                 return controller.isInitialMessageshow == true
                                     ? OwnMessageCard(
+                                        onLongPress: () {
+                                          messageBottomSheet(context);
+                                          print('LongPressed');
+                                        },
                                         ownMessage: controller
                                             .reversedOldMessages[index])
                                     : OwnMessageCard(
+                                        onLongPress: () {
+                                          print('LongPressed');
+                                        },
                                         ownMessage:
                                             controller.reversedMessages[index]);
                               } else {
@@ -246,6 +253,30 @@ class ChatWindowScreen extends StatelessWidget {
               ),
             ),
           );
+        });
+  }
+
+  Future<dynamic> messageBottomSheet(BuildContext context) {
+    return showModalBottomSheet(
+        context: context,
+        builder: (BuildContext context) {
+          return SizedBox(
+              height: MediaQuery.of(context).size.height / 2,
+              width: MediaQuery.of(context).size.width,
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                        color: Colors.grey,
+                        borderRadius: BorderRadius.circular(10)),
+                    height: 3,
+                    width: 75,
+                  )
+                ],
+              ));
         });
   }
 }
