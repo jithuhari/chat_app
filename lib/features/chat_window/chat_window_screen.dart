@@ -390,13 +390,17 @@ class ChatWindowScreen extends StatelessWidget {
                                                 horizontal: 16),
                                             child: InkWell(
                                                 onTap: () {
+                                                  controller.selectedIndexes
+                                                      .clear();
+                                                  controller
+                                                      .clearSelectedCOunt();
                                                   controller
                                                       .forwardActionActive();
                                                 },
                                                 child: Image.asset(
                                                     'assets/png/Cancel.png')),
                                           ),
-                                           Text(
+                                          Text(
                                             '${controller.selectedCount} Selected',
                                             style: const TextStyle(
                                                 color: secondaryColor,

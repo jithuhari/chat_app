@@ -172,4 +172,9 @@ class ChatWindowController extends GetxController {
     _isForwardActive.value = !_isForwardActive.value;
     update();
   }
+
+  clearSelectedCOunt(){
+    _selectedCount.value=0;
+    update();
+  }
 }
