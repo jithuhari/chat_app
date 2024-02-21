@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:nms_chat/features/chat_window/chat_window.dart';
 import 'package:nms_chat/widgets/message_widgets/own_message_card.dart';
@@ -186,13 +187,14 @@ class ChatWindowScreen extends StatelessWidget {
                                 return controller.isInitialMessageshow == true
                                     ? OwnMessageCard(
                                         onLongPress: () {
-                                          messageBottomSheet(context);
+                                          messageBottomSheet(context,controller
+                                            .reversedOldMessages[index]);
                                         },
                                         ownMessage: controller
                                             .reversedOldMessages[index])
                                     : OwnMessageCard(
                                         onLongPress: () {
-                                          messageBottomSheet(context);
+                                          messageBottomSheet(context,controller.reversedMessages[index]);
                                         },
                                         ownMessage:
                                             controller.reversedMessages[index]);
@@ -200,14 +202,15 @@ class ChatWindowScreen extends StatelessWidget {
                                 return controller.isInitialMessageshow == true
                                     ? ReplyMessageCard(
                                       onLongPress: () {
-                                          messageBottomSheet(context);
+                                          messageBottomSheet(context, controller
+                                            .reversedOldMessages[index]);
                                         },
                                         replyMessage: controller
                                             .reversedOldMessages[index],
                                       )
                                     : ReplyMessageCard(
                                       onLongPress: () {
-                                          messageBottomSheet(context);
+                                          messageBottomSheet(context,controller.reversedMessages[index]);
                                         },
                                         replyMessage:
                                             controller.reversedMessages[index],
@@ -369,7 +372,7 @@ class ChatWindowScreen extends StatelessWidget {
         });
   }
 
-  Future<dynamic> messageBottomSheet(BuildContext context) {
+  Future<dynamic> messageBottomSheet(BuildContext context , String messageContent) {
     return showModalBottomSheet(
         context: context,
         builder: (BuildContext context) {
@@ -406,20 +409,26 @@ class ChatWindowScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Row(
-                      children: [
-                        Image.asset('assets/png/message_bottom_sheet/copy.png'),
-                        const SizedBox(
-                          width: 32,
-                        ),
-                        const Text(
-                          'Copy',
-                          style: TextStyle(
-                              color: secondaryColor,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400),
-                        ),
-                      ],
+                    InkWell(
+                      onTap: (){
+                        Clipboard.setData(ClipboardData(text: messageContent));
+                      Navigator.pop(context);
+                      },
+                      child: Row(
+                        children: [
+                          Image.asset('assets/png/message_bottom_sheet/copy.png'),
+                          const SizedBox(
+                            width: 32,
+                          ),
+                          const Text(
+                            'Copy',
+                            style: TextStyle(
+                                color: secondaryColor,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400),
+                          ),
+                        ],
+                      ),
                     ),
                     Row(
                       children: [
