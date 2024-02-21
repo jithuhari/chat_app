@@ -148,10 +148,10 @@ class ChatWindowScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                         Padding(
+                        Padding(
                           padding: const EdgeInsets.only(right: 24.0),
                           child: InkWell(
-                            onTap: (){
+                            onTap: () {
                               controller.searchDisplay();
                             },
                             child: const Icon(
@@ -209,85 +209,153 @@ class ChatWindowScreen extends StatelessWidget {
                                       );
                               }
                             })),
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Container(
-                        color: cardColor,
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 16),
-                              child: Image.asset('assets/png/Plus.png'),
-                            ),
-                            SizedBox(
-                                width: MediaQuery.of(context).size.width - 140,
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 13),
-                                  child: Container(
-                                      height: 38,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(8),
-                                        color: Colors.white,
-                                      ),
-                                      child: TextFormField(
-                                        // focusNode: controller.focusNode,
-                                        controller:
-                                            controller.msgTextController,
-                                        onChanged: (value) {
-                                          if (value.isNotEmpty) {
-                                            controller
-                                                .changeSendButtonStatusToTrue();
-                                          } else {
-                                            controller
-                                                .changeSendButtonStatusTofalse();
-                                          }
-                                        },
-                                        keyboardType: TextInputType.multiline,
-                                        textAlignVertical:
-                                            TextAlignVertical.top,
-                                        maxLines: 5,
-                                        minLines: 1,
-                                        decoration: const InputDecoration(
-                                          enabledBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                  color: Color(0xffF1F1F1))),
-                                          fillColor: Colors.white,
-                                          border: InputBorder.none,
-                                          hintText: 'Type a message...',
-                                          hintStyle: TextStyle(
-                                              color: hintColor,
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w400),
-                                          contentPadding: EdgeInsets.all(5),
-                                        ),
+                    controller.searchDisplayValue == false
+                        ? Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Container(
+                              color: cardColor,
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 16),
+                                    child: Image.asset('assets/png/Plus.png'),
+                                  ),
+                                  SizedBox(
+                                      width: MediaQuery.of(context).size.width -
+                                          140,
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 13),
+                                        child: Container(
+                                            height: 38,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              color: Colors.white,
+                                            ),
+                                            child: TextFormField(
+                                              // focusNode: controller.focusNode,
+                                              controller:
+                                                  controller.msgTextController,
+                                              onChanged: (value) {
+                                                if (value.isNotEmpty) {
+                                                  controller
+                                                      .changeSendButtonStatusToTrue();
+                                                } else {
+                                                  controller
+                                                      .changeSendButtonStatusTofalse();
+                                                }
+                                              },
+                                              keyboardType:
+                                                  TextInputType.multiline,
+                                              textAlignVertical:
+                                                  TextAlignVertical.top,
+                                              maxLines: 5,
+                                              minLines: 1,
+                                              decoration: const InputDecoration(
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: Color(
+                                                                0xffF1F1F1))),
+                                                fillColor: Colors.white,
+                                                border: InputBorder.none,
+                                                hintText: 'Type a message...',
+                                                hintStyle: TextStyle(
+                                                    color: hintColor,
+                                                    fontSize: 14,
+                                                    fontWeight:
+                                                        FontWeight.w400),
+                                                contentPadding:
+                                                    EdgeInsets.all(5),
+                                              ),
+                                            )),
                                       )),
-                                )),
-                            Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 16.0),
-                                child: InkWell(
-                                    onTap: () {
-                                      if (controller.isSendButton == true) {
-                                        FocusScope.of(context).unfocus();
-                                        controller.isInitialMessageshowfalse();
-                                        controller.sendMessage(
-                                            controller.msgTextController.text,
-                                            88,
-                                            controller.receiverId,
-                                            1);
-                                        controller.msgTextController.clear();
-                                      }
-                                    },
-                                    child: Image.asset(
-                                        controller.isSendButton == false
-                                            ? 'assets/png/microphone.png'
-                                            : 'assets/png/send.png'))),
-                          ],
-                        ),
-                      ),
-                    )
+                                  Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 16.0),
+                                      child: InkWell(
+                                          onTap: () {
+                                            if (controller.isSendButton ==
+                                                true) {
+                                              FocusScope.of(context).unfocus();
+                                              controller
+                                                  .isInitialMessageshowfalse();
+                                              controller.sendMessage(
+                                                  controller
+                                                      .msgTextController.text,
+                                                  88,
+                                                  controller.receiverId,
+                                                  1);
+                                              controller.msgTextController
+                                                  .clear();
+                                            }
+                                          },
+                                          child: Image.asset(
+                                              controller.isSendButton == false
+                                                  ? 'assets/png/microphone.png'
+                                                  : 'assets/png/send.png'))),
+                                ],
+                              ),
+                            ),
+                          )
+                        : Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Container(
+                              height: 65,
+                              color: cardColor,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 16.0),
+                                      child: InkWell(
+                                          onTap: () {
+                                            if (controller.isSendButton ==
+                                                true) {
+                                              FocusScope.of(context).unfocus();
+                                              controller
+                                                  .isInitialMessageshowfalse();
+                                              controller.sendMessage(
+                                                  controller
+                                                      .msgTextController.text,
+                                                  88,
+                                                  controller.receiverId,
+                                                  1);
+                                              controller.msgTextController
+                                                  .clear();
+                                            }
+                                          },
+                                          child: Image.asset(
+                                              'assets/png/arrow_up.png'))),
+                                  Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 16.0),
+                                      child: InkWell(
+                                          onTap: () {
+                                            if (controller.isSendButton ==
+                                                true) {
+                                              FocusScope.of(context).unfocus();
+                                              controller
+                                                  .isInitialMessageshowfalse();
+                                              controller.sendMessage(
+                                                  controller
+                                                      .msgTextController.text,
+                                                  88,
+                                                  controller.receiverId,
+                                                  1);
+                                              controller.msgTextController
+                                                  .clear();
+                                            }
+                                          },
+                                          child: Image.asset(
+                                              'assets/png/arrow_down.png'))),
+                                ],
+                              ),
+                            ),
+                          )
                   ],
                 ),
               ),
