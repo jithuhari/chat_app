@@ -182,6 +182,7 @@ class ChatWindowScreen extends StatelessWidget {
                                         children: [
                                           controller.isForwardActive == true
                                               ? Checkbox(
+                                                activeColor: primaryColor,
                                                   side: const BorderSide(
                                                     width: 1,
                                                     color: messageColor,
@@ -216,6 +217,7 @@ class ChatWindowScreen extends StatelessWidget {
                                         children: [
                                           controller.isForwardActive == true
                                               ? Checkbox(
+                                                activeColor: primaryColor,
                                                   side: const BorderSide(
                                                     width: 1,
                                                     color: messageColor,
@@ -251,6 +253,7 @@ class ChatWindowScreen extends StatelessWidget {
                                         children: [
                                           controller.isForwardActive == true
                                               ? Checkbox(
+                                                activeColor: primaryColor,
                                                   side: const BorderSide(
                                                     width: 1,
                                                     color: messageColor,
@@ -285,6 +288,7 @@ class ChatWindowScreen extends StatelessWidget {
                                         children: [
                                           controller.isForwardActive == true
                                               ? Checkbox(
+                                                activeColor: primaryColor,
                                                   side: const BorderSide(
                                                     width: 1,
                                                     color: messageColor,
