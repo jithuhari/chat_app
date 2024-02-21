@@ -137,14 +137,7 @@ class ChatWindowScreen extends StatelessWidget {
                             padding: const EdgeInsets.only(
                                 top: 10, left: 22, right: 23.8, bottom: 4),
                             child: SearchTextField(
-                              onSubmitted: (value) async {
-                                // await allChatSearchController.onSearchTap();
-                                // await allChatSearchController
-                                //     .searchContactsList();
-                                // await allChatSearchController
-                                //     .searchMessageList();
-                                // controller.chatSearchController.clear();
-                              },
+                              onSubmitted: (value) async {},
                               controller: controller.searchController,
                             ),
                           ),
@@ -185,49 +178,141 @@ class ChatWindowScreen extends StatelessWidget {
                                           index] ==
                                       88) {
                                 return controller.isInitialMessageshow == true
-                                    ? OwnMessageCard(
-                                        onLongPress: () {
-                                          messageBottomSheet(
-                                              context,
-                                              controller
-                                                  .reversedOldMessages[index],
-                                              controller);
-                                        },
-                                        ownMessage: controller
-                                            .reversedOldMessages[index])
-                                    : OwnMessageCard(
-                                        onLongPress: () {
-                                          messageBottomSheet(
-                                              context,
-                                              controller
-                                                  .reversedMessages[index],
-                                              controller);
-                                        },
-                                        ownMessage:
-                                            controller.reversedMessages[index]);
+                                    ? Row(
+                                        children: [
+                                          controller.isForwardActive == true
+                                              ? Checkbox(
+                                                  side: const BorderSide(
+                                                    width: 1,
+                                                    color: messageColor,
+                                                  ),
+                                                  value: controller
+                                                      .selectedIndexes
+                                                      .contains(
+                                                          index), // Check if index is in the selectedIndexes list
+                                                  onChanged: (value) {
+                                                    controller.toggleSelection(
+                                                        index); // Toggle the selection when checkbox is clicked
+                                                  },
+                                                )
+                                              : Container(),
+                                          Expanded(
+                                            child: OwnMessageCard(
+                                                onLongPress: () {
+                                                  messageBottomSheet(
+                                                      context,
+                                                      controller
+                                                              .reversedOldMessages[
+                                                          index],
+                                                      controller);
+                                                },
+                                                ownMessage: controller
+                                                        .reversedOldMessages[
+                                                    index]),
+                                          ),
+                                        ],
+                                      )
+                                    : Row(
+                                        children: [
+                                          controller.isForwardActive == true
+                                              ? Checkbox(
+                                                  side: const BorderSide(
+                                                    width: 1,
+                                                    color: messageColor,
+                                                  ),
+                                                  value: controller
+                                                      .selectedIndexes
+                                                      .contains(
+                                                          index), // Check if index is in the selectedIndexes list
+                                                  onChanged: (value) {
+                                                    controller.toggleSelection(
+                                                        index); // Toggle the selection when checkbox is clicked
+                                                  },
+                                                )
+                                              : Container(),
+                                          Expanded(
+                                            child: OwnMessageCard(
+                                                onLongPress: () {
+                                                  messageBottomSheet(
+                                                      context,
+                                                      controller
+                                                              .reversedMessages[
+                                                          index],
+                                                      controller);
+                                                },
+                                                ownMessage: controller
+                                                    .reversedMessages[index]),
+                                          ),
+                                        ],
+                                      );
                               } else {
                                 return controller.isInitialMessageshow == true
-                                    ? ReplyMessageCard(
-                                        onLongPress: () {
-                                          messageBottomSheet(
-                                              context,
-                                              controller
+                                    ? Row(
+                                        children: [
+                                          controller.isForwardActive == true
+                                              ? Checkbox(
+                                                  side: const BorderSide(
+                                                    width: 1,
+                                                    color: messageColor,
+                                                  ),
+                                                  value: controller
+                                                      .selectedIndexes
+                                                      .contains(
+                                                          index), // Check if index is in the selectedIndexes list
+                                                  onChanged: (value) {
+                                                    controller.toggleSelection(
+                                                        index); // Toggle the selection when checkbox is clicked
+                                                  },
+                                                )
+                                              : Container(),
+                                          Expanded(
+                                            child: ReplyMessageCard(
+                                              onLongPress: () {
+                                                messageBottomSheet(
+                                                    context,
+                                                    controller
+                                                            .reversedOldMessages[
+                                                        index],
+                                                    controller);
+                                              },
+                                              replyMessage: controller
                                                   .reversedOldMessages[index],
-                                              controller);
-                                        },
-                                        replyMessage: controller
-                                            .reversedOldMessages[index],
+                                            ),
+                                          ),
+                                        ],
                                       )
-                                    : ReplyMessageCard(
-                                        onLongPress: () {
-                                          messageBottomSheet(
-                                              context,
-                                              controller
+                                    : Row(
+                                        children: [
+                                          controller.isForwardActive == true
+                                              ? Checkbox(
+                                                  side: const BorderSide(
+                                                    width: 1,
+                                                    color: messageColor,
+                                                  ),
+                                                  value: controller
+                                                      .selectedIndexes
+                                                      .contains(
+                                                          index), // Check if index is in the selectedIndexes list
+                                                  onChanged: (value) {
+                                                    controller.toggleSelection(
+                                                        index); // Toggle the selection when checkbox is clicked
+                                                  },
+                                                )
+                                              : Container(),
+                                          Expanded(
+                                            child: ReplyMessageCard(
+                                              onLongPress: () {
+                                                messageBottomSheet(
+                                                    context,
+                                                    controller.reversedMessages[
+                                                        index],
+                                                    controller);
+                                              },
+                                              replyMessage: controller
                                                   .reversedMessages[index],
-                                              controller);
-                                        },
-                                        replyMessage:
-                                            controller.reversedMessages[index],
+                                            ),
+                                          ),
+                                        ],
                                       );
                               }
                             })),
@@ -311,9 +396,9 @@ class ChatWindowScreen extends StatelessWidget {
                                                 child: Image.asset(
                                                     'assets/png/Cancel.png')),
                                           ),
-                                          const Text(
-                                            '0 Selected',
-                                            style: TextStyle(
+                                           Text(
+                                            '${controller.selectedCount} Selected',
+                                            style: const TextStyle(
                                                 color: secondaryColor,
                                                 fontWeight: FontWeight.w700,
                                                 fontSize: 16),

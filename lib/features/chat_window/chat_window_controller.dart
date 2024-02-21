@@ -34,6 +34,9 @@ class ChatWindowController extends GetxController {
   final _reversedOldMessageSenderId = (List<int>.empty()).obs;
   List<int> get reversedOldMessageSenderId => _reversedOldMessageSenderId;
 
+  final _selectedIndexes = (List<int>.empty()).obs;
+  List<int> get selectedIndexes => _selectedIndexes;
+
   final _historicalMessageSenderId = (List<int>.empty()).obs;
   List<int> get historicalMessageSenderId => _historicalMessageSenderId;
   final _reversedHistoricalMessageSenderId = (List<int>.empty()).obs;
@@ -48,6 +51,9 @@ class ChatWindowController extends GetxController {
 
   final _isForwardActive = false.obs;
   bool get isForwardActive => _isForwardActive.value;
+
+  final _selectedCount = 0.obs;
+  int get selectedCount => _selectedCount.value;
 
   // FocusNode focusNode = FocusNode();
 
@@ -128,6 +134,20 @@ class ChatWindowController extends GetxController {
     });
   }
 
+  //checkBox
+  void toggleSelection(int index) {
+    if (selectedIndexes.contains(index)) {
+      // If index is already selected, remove it from the list
+      selectedIndexes.remove(index);
+      _selectedCount.value--;
+    } else {
+      // Otherwise, add it to the list
+      selectedIndexes.add(index);
+      _selectedCount.value++;
+    }
+    update(); 
+  }
+
   changeSendButtonStatusToTrue() {
     _isSendButton.value = true;
     update();
@@ -143,7 +163,7 @@ class ChatWindowController extends GetxController {
     update();
   }
 
-   searchDisplay() {
+  searchDisplay() {
     _searchDisplayValue.value = !_searchDisplayValue.value;
     update();
   }
