@@ -187,128 +187,52 @@ class ChatWindowScreen extends StatelessWidget {
                                 return controller.isInitialMessageshow == true
                                     ? OwnMessageCard(
                                         onLongPress: () {
-                                          messageBottomSheet(context,controller
-                                            .reversedOldMessages[index]);
+                                          messageBottomSheet(
+                                              context,
+                                              controller
+                                                  .reversedOldMessages[index],
+                                              controller);
                                         },
                                         ownMessage: controller
                                             .reversedOldMessages[index])
                                     : OwnMessageCard(
                                         onLongPress: () {
-                                          messageBottomSheet(context,controller.reversedMessages[index]);
+                                          messageBottomSheet(
+                                              context,
+                                              controller
+                                                  .reversedMessages[index],
+                                              controller);
                                         },
                                         ownMessage:
                                             controller.reversedMessages[index]);
                               } else {
                                 return controller.isInitialMessageshow == true
                                     ? ReplyMessageCard(
-                                      onLongPress: () {
-                                          messageBottomSheet(context, controller
-                                            .reversedOldMessages[index]);
+                                        onLongPress: () {
+                                          messageBottomSheet(
+                                              context,
+                                              controller
+                                                  .reversedOldMessages[index],
+                                              controller);
                                         },
                                         replyMessage: controller
                                             .reversedOldMessages[index],
                                       )
                                     : ReplyMessageCard(
-                                      onLongPress: () {
-                                          messageBottomSheet(context,controller.reversedMessages[index]);
+                                        onLongPress: () {
+                                          messageBottomSheet(
+                                              context,
+                                              controller
+                                                  .reversedMessages[index],
+                                              controller);
                                         },
                                         replyMessage:
                                             controller.reversedMessages[index],
                                       );
                               }
                             })),
-                    controller.searchDisplayValue == false
+                    controller.searchDisplayValue == true
                         ? Align(
-                            alignment: Alignment.bottomCenter,
-                            child: Container(
-                              color: cardColor,
-                              child: Row(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 16),
-                                    child: Image.asset('assets/png/Plus.png'),
-                                  ),
-                                  SizedBox(
-                                      width: MediaQuery.of(context).size.width -
-                                          140,
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 13),
-                                        child: Container(
-                                            height: 38,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                              color: Colors.white,
-                                            ),
-                                            child: TextFormField(
-                                              // focusNode: controller.focusNode,
-                                              controller:
-                                                  controller.msgTextController,
-                                              onChanged: (value) {
-                                                if (value.isNotEmpty) {
-                                                  controller
-                                                      .changeSendButtonStatusToTrue();
-                                                } else {
-                                                  controller
-                                                      .changeSendButtonStatusTofalse();
-                                                }
-                                              },
-                                              keyboardType:
-                                                  TextInputType.multiline,
-                                              textAlignVertical:
-                                                  TextAlignVertical.top,
-                                              maxLines: 5,
-                                              minLines: 1,
-                                              decoration: const InputDecoration(
-                                                enabledBorder:
-                                                    OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color: Color(
-                                                                0xffF1F1F1))),
-                                                fillColor: Colors.white,
-                                                border: InputBorder.none,
-                                                hintText: 'Type a message...',
-                                                hintStyle: TextStyle(
-                                                    color: hintColor,
-                                                    fontSize: 14,
-                                                    fontWeight:
-                                                        FontWeight.w400),
-                                                contentPadding:
-                                                    EdgeInsets.all(5),
-                                              ),
-                                            )),
-                                      )),
-                                  Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 16.0),
-                                      child: InkWell(
-                                          onTap: () {
-                                            if (controller.isSendButton ==
-                                                true) {
-                                              FocusScope.of(context).unfocus();
-                                              controller
-                                                  .isInitialMessageshowfalse();
-                                              controller.sendMessage(
-                                                  controller
-                                                      .msgTextController.text,
-                                                  88,
-                                                  controller.receiverId,
-                                                  1);
-                                              controller.msgTextController
-                                                  .clear();
-                                            }
-                                          },
-                                          child: Image.asset(
-                                              controller.isSendButton == false
-                                                  ? 'assets/png/microphone.png'
-                                                  : 'assets/png/send.png'))),
-                                ],
-                              ),
-                            ),
-                          )
-                        : Align(
                             alignment: Alignment.bottomCenter,
                             child: Container(
                               height: 65,
@@ -364,6 +288,164 @@ class ChatWindowScreen extends StatelessWidget {
                               ),
                             ),
                           )
+                        : controller.isForwardActive == true
+                            ? Align(
+                                alignment: Alignment.bottomCenter,
+                                child: Container(
+                                  height: 65,
+                                  color: cardColor,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 16),
+                                            child: InkWell(
+                                                onTap: () {
+                                                  controller
+                                                      .forwardActionActive();
+                                                },
+                                                child: Image.asset(
+                                                    'assets/png/Cancel.png')),
+                                          ),
+                                          const Text(
+                                            '0 Selected',
+                                            style: TextStyle(
+                                                color: secondaryColor,
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: 16),
+                                          ),
+                                        ],
+                                      ),
+                                      Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 16.0),
+                                          child: InkWell(
+                                              onTap: () {
+                                                if (controller.isSendButton ==
+                                                    true) {
+                                                  FocusScope.of(context)
+                                                      .unfocus();
+                                                  controller
+                                                      .isInitialMessageshowfalse();
+                                                  controller.sendMessage(
+                                                      controller
+                                                          .msgTextController
+                                                          .text,
+                                                      88,
+                                                      controller.receiverId,
+                                                      1);
+                                                  controller.msgTextController
+                                                      .clear();
+                                                }
+                                              },
+                                              child: Image.asset(
+                                                  'assets/png/forward.png'))),
+                                    ],
+                                  ),
+                                ),
+                              )
+                            : Align(
+                                alignment: Alignment.bottomCenter,
+                                child: Container(
+                                  color: cardColor,
+                                  child: Row(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 16),
+                                        child:
+                                            Image.asset('assets/png/Plus.png'),
+                                      ),
+                                      SizedBox(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width -
+                                              140,
+                                          child: Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 13),
+                                            child: Container(
+                                                height: 38,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                  color: Colors.white,
+                                                ),
+                                                child: TextFormField(
+                                                  // focusNode: controller.focusNode,
+                                                  controller: controller
+                                                      .msgTextController,
+                                                  onChanged: (value) {
+                                                    if (value.isNotEmpty) {
+                                                      controller
+                                                          .changeSendButtonStatusToTrue();
+                                                    } else {
+                                                      controller
+                                                          .changeSendButtonStatusTofalse();
+                                                    }
+                                                  },
+                                                  keyboardType:
+                                                      TextInputType.multiline,
+                                                  textAlignVertical:
+                                                      TextAlignVertical.top,
+                                                  maxLines: 5,
+                                                  minLines: 1,
+                                                  decoration:
+                                                      const InputDecoration(
+                                                    enabledBorder:
+                                                        OutlineInputBorder(
+                                                            borderSide: BorderSide(
+                                                                color: Color(
+                                                                    0xffF1F1F1))),
+                                                    fillColor: Colors.white,
+                                                    border: InputBorder.none,
+                                                    hintText:
+                                                        'Type a message...',
+                                                    hintStyle: TextStyle(
+                                                        color: hintColor,
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.w400),
+                                                    contentPadding:
+                                                        EdgeInsets.all(5),
+                                                  ),
+                                                )),
+                                          )),
+                                      Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 16.0),
+                                          child: InkWell(
+                                              onTap: () {
+                                                if (controller.isSendButton ==
+                                                    true) {
+                                                  FocusScope.of(context)
+                                                      .unfocus();
+                                                  controller
+                                                      .isInitialMessageshowfalse();
+                                                  controller.sendMessage(
+                                                      controller
+                                                          .msgTextController
+                                                          .text,
+                                                      88,
+                                                      controller.receiverId,
+                                                      1);
+                                                  controller.msgTextController
+                                                      .clear();
+                                                }
+                                              },
+                                              child: Image.asset(controller
+                                                          .isSendButton ==
+                                                      false
+                                                  ? 'assets/png/microphone.png'
+                                                  : 'assets/png/send.png'))),
+                                    ],
+                                  ),
+                                ),
+                              )
                   ],
                 ),
               ),
@@ -372,7 +454,8 @@ class ChatWindowScreen extends StatelessWidget {
         });
   }
 
-  Future<dynamic> messageBottomSheet(BuildContext context , String messageContent) {
+  Future<dynamic> messageBottomSheet(BuildContext context,
+      String messageContent, ChatWindowController controller) {
     return showModalBottomSheet(
         context: context,
         builder: (BuildContext context) {
@@ -410,13 +493,14 @@ class ChatWindowScreen extends StatelessWidget {
                       ),
                     ),
                     InkWell(
-                      onTap: (){
+                      onTap: () {
                         Clipboard.setData(ClipboardData(text: messageContent));
-                      Navigator.pop(context);
+                        Navigator.pop(context);
                       },
                       child: Row(
                         children: [
-                          Image.asset('assets/png/message_bottom_sheet/copy.png'),
+                          Image.asset(
+                              'assets/png/message_bottom_sheet/copy.png'),
                           const SizedBox(
                             width: 32,
                           ),
@@ -476,21 +560,27 @@ class ChatWindowScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Row(
-                      children: [
-                        Image.asset(
-                            'assets/png/message_bottom_sheet/forward.png'),
-                        const SizedBox(
-                          width: 32,
-                        ),
-                        const Text(
-                          'Forward',
-                          style: TextStyle(
-                              color: secondaryColor,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400),
-                        ),
-                      ],
+                    InkWell(
+                      onTap: () {
+                        controller.forwardActionActive();
+                        Navigator.pop(context);
+                      },
+                      child: Row(
+                        children: [
+                          Image.asset(
+                              'assets/png/message_bottom_sheet/forward.png'),
+                          const SizedBox(
+                            width: 32,
+                          ),
+                          const Text(
+                            'Forward',
+                            style: TextStyle(
+                                color: secondaryColor,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400),
+                          ),
+                        ],
+                      ),
                     )
                   ],
                 ),

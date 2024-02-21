@@ -46,6 +46,9 @@ class ChatWindowController extends GetxController {
   final _searchDisplayValue = false.obs;
   bool get searchDisplayValue => _searchDisplayValue.value;
 
+  final _isForwardActive = false.obs;
+  bool get isForwardActive => _isForwardActive.value;
+
   // FocusNode focusNode = FocusNode();
 
   TextEditingController msgTextController = TextEditingController();
@@ -142,6 +145,11 @@ class ChatWindowController extends GetxController {
 
    searchDisplay() {
     _searchDisplayValue.value = !_searchDisplayValue.value;
+    update();
+  }
+
+  forwardActionActive() {
+    _isForwardActive.value = !_isForwardActive.value;
     update();
   }
 }
