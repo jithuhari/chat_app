@@ -187,23 +187,28 @@ class ChatWindowScreen extends StatelessWidget {
                                     ? OwnMessageCard(
                                         onLongPress: () {
                                           messageBottomSheet(context);
-                                          print('LongPressed');
                                         },
                                         ownMessage: controller
                                             .reversedOldMessages[index])
                                     : OwnMessageCard(
                                         onLongPress: () {
-                                          print('LongPressed');
+                                          messageBottomSheet(context);
                                         },
                                         ownMessage:
                                             controller.reversedMessages[index]);
                               } else {
                                 return controller.isInitialMessageshow == true
                                     ? ReplyMessageCard(
+                                      onLongPress: () {
+                                          messageBottomSheet(context);
+                                        },
                                         replyMessage: controller
                                             .reversedOldMessages[index],
                                       )
                                     : ReplyMessageCard(
+                                      onLongPress: () {
+                                          messageBottomSheet(context);
+                                        },
                                         replyMessage:
                                             controller.reversedMessages[index],
                                       );

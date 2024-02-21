@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:nms_chat/utils/theme/theme.dart';
 
 class ReplyMessageCard extends StatelessWidget {
-  const ReplyMessageCard({super.key, required this.replyMessage});
+  const ReplyMessageCard({super.key, required this.replyMessage, this.onLongPress});
 
   final String replyMessage;
+  final VoidCallback? onLongPress;
 
   @override
   Widget build(BuildContext context) {
@@ -16,20 +17,23 @@ class ReplyMessageCard extends StatelessWidget {
         child:  Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Card(
-              shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(0),
-                      topRight: Radius.circular(8),
-                      bottomLeft: Radius.circular(8),
-                      bottomRight: Radius.circular(8))),
-              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              color: replyMessageColor,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 7.5, vertical: 12),
-                child: Text(
-                  replyMessage,
-                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400,color: secondaryColor),
+            InkWell(
+              onLongPress: onLongPress,
+              child: Card(
+                shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(0),
+                        topRight: Radius.circular(8),
+                        bottomLeft: Radius.circular(8),
+                        bottomRight: Radius.circular(8))),
+                margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                color: replyMessageColor,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 7.5, vertical: 12),
+                  child: Text(
+                    replyMessage,
+                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400,color: secondaryColor),
+                  ),
                 ),
               ),
             ),
