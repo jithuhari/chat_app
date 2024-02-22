@@ -182,7 +182,7 @@ class ChatWindowScreen extends StatelessWidget {
                                         children: [
                                           controller.isForwardActive == true
                                               ? Checkbox(
-                                                activeColor: primaryColor,
+                                                  activeColor: primaryColor,
                                                   side: const BorderSide(
                                                     width: 1,
                                                     color: messageColor,
@@ -217,7 +217,7 @@ class ChatWindowScreen extends StatelessWidget {
                                         children: [
                                           controller.isForwardActive == true
                                               ? Checkbox(
-                                                activeColor: primaryColor,
+                                                  activeColor: primaryColor,
                                                   side: const BorderSide(
                                                     width: 1,
                                                     color: messageColor,
@@ -253,7 +253,7 @@ class ChatWindowScreen extends StatelessWidget {
                                         children: [
                                           controller.isForwardActive == true
                                               ? Checkbox(
-                                                activeColor: primaryColor,
+                                                  activeColor: primaryColor,
                                                   side: const BorderSide(
                                                     width: 1,
                                                     color: messageColor,
@@ -288,7 +288,7 @@ class ChatWindowScreen extends StatelessWidget {
                                         children: [
                                           controller.isForwardActive == true
                                               ? Checkbox(
-                                                activeColor: primaryColor,
+                                                  activeColor: primaryColor,
                                                   side: const BorderSide(
                                                     width: 1,
                                                     color: messageColor,
@@ -435,8 +435,12 @@ class ChatWindowScreen extends StatelessWidget {
                                                       .clear();
                                                 }
                                               },
-                                              child: Image.asset(
-                                                  'assets/png/forward.png'))),
+                                              child: controller
+                                                      .selectedIndexes.isEmpty
+                                                  ? Image.asset(
+                                                      'assets/png/forward.png')
+                                                  : Image.asset(
+                                                      'assets/png/forward_active.png'))),
                                     ],
                                   ),
                                 ),
