@@ -33,6 +33,7 @@ class SignInScreen extends StatelessWidget {
               backgroundColor: backgroundColor,
               resizeToAvoidBottomInset: true,
               body: SingleChildScrollView(
+                reverse: true,
                 child: Stack(children: [
                   Positioned(
                     bottom: 0,
