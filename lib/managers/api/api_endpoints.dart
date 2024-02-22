@@ -10,5 +10,6 @@ class ApiEndPoints {
   static const String newChatList = 'users/new';
   static const String searchContact = 'users/contacts/search';
   static const String searchMessage = 'users/messages/search';
+  static const String profileDetails = 'users/details';
   
 }

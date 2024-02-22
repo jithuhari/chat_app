@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../dtos/chat_app_dtos/new_chat/nms_new_chat.dart';
 import '../dtos/chat_app_dtos/nms_chat_list/nms_chat_list.dart';
+import '../dtos/chat_app_dtos/profile_details/profile_details.dart';
 import '../dtos/chat_app_dtos/search_dtos/search_contacts/search_contacts.dart';
 import '../dtos/chat_app_dtos/search_dtos/search_messages/search_messages.dart';
 import '../managers/api/api.dart';
@@ -19,7 +20,10 @@ abstract class NMSChatApiRepository extends GetxController {
   Future<SearchContactsResponse> searchContactsList(
       {required SearchContactsRequest request});
   Future<SearchMessagesResponse> searchMessagesList(
-      {required SearchMessagesRequest request});    
+      {required SearchMessagesRequest request});
+
+  Future<ProfileDetailsResponse> profileDetails(
+      {required ProfileDetailsRequest request});     
 }
 
 class NMSApiRepositoryImpl extends GetxController
@@ -84,5 +88,20 @@ class NMSApiRepositoryImpl extends GetxController
     );
     
     return SearchMessagesResponse.fromJson(response);
+  }
+
+  //profile details api
+
+   @override
+  Future<ProfileDetailsResponse> profileDetails(
+      {required ProfileDetailsRequest request}) async {
+    final response = await _helper.postWithBody(
+      // headers: _headersWithoutToken,
+      endpoint: ApiEndPoints.profileDetails,
+      params: {},
+      body: request.toBody(),
+    );
+    
+    return ProfileDetailsResponse.fromJson(response);
   }
 }
