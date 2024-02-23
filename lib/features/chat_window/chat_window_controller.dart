@@ -52,6 +52,9 @@ class ChatWindowController extends GetxController {
   final _isForwardActive = false.obs;
   bool get isForwardActive => _isForwardActive.value;
 
+  final _isPinMessageActive = false.obs;
+  bool get isPinMessageActive => _isPinMessageActive.value;
+
   final _selectedCount = 0.obs;
   int get selectedCount => _selectedCount.value;
 
@@ -175,6 +178,11 @@ class ChatWindowController extends GetxController {
 
   clearSelectedCOunt(){
     _selectedCount.value=0;
+    update();
+  }
+
+  pinMessageActive(){
+    _isPinMessageActive.value=!_isPinMessageActive.value;
     update();
   }
 }

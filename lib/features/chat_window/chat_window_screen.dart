@@ -21,6 +21,85 @@ class ChatWindowScreen extends StatelessWidget {
               backgroundColor: Colors.white,
               appBar: controller.searchDisplayValue == false
                   ? AppBar(
+                      bottom: controller.isPinMessageActive == true
+                          ? PreferredSize(
+                              preferredSize: Size.fromHeight(
+                                  AppBar().preferredSize.height / .9),
+                              child: Column(
+                                children: [
+                                  const Divider(
+                                    thickness: .4,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 14.0, right: 8.0),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 15.0),
+                                              child: Image.asset(
+                                                  'assets/png/push_pin.png'),
+                                            ),
+                                            const SizedBox(
+                                              height: 50,
+                                              child: Padding(
+                                                padding:
+                                                    EdgeInsets.only(left: 16.0),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'Ryan Lewis',
+                                                      style: TextStyle(
+                                                          fontSize: 12,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          color:
+                                                              secondaryColor),
+                                                    ),
+                                                    Text(
+                                                        'Lorem ipsum dolor sit amet',
+                                                        style: TextStyle(
+                                                            fontSize: 12,
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                            color:
+                                                                secondaryColor))
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        const Text('09/08/2023')
+                                      ],
+                                    ),
+                                  ),
+                                  Row(
+                                    children: [
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        height: 1.5,
+                                        color: const Color.fromARGB(
+                                            255, 245, 245, 245),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            )
+                          : PreferredSize(
+                              preferredSize: Size.fromHeight(
+                                  AppBar().preferredSize.height / 10),
+                              child: Container(),
+                            ),
                       toolbarHeight: 64,
                       surfaceTintColor: Colors.white,
                       backgroundColor: cardColor,
@@ -156,13 +235,39 @@ class ChatWindowScreen extends StatelessWidget {
                         ),
                       ],
                     ),
+              // floatingActionButtonLocation:
+              //     FloatingActionButtonLocation.miniCenterTop,
+              // floatingActionButton: Row(
+              //   children: [
+              //     Expanded(
+              //         child: Card(
+              //       child: Row(
+              //         children: [
+              //           Image.asset('assets/png/push_pin.png'),
+              //           SizedBox(
+              //             height: 50,
+              //             child: const Column(
+              //               children: [
+              //                 Text('Ryan Lewis'),
+              //                 Text('Lorem ipsum dolor sit amet')
+              //               ],
+              //             ),
+              //           ),
+              //           Text('09/08/2023')
+              //         ],
+              //       ),
+              //     )),
+              //   ],
+              // ),
               body: SizedBox(
                 height: MediaQuery.of(context).size.height,
                 width: MediaQuery.of(context).size.width,
                 child: Stack(
                   children: [
                     SizedBox(
-                        height: MediaQuery.of(context).size.height * .73,
+                        height: controller.isPinMessageActive == true
+                            ? MediaQuery.of(context).size.height * .66
+                            : MediaQuery.of(context).size.height * .73,
                         child: ListView.builder(
                             reverse: true,
                             shrinkWrap: true,
@@ -611,20 +716,27 @@ class ChatWindowScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Row(
-                      children: [
-                        Image.asset('assets/png/message_bottom_sheet/pin.png'),
-                        const SizedBox(
-                          width: 32,
-                        ),
-                        const Text(
-                          'Pin Message',
-                          style: TextStyle(
-                              color: secondaryColor,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400),
-                        ),
-                      ],
+                    InkWell(
+                      onTap: () {
+                        controller.pinMessageActive();
+                        Navigator.pop(context);
+                      },
+                      child: Row(
+                        children: [
+                          Image.asset(
+                              'assets/png/message_bottom_sheet/pin.png'),
+                          const SizedBox(
+                            width: 32,
+                          ),
+                          const Text(
+                            'Pin Message',
+                            style: TextStyle(
+                                color: secondaryColor,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400),
+                          ),
+                        ],
+                      ),
                     ),
                     Row(
                       children: [
