@@ -325,6 +325,7 @@ class ChatWindowScreen extends StatelessWidget {
                                           Expanded(
                                             child: OwnMessageCard(
                                                 onLongPress: () {
+                                                  FocusScope.of(context).unfocus(); 
                                                   messageBottomSheet(
                                                       context,
                                                       controller
@@ -365,6 +366,7 @@ class ChatWindowScreen extends StatelessWidget {
                                           Expanded(
                                             child: ReplyMessageCard(
                                               onLongPress: () {
+                                                FocusScope.of(context).unfocus(); 
                                                 messageBottomSheet(
                                                     context,
                                                     controller
@@ -404,6 +406,7 @@ class ChatWindowScreen extends StatelessWidget {
                                           Expanded(
                                             child: ReplyMessageCard(
                                               onLongPress: () {
+                                                FocusScope.of(context).unfocus(); 
                                                 messageBottomSheet(
                                                     context,
                                                     controller.reversedMessages[
