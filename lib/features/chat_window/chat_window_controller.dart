@@ -3,10 +3,10 @@ import 'package:get/get.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class ChatWindowController extends GetxController {
-  final Map<String, dynamic> arguments = Get.arguments;
-  late final String firstName = arguments['firstName'];
-  late final String lastName = arguments['lastName'];
-  late final int receiverId = arguments['receiverId'];
+  final Map<String, dynamic>? arguments = Get.arguments;
+  late final String firstName = arguments!['firstName'];
+  late final String lastName = arguments!['lastName'];
+  late final int receiverId = arguments!['receiverId'];
 
   final TextEditingController searchController = TextEditingController();
 

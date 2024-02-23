@@ -235,30 +235,6 @@ class ChatWindowScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-              // floatingActionButtonLocation:
-              //     FloatingActionButtonLocation.miniCenterTop,
-              // floatingActionButton: Row(
-              //   children: [
-              //     Expanded(
-              //         child: Card(
-              //       child: Row(
-              //         children: [
-              //           Image.asset('assets/png/push_pin.png'),
-              //           SizedBox(
-              //             height: 50,
-              //             child: const Column(
-              //               children: [
-              //                 Text('Ryan Lewis'),
-              //                 Text('Lorem ipsum dolor sit amet')
-              //               ],
-              //             ),
-              //           ),
-              //           Text('09/08/2023')
-              //         ],
-              //       ),
-              //     )),
-              //   ],
-              // ),
               body: SizedBox(
                 height: MediaQuery.of(context).size.height,
                 width: MediaQuery.of(context).size.width,
@@ -287,6 +263,10 @@ class ChatWindowScreen extends StatelessWidget {
                                         children: [
                                           controller.isForwardActive == true
                                               ? Checkbox(
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              3)),
                                                   activeColor: primaryColor,
                                                   side: const BorderSide(
                                                     width: 1,
@@ -305,6 +285,7 @@ class ChatWindowScreen extends StatelessWidget {
                                           Expanded(
                                             child: OwnMessageCard(
                                                 onLongPress: () {
+                                                  FocusScope.of(context).unfocus(); 
                                                   messageBottomSheet(
                                                       context,
                                                       controller
@@ -322,6 +303,10 @@ class ChatWindowScreen extends StatelessWidget {
                                         children: [
                                           controller.isForwardActive == true
                                               ? Checkbox(
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              3)),
                                                   activeColor: primaryColor,
                                                   side: const BorderSide(
                                                     width: 1,
@@ -358,6 +343,10 @@ class ChatWindowScreen extends StatelessWidget {
                                         children: [
                                           controller.isForwardActive == true
                                               ? Checkbox(
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              3)),
                                                   activeColor: primaryColor,
                                                   side: const BorderSide(
                                                     width: 1,
@@ -393,6 +382,10 @@ class ChatWindowScreen extends StatelessWidget {
                                         children: [
                                           controller.isForwardActive == true
                                               ? Checkbox(
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              3)),
                                                   activeColor: primaryColor,
                                                   side: const BorderSide(
                                                     width: 1,
