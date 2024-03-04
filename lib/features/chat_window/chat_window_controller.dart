@@ -99,7 +99,7 @@ class ChatWindowController extends GetxController {
 
     socket.on("oldMessages", (data) {
       _oldMessages.value = data['oldMessages'];
-      debugPrint(data);
+      print(data);
 
       for (var message in oldMessages) {
         int messageId = message['sender_id'];
@@ -114,9 +114,9 @@ class ChatWindowController extends GetxController {
         _reversedtimeoldMessages.value = timeoldMessages.reversed.toList();
       }
       update();
-      debugPrint('------$reversedOldMessageSenderId----------');
-      debugPrint('------$reversedOldMessages----------');
-      debugPrint('------$reversedtimeoldMessages----------');
+      print('------$reversedOldMessageSenderId----------');
+      print('------$reversedOldMessages----------');
+      print('------$reversedtimeoldMessages----------');
     });
   }
 
@@ -144,7 +144,7 @@ class ChatWindowController extends GetxController {
       update();
       // Now you have all the messages in the `messages` list
       print(messages);
-      debugPrint('-----$reversedHistoricalMessageSenderId');
+      print('-----$reversedHistoricalMessageSenderId');
     });
   }
 
