@@ -294,10 +294,11 @@ class ChatWindowScreen extends StatelessWidget {
                                                           index],
                                                       controller);
                                                 },
-                                                ownMessageTime: controller
+                                                ownMessageTime:controller.isInitialMessageshow == true? controller
                                                   .convertToIndianTime(controller
                                                           .reversedtimeoldMessages[
-                                                      index]),
+                                                      index]):controller
+                                                  .convertToIndianTime(controller.reversedtimeHistoricMessages[index]),
                                                 ownMessage: controller
                                                         .reversedOldMessages[
                                                     index]),
@@ -329,10 +330,11 @@ class ChatWindowScreen extends StatelessWidget {
                                               : Container(),
                                           Expanded(
                                             child: OwnMessageCard(
-                                                ownMessageTime: controller
+                                                ownMessageTime:controller.isInitialMessageshow == true? controller
                                                   .convertToIndianTime(controller
                                                           .reversedtimeoldMessages[
-                                                      index]),
+                                                      index]):controller
+                                                  .convertToIndianTime(controller.reversedtimeHistoricMessages[index]),
                                                 onLongPress: () {
                                                   FocusScope.of(context)
                                                       .unfocus();
@@ -375,10 +377,11 @@ class ChatWindowScreen extends StatelessWidget {
                                               : Container(),
                                           Expanded(
                                             child: ReplyMessageCard(
-                                              replyMessageTime: controller
+                                              replyMessageTime:controller.isInitialMessageshow == true? controller
                                                   .convertToIndianTime(controller
                                                           .reversedtimeoldMessages[
-                                                      index]),
+                                                      index]):controller
+                                                  .convertToIndianTime(controller.reversedtimeHistoricMessages[index]),
                                               onLongPress: () {
                                                 FocusScope.of(context)
                                                     .unfocus();
@@ -420,10 +423,11 @@ class ChatWindowScreen extends StatelessWidget {
                                               : Container(),
                                           Expanded(
                                             child: ReplyMessageCard(
-                                              replyMessageTime: controller
+                                              replyMessageTime:controller.isInitialMessageshow == true? controller
                                                   .convertToIndianTime(controller
                                                           .reversedtimeoldMessages[
-                                                      index]),
+                                                      index]):controller
+                                                  .convertToIndianTime(controller.reversedtimeHistoricMessages[index]),
                                               onLongPress: () {
                                                 FocusScope.of(context)
                                                     .unfocus();

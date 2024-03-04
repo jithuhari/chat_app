@@ -26,6 +26,10 @@ class ChatWindowController extends GetxController {
   final _reversedtimeoldMessages = (List<String>.empty()).obs;
   List<String> get reversedtimeoldMessages => _reversedtimeoldMessages;
 
+  final _reversedtimeHistoricMessages = (List<String>.empty()).obs;
+  List<String> get reversedtimeHistoricMessages =>
+      _reversedtimeHistoricMessages;
+
   final _reversedMessages = (List<String>.empty()).obs;
   List<String> get reversedMessages => _reversedMessages;
 
@@ -34,6 +38,9 @@ class ChatWindowController extends GetxController {
 
   final _timeoldMessages = (List<String>.empty()).obs;
   List<String> get timeoldMessages => _timeoldMessages;
+
+  final _timeHistoricMessages = (List<String>.empty()).obs;
+  List<String> get timeHistoricMessages => _timeHistoricMessages;
 
   final _oldMessageSenderId = (List<int>.empty()).obs;
   List<int> get oldMessageSenderId => _oldMessageSenderId;
@@ -137,9 +144,14 @@ class ChatWindowController extends GetxController {
         messages.add(message['message']);
         _reversedMessages.value = messages.reversed.toList();
         int historicalMessageId = message['sender_id'];
+
         historicalMessageSenderId.add(historicalMessageId);
         _reversedHistoricalMessageSenderId.value =
             historicalMessageSenderId.reversed.toList();
+
+        timeHistoricMessages.add(message['message_created_at']);
+        _reversedtimeHistoricMessages.value =
+            timeHistoricMessages.reversed.toList();
       }
       update();
       // Now you have all the messages in the `messages` list
@@ -180,8 +192,9 @@ class ChatWindowController extends GetxController {
     if (indianDateTime.year == now.year &&
         indianDateTime.month == now.month &&
         indianDateTime.day == now.day) {
-      String timeFormat = DateFormat('h:mm a').format(indianDateTime); // Display time in AM/PM format
-    return timeFormat;
+      String timeFormat = DateFormat('h:mm a')
+          .format(indianDateTime); // Display time in AM/PM format
+      return timeFormat;
     }
 
     // Check if the date is yesterday
