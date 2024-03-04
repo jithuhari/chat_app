@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class ChatWindowController extends GetxController {
@@ -22,11 +23,17 @@ class ChatWindowController extends GetxController {
   final _reversedOldMessages = (List<String>.empty()).obs;
   List<String> get reversedOldMessages => _reversedOldMessages;
 
+  final _reversedtimeoldMessages = (List<String>.empty()).obs;
+  List<String> get reversedtimeoldMessages => _reversedtimeoldMessages;
+
   final _reversedMessages = (List<String>.empty()).obs;
   List<String> get reversedMessages => _reversedMessages;
 
   final _initialOldMessages = (List<String>.empty()).obs;
   List<String> get initialOldMessages => _initialOldMessages;
+
+  final _timeoldMessages = (List<String>.empty()).obs;
+  List<String> get timeoldMessages => _timeoldMessages;
 
   final _oldMessageSenderId = (List<int>.empty()).obs;
   List<int> get oldMessageSenderId => _oldMessageSenderId;
@@ -92,7 +99,7 @@ class ChatWindowController extends GetxController {
 
     socket.on("oldMessages", (data) {
       _oldMessages.value = data['oldMessages'];
-      print(data);
+      debugPrint(data);
 
       for (var message in oldMessages) {
         int messageId = message['sender_id'];
@@ -102,10 +109,14 @@ class ChatWindowController extends GetxController {
 
         initialOldMessages.add(message['message']);
         _reversedOldMessages.value = initialOldMessages.reversed.toList();
+
+        timeoldMessages.add(message['message_created_at']);
+        _reversedtimeoldMessages.value = timeoldMessages.reversed.toList();
       }
       update();
-      print('------${reversedOldMessageSenderId}----------');
-      print('------${reversedOldMessages}----------');
+      debugPrint('------$reversedOldMessageSenderId----------');
+      debugPrint('------$reversedOldMessages----------');
+      debugPrint('------$reversedtimeoldMessages----------');
     });
   }
 
@@ -133,7 +144,7 @@ class ChatWindowController extends GetxController {
       update();
       // Now you have all the messages in the `messages` list
       print(messages);
-      print('-----$reversedHistoricalMessageSenderId');
+      debugPrint('-----$reversedHistoricalMessageSenderId');
     });
   }
 
@@ -148,7 +159,46 @@ class ChatWindowController extends GetxController {
       selectedIndexes.add(index);
       _selectedCount.value++;
     }
-    update(); 
+    update();
+  }
+
+// Function to convert UTC timestamp to Indian Standard Time (IST) and format based on the condition
+  String convertToIndianTime(String utcTimestamp) {
+    DateTime utcDateTime = DateTime.parse(utcTimestamp);
+    DateTime indianDateTime = utcDateTime.toLocal();
+
+    // Get current Indian Standard Time (IST) date
+    DateTime now = DateTime.now().toLocal();
+
+    // Calculate yesterday's date
+    DateTime yesterday = now.subtract(const Duration(days: 1));
+
+    // Calculate the date 7 days ago from today
+    DateTime lastWeek = now.subtract(const Duration(days: 7));
+
+    // Check if the date is today
+    if (indianDateTime.year == now.year &&
+        indianDateTime.month == now.month &&
+        indianDateTime.day == now.day) {
+      return DateFormat('HH:mm').format(indianDateTime); // Display time only
+    }
+
+    // Check if the date is yesterday
+    if (indianDateTime.year == yesterday.year &&
+        indianDateTime.month == yesterday.month &&
+        indianDateTime.day == yesterday.day) {
+      return 'Yesterday';
+    }
+
+    // Check if the date is before yesterday but within the last week
+    if (indianDateTime.isAfter(lastWeek) &&
+        indianDateTime.isBefore(yesterday)) {
+      // Return corresponding day of the week
+      return DateFormat('EEEE').format(indianDateTime);
+    }
+
+    // For any other date, display the date in the format dd/MM/yyyy
+    return DateFormat('dd/MM/yyyy').format(indianDateTime);
   }
 
   changeSendButtonStatusToTrue() {
@@ -176,13 +226,13 @@ class ChatWindowController extends GetxController {
     update();
   }
 
-  clearSelectedCOunt(){
-    _selectedCount.value=0;
+  clearSelectedCOunt() {
+    _selectedCount.value = 0;
     update();
   }
 
-  pinMessageActive(){
-    _isPinMessageActive.value=!_isPinMessageActive.value;
+  pinMessageActive() {
+    _isPinMessageActive.value = !_isPinMessageActive.value;
     update();
   }
 }

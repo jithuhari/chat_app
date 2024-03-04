@@ -285,7 +285,8 @@ class ChatWindowScreen extends StatelessWidget {
                                           Expanded(
                                             child: OwnMessageCard(
                                                 onLongPress: () {
-                                                  FocusScope.of(context).unfocus(); 
+                                                  FocusScope.of(context)
+                                                      .unfocus();
                                                   messageBottomSheet(
                                                       context,
                                                       controller
@@ -293,6 +294,10 @@ class ChatWindowScreen extends StatelessWidget {
                                                           index],
                                                       controller);
                                                 },
+                                                ownMessageTime: controller
+                                                  .convertToIndianTime(controller
+                                                          .reversedtimeoldMessages[
+                                                      index]),
                                                 ownMessage: controller
                                                         .reversedOldMessages[
                                                     index]),
@@ -324,8 +329,13 @@ class ChatWindowScreen extends StatelessWidget {
                                               : Container(),
                                           Expanded(
                                             child: OwnMessageCard(
+                                                ownMessageTime: controller
+                                                  .convertToIndianTime(controller
+                                                          .reversedtimeoldMessages[
+                                                      index]),
                                                 onLongPress: () {
-                                                  FocusScope.of(context).unfocus(); 
+                                                  FocusScope.of(context)
+                                                      .unfocus();
                                                   messageBottomSheet(
                                                       context,
                                                       controller
@@ -365,8 +375,13 @@ class ChatWindowScreen extends StatelessWidget {
                                               : Container(),
                                           Expanded(
                                             child: ReplyMessageCard(
+                                              replyMessageTime: controller
+                                                  .convertToIndianTime(controller
+                                                          .reversedtimeoldMessages[
+                                                      index]),
                                               onLongPress: () {
-                                                FocusScope.of(context).unfocus(); 
+                                                FocusScope.of(context)
+                                                    .unfocus();
                                                 messageBottomSheet(
                                                     context,
                                                     controller
@@ -405,8 +420,13 @@ class ChatWindowScreen extends StatelessWidget {
                                               : Container(),
                                           Expanded(
                                             child: ReplyMessageCard(
+                                              replyMessageTime: controller
+                                                  .convertToIndianTime(controller
+                                                          .reversedtimeoldMessages[
+                                                      index]),
                                               onLongPress: () {
-                                                FocusScope.of(context).unfocus(); 
+                                                FocusScope.of(context)
+                                                    .unfocus();
                                                 messageBottomSheet(
                                                     context,
                                                     controller.reversedMessages[

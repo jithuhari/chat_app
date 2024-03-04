@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:nms_chat/utils/theme/theme.dart';
 
 class ReplyMessageCard extends StatelessWidget {
-  const ReplyMessageCard({super.key, required this.replyMessage, this.onLongPress});
+  const ReplyMessageCard({super.key, required this.replyMessage, this.onLongPress, required this.replyMessageTime});
 
   final String replyMessage;
   final VoidCallback? onLongPress;
+  final String replyMessageTime;
 
   @override
   Widget build(BuildContext context) {
@@ -37,16 +38,16 @@ class ReplyMessageCard extends StatelessWidget {
                 ),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(left: 15.0),
+             Padding(
+              padding: const EdgeInsets.only(left: 15.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    "11:10",
-                    style: TextStyle(color: iconColor, fontSize: 12),
+                    replyMessageTime,
+                    style:const TextStyle(color: iconColor, fontSize: 12),
                   ),
-                  Icon(
+                  const Icon(
                     Icons.done,
                     color: iconColor,
                     size: 15,

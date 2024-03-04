@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:nms_chat/utils/theme/theme.dart';
 
 class OwnMessageCard extends StatelessWidget {
-  const OwnMessageCard({super.key, required this.ownMessage, this.onLongPress});
+  const OwnMessageCard({super.key, required this.ownMessage, this.onLongPress, required this.ownMessageTime});
 
   final String ownMessage;
+  final String ownMessageTime;
   final VoidCallback? onLongPress;
 
   @override
@@ -40,16 +41,16 @@ class OwnMessageCard extends StatelessWidget {
                 ),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(right: 15.0),
+             Padding(
+              padding: const EdgeInsets.only(right: 15.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text(
-                    "11:10",
-                    style: TextStyle(color: iconColor, fontSize: 12),
+                    ownMessageTime,
+                    style: const TextStyle(color: iconColor, fontSize: 12),
                   ),
-                  Icon(
+                  const Icon(
                     Icons.done,
                     color: iconColor,
                     size: 15,
