@@ -180,7 +180,8 @@ class ChatWindowController extends GetxController {
     if (indianDateTime.year == now.year &&
         indianDateTime.month == now.month &&
         indianDateTime.day == now.day) {
-      return DateFormat('HH:mm').format(indianDateTime); // Display time only
+      String timeFormat = DateFormat('h:mm a').format(indianDateTime); // Display time in AM/PM format
+    return timeFormat;
     }
 
     // Check if the date is yesterday
