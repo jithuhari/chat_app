@@ -292,13 +292,22 @@ class ChatWindowScreen extends StatelessWidget {
                                                       controller
                                                               .reversedOldMessages[
                                                           index],
-                                                      controller,index);
+                                                      controller,
+                                                      index);
                                                 },
-                                                ownMessageTime:controller.isInitialMessageshow == true? controller
-                                                  .convertToIndianTime(controller
-                                                          .reversedtimeoldMessages[
-                                                      index]):controller
-                                                  .convertToIndianTime(controller.reversedtimeHistoricMessages[index]),
+                                                ownMessageTime: controller
+                                                            .isInitialMessageshow ==
+                                                        true
+                                                    ? controller
+                                                        .convertToIndianTime(
+                                                            controller
+                                                                    .reversedtimeoldMessages[
+                                                                index])
+                                                    : controller
+                                                        .convertToIndianTime(
+                                                            controller
+                                                                    .reversedtimeHistoricMessages[
+                                                                index]),
                                                 ownMessage: controller
                                                         .reversedOldMessages[
                                                     index]),
@@ -330,11 +339,19 @@ class ChatWindowScreen extends StatelessWidget {
                                               : Container(),
                                           Expanded(
                                             child: OwnMessageCard(
-                                                ownMessageTime:controller.isInitialMessageshow == true? controller
-                                                  .convertToIndianTime(controller
-                                                          .reversedtimeoldMessages[
-                                                      index]):controller
-                                                  .convertToIndianTime(controller.reversedtimeHistoricMessages[index]),
+                                                ownMessageTime: controller
+                                                            .isInitialMessageshow ==
+                                                        true
+                                                    ? controller
+                                                        .convertToIndianTime(
+                                                            controller
+                                                                    .reversedtimeoldMessages[
+                                                                index])
+                                                    : controller
+                                                        .convertToIndianTime(
+                                                            controller
+                                                                    .reversedtimeHistoricMessages[
+                                                                index]),
                                                 onLongPress: () {
                                                   FocusScope.of(context)
                                                       .unfocus();
@@ -343,7 +360,8 @@ class ChatWindowScreen extends StatelessWidget {
                                                       controller
                                                               .reversedMessages[
                                                           index],
-                                                      controller,index);
+                                                      controller,
+                                                      index);
                                                 },
                                                 ownMessage: controller
                                                     .reversedMessages[index]),
@@ -377,11 +395,23 @@ class ChatWindowScreen extends StatelessWidget {
                                               : Container(),
                                           Expanded(
                                             child: ReplyMessageCard(
-                                              replyMessageTime:controller.isInitialMessageshow == true? controller
-                                                  .convertToIndianTime(controller
-                                                          .reversedtimeoldMessages[
-                                                      index]):controller
-                                                  .convertToIndianTime(controller.reversedtimeHistoricMessages[index]),
+                                              starMessageWidget: controller
+                                                          .isStarMessageActive ==
+                                                      false
+                                                  ? Container()
+                                                  : Image.asset(
+                                                      'assets/png/star_msg.png'),
+                                              replyMessageTime: controller
+                                                          .isInitialMessageshow ==
+                                                      true
+                                                  ? controller.convertToIndianTime(
+                                                      controller
+                                                              .reversedtimeoldMessages[
+                                                          index])
+                                                  : controller.convertToIndianTime(
+                                                      controller
+                                                              .reversedtimeHistoricMessages[
+                                                          index]),
                                               onLongPress: () {
                                                 FocusScope.of(context)
                                                     .unfocus();
@@ -390,7 +420,8 @@ class ChatWindowScreen extends StatelessWidget {
                                                     controller
                                                             .reversedOldMessages[
                                                         index],
-                                                    controller,index);
+                                                    controller,
+                                                    index);
                                               },
                                               replyMessage: controller
                                                   .reversedOldMessages[index],
@@ -423,11 +454,23 @@ class ChatWindowScreen extends StatelessWidget {
                                               : Container(),
                                           Expanded(
                                             child: ReplyMessageCard(
-                                              replyMessageTime:controller.isInitialMessageshow == true? controller
-                                                  .convertToIndianTime(controller
-                                                          .reversedtimeoldMessages[
-                                                      index]):controller
-                                                  .convertToIndianTime(controller.reversedtimeHistoricMessages[index]),
+                                              starMessageWidget: controller
+                                                          .isStarMessageActive ==
+                                                      false
+                                                  ? Container()
+                                                  : Image.asset(
+                                                      'assets/png/star_msg.png'),
+                                              replyMessageTime: controller
+                                                          .isInitialMessageshow ==
+                                                      true
+                                                  ? controller.convertToIndianTime(
+                                                      controller
+                                                              .reversedtimeoldMessages[
+                                                          index])
+                                                  : controller.convertToIndianTime(
+                                                      controller
+                                                              .reversedtimeHistoricMessages[
+                                                          index]),
                                               onLongPress: () {
                                                 FocusScope.of(context)
                                                     .unfocus();
@@ -435,7 +478,8 @@ class ChatWindowScreen extends StatelessWidget {
                                                     context,
                                                     controller.reversedMessages[
                                                         index],
-                                                    controller,index);
+                                                    controller,
+                                                    index);
                                               },
                                               replyMessage: controller
                                                   .reversedMessages[index],
@@ -677,7 +721,7 @@ class ChatWindowScreen extends StatelessWidget {
   }
 
   Future<dynamic> messageBottomSheet(BuildContext context,
-      String messageContent, ChatWindowController controller,int index) {
+      String messageContent, ChatWindowController controller, int index) {
     return showModalBottomSheet(
         context: context,
         builder: (BuildContext context) {
@@ -759,13 +803,15 @@ class ChatWindowScreen extends StatelessWidget {
                       ),
                     ),
                     InkWell(
-                      onTap: (){
+                      onTap: () {
                         controller.starMessageActive();
                         Navigator.pop(context);
                       },
                       child: Row(
                         children: [
-                          Image.asset(controller.isStarMessageActive==false? 'assets/png/message_bottom_sheet/star.png':'assets/png/message_bottom_sheet/unstar.png'),
+                          Image.asset(controller.isStarMessageActive == false
+                              ? 'assets/png/message_bottom_sheet/star.png'
+                              : 'assets/png/message_bottom_sheet/unstar.png'),
                           const SizedBox(
                             width: 32,
                           ),
