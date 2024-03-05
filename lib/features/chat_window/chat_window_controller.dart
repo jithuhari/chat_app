@@ -69,6 +69,9 @@ class ChatWindowController extends GetxController {
   final _isPinMessageActive = false.obs;
   bool get isPinMessageActive => _isPinMessageActive.value;
 
+  final _isStarMessageActive = false.obs;
+  bool get isStarMessageActive => _isStarMessageActive.value;
+
   final _selectedCount = 0.obs;
   int get selectedCount => _selectedCount.value;
 
@@ -247,6 +250,11 @@ class ChatWindowController extends GetxController {
 
   pinMessageActive() {
     _isPinMessageActive.value = !_isPinMessageActive.value;
+    update();
+  }
+
+  starMessageActive() {
+    _isStarMessageActive.value = !_isStarMessageActive.value;
     update();
   }
 }

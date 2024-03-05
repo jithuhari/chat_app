@@ -758,20 +758,26 @@ class ChatWindowScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Row(
-                      children: [
-                        Image.asset('assets/png/message_bottom_sheet/star.png'),
-                        const SizedBox(
-                          width: 32,
-                        ),
-                        const Text(
-                          'Star Message',
-                          style: TextStyle(
-                              color: secondaryColor,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400),
-                        ),
-                      ],
+                    InkWell(
+                      onTap: (){
+                        controller.starMessageActive();
+                        Navigator.pop(context);
+                      },
+                      child: Row(
+                        children: [
+                          Image.asset(controller.isStarMessageActive==false? 'assets/png/message_bottom_sheet/star.png':'assets/png/message_bottom_sheet/unstar.png'),
+                          const SizedBox(
+                            width: 32,
+                          ),
+                          const Text(
+                            'Star Message',
+                            style: TextStyle(
+                                color: secondaryColor,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400),
+                          ),
+                        ],
+                      ),
                     ),
                     Row(
                       children: [
