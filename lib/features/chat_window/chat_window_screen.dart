@@ -292,7 +292,7 @@ class ChatWindowScreen extends StatelessWidget {
                                                       controller
                                                               .reversedOldMessages[
                                                           index],
-                                                      controller);
+                                                      controller,index);
                                                 },
                                                 ownMessageTime:controller.isInitialMessageshow == true? controller
                                                   .convertToIndianTime(controller
@@ -343,7 +343,7 @@ class ChatWindowScreen extends StatelessWidget {
                                                       controller
                                                               .reversedMessages[
                                                           index],
-                                                      controller);
+                                                      controller,index);
                                                 },
                                                 ownMessage: controller
                                                     .reversedMessages[index]),
@@ -390,7 +390,7 @@ class ChatWindowScreen extends StatelessWidget {
                                                     controller
                                                             .reversedOldMessages[
                                                         index],
-                                                    controller);
+                                                    controller,index);
                                               },
                                               replyMessage: controller
                                                   .reversedOldMessages[index],
@@ -435,7 +435,7 @@ class ChatWindowScreen extends StatelessWidget {
                                                     context,
                                                     controller.reversedMessages[
                                                         index],
-                                                    controller);
+                                                    controller,index);
                                               },
                                               replyMessage: controller
                                                   .reversedMessages[index],
@@ -677,7 +677,7 @@ class ChatWindowScreen extends StatelessWidget {
   }
 
   Future<dynamic> messageBottomSheet(BuildContext context,
-      String messageContent, ChatWindowController controller) {
+      String messageContent, ChatWindowController controller,int index) {
     return showModalBottomSheet(
         context: context,
         builder: (BuildContext context) {
@@ -791,6 +791,7 @@ class ChatWindowScreen extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () {
+                        controller.toggleSelection(index);
                         controller.forwardActionActive();
                         Navigator.pop(context);
                       },
