@@ -157,6 +157,32 @@ class ProfilePageScreen extends StatelessWidget {
                         children: [
                           Row(
                             children: [
+                              Image(image: AssetImage("assets/png/starred_message.png")),
+                              SizedBox(
+                                width: 16,
+                              ),
+                              Text('Starred Messages',
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500,
+                                      color: iconColor)),
+                            ],
+                          ),
+                          Icon(
+                            Icons.arrow_forward_ios_rounded,
+                            size: 10,
+                            color: hintColor,
+                          )
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 24,
+                      ),
+                      const Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
                               Image(
                                   image: AssetImage("assets/png/document.png")),
                               SizedBox(
@@ -178,58 +204,36 @@ class ProfilePageScreen extends StatelessWidget {
                           )
                         ],
                       ),
-                      const SizedBox(
-                        height: 24,
-                      ),
-                      const Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Image(image: AssetImage("assets/png/video.png")),
-                              SizedBox(
-                                width: 16,
-                              ),
-                              Text('Videos',
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500,
-                                      color: iconColor)),
-                            ],
-                          ),
-                          Icon(
-                            Icons.arrow_forward_ios_rounded,
-                            size: 10,
-                            color: hintColor,
-                          )
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 24,
-                      ),
-                      const Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Image(image: AssetImage("assets/png/link.png")),
-                              SizedBox(
-                                width: 16,
-                              ),
-                              Text('Links',
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500,
-                                      color: iconColor)),
-                            ],
-                          ),
-                          Icon(
-                            Icons.arrow_forward_ios_rounded,
-                            size: 10,
-                            color: hintColor,
-                          )
-                        ],
-                      ),
+                      // const SizedBox(
+                      //   height: 24,
+                      // ),
+                      
+                      // const SizedBox(
+                      //   height: 24,
+                      // ),
+                      // const Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   children: [
+                      //     Row(
+                      //       children: [
+                      //         Image(image: AssetImage("assets/png/link.png")),
+                      //         SizedBox(
+                      //           width: 16,
+                      //         ),
+                      //         Text('Links',
+                      //             style: TextStyle(
+                      //                 fontSize: 14,
+                      //                 fontWeight: FontWeight.w500,
+                      //                 color: iconColor)),
+                      //       ],
+                      //     ),
+                      //     Icon(
+                      //       Icons.arrow_forward_ios_rounded,
+                      //       size: 10,
+                      //       color: hintColor,
+                      //     )
+                      //   ],
+                      // ),
                       const SizedBox(
                         height: 24,
                       ),
