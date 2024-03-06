@@ -313,7 +313,7 @@ class AllChatSearchScreen extends StatelessWidget {
                                   onTap: () {},
                                   // name: 'Cody Fisher',
                                   name: controller
-                                      .chatListModelData[index].userName,
+                                      .chatListModelData[index].firstName,
                                   message: controller
                                       .chatListModelData[index].message,
                                   lastMessageTime: controller
