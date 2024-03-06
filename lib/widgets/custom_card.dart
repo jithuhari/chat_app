@@ -9,12 +9,13 @@ class CustomCard extends StatelessWidget {
       required this.name,
       required this.message,
       required this.lastMessageTime,
-      required this.onTap});
+      required this.onTap, required this.unReadMessageCount});
 
   // final ChatModel chatModel;
   // final ChatModel sourceChat;
   final String name;
   final String message;
+  final String unReadMessageCount;
   final String lastMessageTime;
   final VoidCallback onTap;
   @override
@@ -82,12 +83,12 @@ class CustomCard extends StatelessWidget {
                     const SizedBox(
                       width: 3,
                     ),
-                    const CircleAvatar(
+                     CircleAvatar(
                       radius: 12,
                       backgroundColor: primaryColor,
                       child: Text(
-                        '38',
-                        style: TextStyle(
+                        unReadMessageCount,
+                        style: const TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w500,
                             color: Colors.white),

@@ -131,15 +131,16 @@ class AllChatScreen extends StatelessWidget {
                     ]),
                     child: InkWell(
                       child: CustomCard(
+                        unReadMessageCount: controller
+                            .chatListModelData[index].unReadMessageCount,
                         onTap: () {
                           Get.toNamed('/chat_window_screen', arguments: {
                             'firstName':
                                 controller.chatListModelData[index].firstName,
                             'lastName':
                                 controller.chatListModelData[index].lastName,
-                            'receiverId':controller.chatListModelData[index].userId    
-                                
-                            
+                            'receiverId':
+                                controller.chatListModelData[index].userId
                           });
                         },
                         // name: 'Cody Fisher',
