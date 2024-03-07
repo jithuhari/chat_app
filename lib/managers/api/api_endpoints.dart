@@ -11,5 +11,6 @@ class ApiEndPoints {
   static const String searchContact = 'users/contacts/search';
   static const String searchMessage = 'users/messages/search';
   static const String profileDetails = 'users/details';
+  static const String pinnedMsg = 'single-chat/pinned';
   
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../dtos/chat_app_dtos/new_chat/nms_new_chat.dart';
 import '../dtos/chat_app_dtos/nms_chat_list/nms_chat_list.dart';
+import '../dtos/chat_app_dtos/pinned_message/pinned_message.dart';
 import '../dtos/chat_app_dtos/profile_details/profile_details.dart';
 import '../dtos/chat_app_dtos/search_dtos/search_contacts/search_contacts.dart';
 import '../dtos/chat_app_dtos/search_dtos/search_messages/search_messages.dart';
@@ -23,7 +24,11 @@ abstract class NMSChatApiRepository extends GetxController {
       {required SearchMessagesRequest request});
 
   Future<ProfileDetailsResponse> profileDetails(
-      {required ProfileDetailsRequest request});     
+      {required ProfileDetailsRequest request});
+
+  
+  Future<PinnedMessageResponse> pinnedMessage(
+      {required PinnedMessageRequest request});         
 }
 
 class NMSApiRepositoryImpl extends GetxController
@@ -103,5 +108,18 @@ class NMSApiRepositoryImpl extends GetxController
     );
     
     return ProfileDetailsResponse.fromJson(response);
+  }
+
+   @override
+  Future<PinnedMessageResponse> pinnedMessage(
+      {required PinnedMessageRequest request}) async {
+    final response = await _helper.postWithBody(
+      // headers: _headersWithoutToken,
+      endpoint: ApiEndPoints.pinnedMsg,
+      params: {},
+      body: request.toBody(),
+    );
+    
+    return PinnedMessageResponse.fromJson(response);
   }
 }
