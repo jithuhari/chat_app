@@ -1,15 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:nms_chat/mixins/snackbar_mixin.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
-class ChatWindowController extends GetxController {
+import '../../dtos/chat_app_dtos/pinned_message/pinned_message.dart';
+import '../../models/pinned_message/pinned_message_model.dart';
+import '../../repository/nms_chat_api_repository.dart';
+
+class ChatWindowController extends GetxController with SnackbarMixin {
   final Map<String, dynamic>? arguments = Get.arguments;
   late final String firstName = arguments!['firstName'];
   late final String lastName = arguments!['lastName'];
   late final int receiverId = arguments!['receiverId'];
 
   final TextEditingController searchController = TextEditingController();
+
+  final _pinnedMessageModelData = Rx<PinnedMessageData?>(null);
+  PinnedMessageData? get pinnedMessageModelData =>
+      _pinnedMessageModelData.value;
+
+  final _message = "".obs;
+  String get message => _message.value;
+
+  final _timeOfMessage = "".obs;
+  String get timeOfMessage => _timeOfMessage.value;
 
   final _oldMessages = (List<dynamic>.empty()).obs;
   List<dynamic> get oldMessages => _oldMessages;
@@ -88,6 +103,7 @@ class ChatWindowController extends GetxController {
     super.onInit();
     connect();
     await fetchOldlMessage(88, receiverId);
+    await fetchPinnedMessage();
   }
 
   void connect() {
@@ -216,6 +232,40 @@ class ChatWindowController extends GetxController {
 
     // For any other date, display the date in the format dd/MM/yyyy
     return DateFormat('dd/MM/yyyy').format(indianDateTime);
+  }
+
+  fetchPinnedMessage() async {
+    // _isLoading.value = true;
+    try {
+      final request =
+          PinnedMessageRequest(senderId: 88, receiverId: receiverId, pinnedId: 704);
+      final response =
+          await NMSChatApiRepository.to.pinnedMessage(request: request);
+      if (response.status == 200) {
+        _pinnedMessageModelData.value = response.data;
+
+        // debugPrint(
+        //     "pinned message-------  ${_pinnedMessageModelData.value!.message} ------");
+
+        _message.value = _pinnedMessageModelData.value!.message;
+        _timeOfMessage.value = _pinnedMessageModelData.value!.updatedAt;
+
+        debugPrint("pinned message new-------  $message ------");
+        // _firstName.value = _profileDetailsModelData.value!.firstName;
+        // _lastName.value = _profileDetailsModelData.value!.lastName;
+        // _phNumber.value = _profileDetailsModelData.value!.phone;
+        // if (_chatListModelData.isNotEmpty) {
+        //   for (int i = 0; i < chatListModelData.length; i++) {
+        //     // _chatUserListLength.value = _chatListModelData.length;
+        //   }
+        // }
+      }
+      update();
+    } catch (e) {
+      showErrorSnackbar(message: e.toString());
+      // _isLoading.value = false;
+      debugPrint(e.toString());
+    }
   }
 
   changeSendButtonStatusToTrue() {

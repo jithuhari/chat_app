@@ -45,16 +45,16 @@ class ChatWindowScreen extends StatelessWidget {
                                               child: Image.asset(
                                                   'assets/png/push_pin.png'),
                                             ),
-                                            const SizedBox(
+                                             SizedBox(
                                               height: 50,
                                               child: Padding(
                                                 padding:
-                                                    EdgeInsets.only(left: 16.0),
+                                                    const EdgeInsets.only(left: 16.0),
                                                 child: Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: [
-                                                    Text(
+                                                    const Text(
                                                       'Ryan Lewis',
                                                       style: TextStyle(
                                                           fontSize: 12,
@@ -64,8 +64,8 @@ class ChatWindowScreen extends StatelessWidget {
                                                               secondaryColor),
                                                     ),
                                                     Text(
-                                                        'Lorem ipsum dolor sit amet',
-                                                        style: TextStyle(
+                                                        controller.message,
+                                                        style:const TextStyle(
                                                             fontSize: 12,
                                                             fontWeight:
                                                                 FontWeight.w400,
@@ -77,7 +77,7 @@ class ChatWindowScreen extends StatelessWidget {
                                             ),
                                           ],
                                         ),
-                                        const Text('09/08/2023')
+                                         Text(controller.convertToIndianTime(controller.timeOfMessage))
                                       ],
                                     ),
                                   ),
