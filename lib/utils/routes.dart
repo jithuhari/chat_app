@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:nms_chat/features/signin/signin.dart';
+import 'package:nms_chat/features/starred_messages/starred_messages.dart';
 
 import '../features/chat_main_layout/chat_main_layout.dart';
 import '../features/chat_window/chat_window.dart';
@@ -35,6 +36,11 @@ List<GetPage> routes() => [
       GetPage(
           name: "/profile_page_screen",
           page: () => const ProfilePageScreen(),
+          transition: Transition.cupertino),
+
+      GetPage(
+          name: "/starred_message_screen",
+          page: () => const StarredMessagesScreen(),
           transition: Transition.cupertino),
 
       //  Sign In/Sign Up Section

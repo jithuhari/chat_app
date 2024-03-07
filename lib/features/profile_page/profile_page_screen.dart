@@ -42,7 +42,7 @@ class ProfilePageScreen extends StatelessWidget {
                       const SizedBox(
                         height: 16,
                       ),
-                       Text(
+                      Text(
                         "${controller.firstName} ${controller.lastName}",
                         style: const TextStyle(
                             color: Colors.black,
@@ -63,7 +63,7 @@ class ProfilePageScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                       Row(
+                      Row(
                         children: [
                           Text(
                             controller.phNumber,
@@ -152,28 +152,35 @@ class ProfilePageScreen extends StatelessWidget {
                       const SizedBox(
                         height: 24,
                       ),
-                      const Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Image(image: AssetImage("assets/png/starred_message.png")),
-                              SizedBox(
-                                width: 16,
-                              ),
-                              Text('Starred Messages',
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500,
-                                      color: iconColor)),
-                            ],
-                          ),
-                          Icon(
-                            Icons.arrow_forward_ios_rounded,
-                            size: 10,
-                            color: hintColor,
-                          )
-                        ],
+                      InkWell(
+                        onTap: () {
+                          Get.toNamed('/starred_message_screen');
+                        },
+                        child: const Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Image(
+                                    image: AssetImage(
+                                        "assets/png/starred_message.png")),
+                                SizedBox(
+                                  width: 16,
+                                ),
+                                Text('Starred Messages',
+                                    style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w500,
+                                        color: iconColor)),
+                              ],
+                            ),
+                            Icon(
+                              Icons.arrow_forward_ios_rounded,
+                              size: 10,
+                              color: hintColor,
+                            )
+                          ],
+                        ),
                       ),
                       const SizedBox(
                         height: 24,
@@ -207,7 +214,7 @@ class ProfilePageScreen extends StatelessWidget {
                       // const SizedBox(
                       //   height: 24,
                       // ),
-                      
+
                       // const SizedBox(
                       //   height: 24,
                       // ),
