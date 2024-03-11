@@ -85,23 +85,24 @@ class StarredMessageWidget extends StatelessWidget {
             Text(
               senderName,
               style: const TextStyle(
-                  fontSize: 16,
+                  fontSize: 18,
                   fontWeight: FontWeight.w400,
                   color: secondaryColor),
             ),
             const SizedBox(width: 8.0),
-            const Text(
-              '>',
-              style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                  color: secondaryColor),
-            ),
+            Image.asset('assets/png/arrow.png'),
+            // const Text(
+            //   '>',
+            //   style: TextStyle(
+            //       fontSize: 16,
+            //       fontWeight: FontWeight.w400,
+            //       color: secondaryColor),
+            // ),
             const SizedBox(width: 8.0),
             Text(
               receiverName,
               style: const TextStyle(
-                  fontSize: 16,
+                  fontSize: 18,
                   fontWeight: FontWeight.w400,
                   color: secondaryColor),
             ),
@@ -122,7 +123,7 @@ class StarredMessageWidget extends StatelessWidget {
             child: Text(
               message,
               style: const TextStyle(
-                  fontSize: 16,
+                  fontSize: 18,
                   fontWeight: FontWeight.w400,
                   color: secondaryColor),
             ),
