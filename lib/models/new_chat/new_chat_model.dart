@@ -1,15 +1,14 @@
 class UsersListModelDatum {
   String userId;
-  String firstname;
-  String lastname;
+  String firstName;
+  String lastName;
   String? profileImgUrl;
   String workEmail;
   int probationPeriod;
   bool archived;
   String? workMobileNumber;
   int? id;
-  String? firstName;
-  String? lastName;
+
   String? email;
   String? phone;
   String? message;
@@ -17,16 +16,14 @@ class UsersListModelDatum {
 
   UsersListModelDatum({
     required this.userId,
-    required this.firstname,
-    required this.lastname,
     this.profileImgUrl,
     required this.workEmail,
     required this.probationPeriod,
     required this.archived,
     this.workMobileNumber,
     this.id,
-    this.firstName,
-    this.lastName,
+    required this.firstName,
+    required this.lastName,
     this.email,
     this.phone,
     this.message,
@@ -36,16 +33,14 @@ class UsersListModelDatum {
   factory UsersListModelDatum.fromJson(Map<String, dynamic> json) =>
       UsersListModelDatum(
         userId: json["userId"],
-        firstname: json["firstname"],
-        lastname: json["lastname"],
         profileImgUrl: json["profileImgUrl"],
         workEmail: json["workEmail"],
         probationPeriod: json["probationPeriod"],
         archived: json["archived"],
         workMobileNumber: json["workMobileNumber"],
         id: json["id"],
-        firstName: json["first_name"],
-        lastName: json["last_name"],
+        firstName: json["firstname"],
+        lastName: json["lastname"],
         email: json["email"],
         phone: json["phone"],
         message: json["message"],
@@ -56,8 +51,6 @@ class UsersListModelDatum {
 
   Map<String, dynamic> toJson() => {
         "userId": userId,
-        "firstname": firstname,
-        "lastname": lastname,
         "profileImgUrl": profileImgUrl,
         "workEmail": workEmail,
         "probationPeriod": probationPeriod,

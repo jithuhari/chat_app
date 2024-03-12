@@ -58,10 +58,10 @@ class NewChatScreen extends StatelessWidget {
                 ],
               ),
               body: ListView.builder(
-                  itemCount: 15,
+                  itemCount: controller.newChatListModelData.length,
                   itemBuilder: (builder, index) {
-                    return const NewChatCard(
-                      name: 'Robert Fox',
+                    return NewChatCard(
+                      name: '${controller.newChatListModelData[index].firstName} ${controller.newChatListModelData[index].lastName}',
                     );
                   }),
             ),

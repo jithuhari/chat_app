@@ -22,7 +22,7 @@ class NMSGroupUserListRequest {
   Map<String, dynamic> toBody() {
     final map = {
       "sender_id": senderId,
-      "sortBy": {"field": page, "sortOrder": size},
+      "sortBy": {"field": field, "sortOrder": sortOrder},
       "pagination": {"page": page, "size": size},
       "data": [workEmail, workMobileNumber, workLocation]
     };
