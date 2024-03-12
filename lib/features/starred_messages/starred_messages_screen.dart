@@ -91,13 +91,7 @@ class StarredMessageWidget extends StatelessWidget {
             ),
             const SizedBox(width: 8.0),
             Image.asset('assets/png/arrow.png'),
-            // const Text(
-            //   '>',
-            //   style: TextStyle(
-            //       fontSize: 16,
-            //       fontWeight: FontWeight.w400,
-            //       color: secondaryColor),
-            // ),
+            
             const SizedBox(width: 8.0),
             Text(
               receiverName,

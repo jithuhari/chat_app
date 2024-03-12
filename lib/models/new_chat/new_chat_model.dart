@@ -1,11 +1,12 @@
-class NewChatDatum {
+class UsersListModelDatum {
   String userId;
   String firstname;
   String lastname;
+  String? profileImgUrl;
   String workEmail;
-  String workMobileNumber;
   int probationPeriod;
   bool archived;
+  String? workMobileNumber;
   int? id;
   String? firstName;
   String? lastName;
@@ -14,14 +15,15 @@ class NewChatDatum {
   String? message;
   DateTime? lastMessageTime;
 
-  NewChatDatum({
+  UsersListModelDatum({
     required this.userId,
     required this.firstname,
     required this.lastname,
+    this.profileImgUrl,
     required this.workEmail,
-    required this.workMobileNumber,
     required this.probationPeriod,
     required this.archived,
+    this.workMobileNumber,
     this.id,
     this.firstName,
     this.lastName,
@@ -31,14 +33,16 @@ class NewChatDatum {
     this.lastMessageTime,
   });
 
-  factory NewChatDatum.fromJson(Map<String, dynamic> json) => NewChatDatum(
+  factory UsersListModelDatum.fromJson(Map<String, dynamic> json) =>
+      UsersListModelDatum(
         userId: json["userId"],
         firstname: json["firstname"],
         lastname: json["lastname"],
+        profileImgUrl: json["profileImgUrl"],
         workEmail: json["workEmail"],
-        workMobileNumber: json["workMobileNumber"],
         probationPeriod: json["probationPeriod"],
         archived: json["archived"],
+        workMobileNumber: json["workMobileNumber"],
         id: json["id"],
         firstName: json["first_name"],
         lastName: json["last_name"],
@@ -54,10 +58,11 @@ class NewChatDatum {
         "userId": userId,
         "firstname": firstname,
         "lastname": lastname,
+        "profileImgUrl": profileImgUrl,
         "workEmail": workEmail,
-        "workMobileNumber": workMobileNumber,
         "probationPeriod": probationPeriod,
         "archived": archived,
+        "workMobileNumber": workMobileNumber,
         "id": id,
         "first_name": firstName,
         "last_name": lastName,

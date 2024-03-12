@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../dtos/chat_app_dtos/group_user_list/group_user_list.dart';
 import '../dtos/chat_app_dtos/new_chat/nms_new_chat.dart';
 import '../dtos/chat_app_dtos/nms_chat_list/nms_chat_list.dart';
 import '../dtos/chat_app_dtos/pinned_message/pinned_message.dart';
@@ -28,7 +29,10 @@ abstract class NMSChatApiRepository extends GetxController {
 
   
   Future<PinnedMessageResponse> pinnedMessage(
-      {required PinnedMessageRequest request});         
+      {required PinnedMessageRequest request});
+
+  Future<NMSGroupUserListResponse> fetchNMSGroupUserList(
+      {required NMSGroupUserListRequest request});         
 }
 
 class NMSApiRepositoryImpl extends GetxController
@@ -110,6 +114,7 @@ class NMSApiRepositoryImpl extends GetxController
     return ProfileDetailsResponse.fromJson(response);
   }
 
+  //pinned message
    @override
   Future<PinnedMessageResponse> pinnedMessage(
       {required PinnedMessageRequest request}) async {
@@ -121,5 +126,18 @@ class NMSApiRepositoryImpl extends GetxController
     );
     
     return PinnedMessageResponse.fromJson(response);
+  }
+
+   @override
+  Future<NMSGroupUserListResponse> fetchNMSGroupUserList(
+      {required NMSGroupUserListRequest request}) async {
+    final response = await _helper.postWithBody(
+      // headers: _headersWithoutToken,
+      endpoint: ApiEndPoints.newChatList,
+      params: {},
+      body: request.toBody(),
+    );
+    debugPrint("response $response");
+    return NMSGroupUserListResponse.fromJson(response);
   }
 }
