@@ -13,7 +13,7 @@ class CreateGroupRequest {
     final map = {
       "data": {
         "group_name": groupName,
-        "created_by": groupName,
+        "created_by": createdBy,
         "group_members": groupMembers,
       },
     };

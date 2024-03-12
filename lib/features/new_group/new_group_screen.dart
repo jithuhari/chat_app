@@ -98,7 +98,8 @@ class NewGroupScreen extends StatelessWidget {
                           // physics: const NeverScrollableScrollPhysics(),
                           itemBuilder: (builder, index) {
                             return NewgroupSelectionCard(
-                              name: controller.firstName[index],
+                              name:
+                                  "${controller.firstName[index]} ${controller.lastName[index]}",
                             );
                           }),
                     ),
@@ -107,7 +108,9 @@ class NewGroupScreen extends StatelessWidget {
                           horizontal: 23, vertical: 12),
                       child: CorneredButton(
                         title: 'Create group',
-                        onPress: () {},
+                        onPress: () async {
+                          await controller.createGroup();
+                        },
                         color: primaryColor,
                         textcolor: Colors.white,
                         height: 50,

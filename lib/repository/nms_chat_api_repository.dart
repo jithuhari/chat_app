@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../dtos/chat_app_dtos/create_group/create_group.dart';
 import '../dtos/chat_app_dtos/group_user_list/group_user_list.dart';
 import '../dtos/chat_app_dtos/new_chat/nms_new_chat.dart';
 import '../dtos/chat_app_dtos/nms_chat_list/nms_chat_list.dart';
@@ -16,7 +17,7 @@ abstract class NMSChatApiRepository extends GetxController {
   Future<NMSChatListResponse> fetchChatList(
       {required NMSChatListRequest request});
 
-      Future<NMSNewChatListResponse> fetchNewChatList(
+  Future<NMSNewChatListResponse> fetchNewChatList(
       {required NMSNewChatListRequest request});
 
   Future<SearchContactsResponse> searchContactsList(
@@ -27,12 +28,14 @@ abstract class NMSChatApiRepository extends GetxController {
   Future<ProfileDetailsResponse> profileDetails(
       {required ProfileDetailsRequest request});
 
-  
   Future<PinnedMessageResponse> pinnedMessage(
       {required PinnedMessageRequest request});
 
   Future<NMSGroupUserListResponse> fetchNMSGroupUserList(
-      {required NMSGroupUserListRequest request});         
+      {required NMSGroupUserListRequest request});
+
+  Future<CreateGroupResponse> createGroup(
+      {required CreateGroupRequest request});
 }
 
 class NMSApiRepositoryImpl extends GetxController
@@ -95,13 +98,13 @@ class NMSApiRepositoryImpl extends GetxController
       params: {},
       body: request.toBody(),
     );
-    
+
     return SearchMessagesResponse.fromJson(response);
   }
 
   //profile details api
 
-   @override
+  @override
   Future<ProfileDetailsResponse> profileDetails(
       {required ProfileDetailsRequest request}) async {
     final response = await _helper.postWithBody(
@@ -110,12 +113,12 @@ class NMSApiRepositoryImpl extends GetxController
       params: {},
       body: request.toBody(),
     );
-    
+
     return ProfileDetailsResponse.fromJson(response);
   }
 
   //pinned message
-   @override
+  @override
   Future<PinnedMessageResponse> pinnedMessage(
       {required PinnedMessageRequest request}) async {
     final response = await _helper.postWithBody(
@@ -124,11 +127,11 @@ class NMSApiRepositoryImpl extends GetxController
       params: {},
       body: request.toBody(),
     );
-    
+
     return PinnedMessageResponse.fromJson(response);
   }
 
-   @override
+  @override
   Future<NMSGroupUserListResponse> fetchNMSGroupUserList(
       {required NMSGroupUserListRequest request}) async {
     final response = await _helper.postWithBody(
@@ -139,5 +142,19 @@ class NMSApiRepositoryImpl extends GetxController
     );
     debugPrint("response $response");
     return NMSGroupUserListResponse.fromJson(response);
+  }
+
+  //create group api
+  @override
+  Future<CreateGroupResponse> createGroup(
+      {required CreateGroupRequest request}) async {
+    final response = await _helper.postWithBody(
+      // headers: _headersWithoutToken,
+      endpoint: ApiEndPoints.createGroup,
+      params: {},
+      body: request.toBody(),
+    );
+
+    return CreateGroupResponse.fromJson(response);
   }
 }
