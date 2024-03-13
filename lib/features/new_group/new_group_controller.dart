@@ -8,6 +8,9 @@ import '../../models/new_chat/new_chat_model.dart';
 import '../../repository/nms_chat_api_repository.dart';
 
 class NewGroupController extends GetxController with SnackbarMixin {
+
+  final TextEditingController groupNameController = TextEditingController();
+
   final _firstName = (List<dynamic>.empty()).obs;
   List<dynamic> get firstName => _firstName;
 
@@ -72,7 +75,7 @@ class NewGroupController extends GetxController with SnackbarMixin {
     // _isLoading.value = true;
     try {
       final request = CreateGroupRequest(
-        groupName: 'new Group',
+        groupName: groupNameController.value.text,
         createdBy: 88,
         groupMembers: [88,89,90]
         
