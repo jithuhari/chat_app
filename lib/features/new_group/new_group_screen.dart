@@ -99,6 +99,21 @@ class NewGroupScreen extends StatelessWidget {
                           // physics: const NeverScrollableScrollPhysics(),
                           itemBuilder: (builder, index) {
                             return NewgroupSelectionCard(
+                              checkBoxWidget: Checkbox(
+                                side: const BorderSide(
+                                  width: 1,
+                                  color: messageColor,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(3)),
+                                activeColor: primaryColor,
+                                value: controller.selectedIndexes.contains(
+                                    index), // Check if index is in the selectedIndexes list
+                                onChanged: (value) {
+                                  controller.toggleSelection(
+                                      index); // Toggle the selection when checkbox is clicked
+                                },
+                              ),
                               name:
                                   "${controller.firstName[index]} ${controller.lastName[index]}",
                             );

@@ -8,8 +8,10 @@ import '../../models/new_chat/new_chat_model.dart';
 import '../../repository/nms_chat_api_repository.dart';
 
 class NewGroupController extends GetxController with SnackbarMixin {
-
   final TextEditingController groupNameController = TextEditingController();
+
+  final _selectedIndexes = (List<int>.empty()).obs;
+  List<int> get selectedIndexes => _selectedIndexes;
 
   final _firstName = (List<dynamic>.empty()).obs;
   List<dynamic> get firstName => _firstName;
@@ -18,8 +20,7 @@ class NewGroupController extends GetxController with SnackbarMixin {
   List<dynamic> get lastName => _lastName;
 
   final _createGroupData = Rx<CreateGroupModelData?>(null);
-  CreateGroupModelData? get createGroupData =>
-      _createGroupData.value;
+  CreateGroupModelData? get createGroupData => _createGroupData.value;
 
   @override
   void onInit() async {
@@ -69,34 +70,20 @@ class NewGroupController extends GetxController with SnackbarMixin {
     }
   }
 
-
   //create group api
   createGroup() async {
     // _isLoading.value = true;
     try {
       final request = CreateGroupRequest(
-        groupName: groupNameController.value.text,
-        createdBy: 88,
-        groupMembers: [88,89,90]
-        
-      );
+          groupName: groupNameController.value.text,
+          createdBy: 88,
+          groupMembers: [88, 89, 90]);
       final response =
           await NMSChatApiRepository.to.createGroup(request: request);
       if (response.status == 200) {
         _createGroupData.value = response.data;
 
-        debugPrint(
-            "Categorylist-- length  ${_createGroupData.value!.groupId}");
-
-        // _email.value = _profileDetailsModelData.value!.email;
-        // _firstName.value = _profileDetailsModelData.value!.firstName;
-        // _lastName.value = _profileDetailsModelData.value!.lastName;
-        // _phNumber.value = _profileDetailsModelData.value!.phone;
-        // if (_chatListModelData.isNotEmpty) {
-        //   for (int i = 0; i < chatListModelData.length; i++) {
-        //     // _chatUserListLength.value = _chatListModelData.length;
-        //   }
-        // }
+        debugPrint("Categorylist-- length  ${_createGroupData.value!.groupId}");
       }
       update();
     } catch (e) {
@@ -105,5 +92,18 @@ class NewGroupController extends GetxController with SnackbarMixin {
       debugPrint(e.toString());
     }
   }
-  
+
+  //checkBox
+  void toggleSelection(int index) {
+    if (selectedIndexes.contains(index)) {
+      // If index is already selected, remove it from the list
+      selectedIndexes.remove(index);
+      // _selectedCount.value--;
+    } else {
+      // Otherwise, add it to the list
+      selectedIndexes.add(index);
+      // _selectedCount.value++;
+    }
+    update();
+  }
 }

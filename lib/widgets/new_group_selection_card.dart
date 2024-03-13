@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:nms_chat/utils/theme/theme.dart';
 
 class NewgroupSelectionCard extends StatelessWidget {
   const NewgroupSelectionCard({
     super.key,
     required this.name,
+    required this.checkBoxWidget,
   });
 
   // final ChatModel chatModel;
   // final ChatModel sourceChat;
   final String name;
+  final Widget checkBoxWidget;
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +24,7 @@ class NewgroupSelectionCard extends StatelessWidget {
           child: Column(
             children: [
               ListTile(
-                trailing: Checkbox(
-                  activeColor: primaryColor,
-                  value: true,
-                  onChanged: (value) {},
-                ),
+                trailing: checkBoxWidget,
                 leading: const CircleAvatar(
                     radius: 30,
                     backgroundColor: Colors.blueGrey,
