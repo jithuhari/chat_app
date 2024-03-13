@@ -19,6 +19,9 @@ class NewGroupController extends GetxController with SnackbarMixin {
   final _lastName = (List<dynamic>.empty()).obs;
   List<dynamic> get lastName => _lastName;
 
+  final _myUserId = (List<dynamic>.empty()).obs;
+  List<dynamic> get myUserId => _myUserId;
+
   final _createGroupData = Rx<CreateGroupModelData?>(null);
   CreateGroupModelData? get createGroupData => _createGroupData.value;
 
@@ -40,7 +43,7 @@ class NewGroupController extends GetxController with SnackbarMixin {
         field: 'firstname',
         sortOrder: 'ASC',
         page: 0,
-        size: 10,
+        size: 100,
         workEmail: 'workEmail',
         workLocation: 'workLocation',
         workMobileNumber: 'workMobileNumber',
@@ -56,8 +59,10 @@ class NewGroupController extends GetxController with SnackbarMixin {
 
             firstName.add(nmsGroupUserListDetails[i].firstName);
             lastName.add(nmsGroupUserListDetails[i].lastName);
+            // myUserId.add(nmsGroupUserListDetails[i].id);
 
             debugPrint('-----name------$firstName');
+            // debugPrint('-----id------$myUserId');
           }
           update();
         } else {}
@@ -77,7 +82,7 @@ class NewGroupController extends GetxController with SnackbarMixin {
       final request = CreateGroupRequest(
           groupName: groupNameController.value.text,
           createdBy: 88,
-          groupMembers: [88, 89, 90]);
+          groupMembers: myUserId);
       final response =
           await NMSChatApiRepository.to.createGroup(request: request);
       if (response.status == 200) {
@@ -98,11 +103,19 @@ class NewGroupController extends GetxController with SnackbarMixin {
     if (selectedIndexes.contains(index)) {
       // If index is already selected, remove it from the list
       selectedIndexes.remove(index);
-      // _selectedCount.value--;
+      // Remove corresponding myUserId
+      // myUserId.removeAt(index);
+      int userIdIndex = myUserId.indexOf(nmsGroupUserListDetails[index].id);
+      if (userIdIndex != -1) {
+        myUserId.removeAt(userIdIndex);
+      }
+      debugPrint('-----id------$myUserId');
     } else {
       // Otherwise, add it to the list
       selectedIndexes.add(index);
-      // _selectedCount.value++;
+      // Add corresponding myUserId
+      myUserId.add(nmsGroupUserListDetails[index].id);
+      debugPrint('-----id------$myUserId');
     }
     update();
   }

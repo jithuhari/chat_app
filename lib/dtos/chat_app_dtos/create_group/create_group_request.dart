@@ -7,7 +7,7 @@ class CreateGroupRequest {
 
   String groupName;
   int createdBy;
-  List<int> groupMembers;
+  List<dynamic> groupMembers;
 
   Map<String, dynamic> toBody() {
     final map = {

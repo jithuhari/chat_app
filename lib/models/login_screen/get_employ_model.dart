@@ -36,11 +36,11 @@ class CorporateDetails {
   String workEmail;
   int dateOfFirstJoining;
   int joiningDate;
-  String employmentType;
+  String? employmentType;
   Designation designation;
   Department department;
   String? workLocation;
-  String employmentStatus;
+  String? employmentStatus;
   int probationPeriod;
   int salary;
   List<Project> projects;
@@ -57,11 +57,11 @@ class CorporateDetails {
     required this.workEmail,
     required this.dateOfFirstJoining,
     required this.joiningDate,
-    required this.employmentType,
+    this.employmentType,
     required this.designation,
     required this.department,
     this.workLocation,
-    required this.employmentStatus,
+     this.employmentStatus,
     required this.probationPeriod,
     required this.salary,
     required this.projects,
