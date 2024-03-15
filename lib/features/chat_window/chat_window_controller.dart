@@ -103,7 +103,7 @@ class ChatWindowController extends GetxController with SnackbarMixin {
     super.onInit();
     connect();
     await fetchOldlMessage(88, receiverId);
-    await fetchPinnedMessage();
+    // await fetchPinnedMessage();
   }
 
   void connect() {

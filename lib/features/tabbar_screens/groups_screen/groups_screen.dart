@@ -116,13 +116,18 @@ class AllGroupScreen extends StatelessWidget {
                           // });
                         },
                         // name: 'Cody Fisher',
-                        name:
-                            controller.fetchGroupsDetails[index].groupName,
-                        message: controller.fetchGroupsDetails[index].lastMessage==null?'':controller.fetchGroupsDetails[index].lastMessage!,
-                        lastMessageTime:
-                            '10 am',
-                        // chatModel: widget.chatModels[index],
-                        // sourceChat: widget.sourceChat,
+                        name: controller.fetchGroupsDetails[index].groupName,
+                        message: controller
+                                    .fetchGroupsDetails[index].lastMessage ==
+                                null
+                            ? ''
+                            : controller.fetchGroupsDetails[index].lastMessage!,
+                        lastMessageTime: controller.fetchGroupsDetails[index]
+                                    .lastMessageTime ==
+                                null
+                            ? ''
+                            : controller.convertToIndianTime(controller
+                                .fetchGroupsDetails[index].lastMessageTime!),
                       ),
                     ),
                   );

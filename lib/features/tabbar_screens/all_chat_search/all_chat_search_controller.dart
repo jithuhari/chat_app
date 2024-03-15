@@ -256,8 +256,16 @@ class AllChatSearchController extends GetxController with SnackbarMixin {
           for (int i = 0; i < chatListModelData.length; i++) {
             _chatUserListLength.value = _chatListModelData.length;
             // Parse lastMessageTime string to DateTime
-            DateTime lastMessageDateTime =
-                DateTime.parse(chatListModelData[i].lastMessageTime.toString());
+            // DateTime lastMessageDateTime =
+            //     DateTime.parse(chatListModelData[i].lastMessageTime.toString());
+             DateTime lastMessageDateTime;
+            if (chatListModelData[i].lastMessageTime != null) {
+              lastMessageDateTime = DateTime.parse(
+                  chatListModelData[i].lastMessageTime.toString());
+            } else {
+              return '';
+            }
+            update();
 
             // Add 5 hours and 30 minutes
             lastMessageDateTime = lastMessageDateTime.add(
