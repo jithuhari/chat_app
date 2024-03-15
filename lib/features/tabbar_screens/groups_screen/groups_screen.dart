@@ -118,7 +118,7 @@ class AllGroupScreen extends StatelessWidget {
                         // name: 'Cody Fisher',
                         name:
                             controller.fetchGroupsDetails[index].groupName,
-                        message: 'controller.chatListModelData[index].message',
+                        message: controller.fetchGroupsDetails[index].lastMessage==null?'':controller.fetchGroupsDetails[index].lastMessage!,
                         lastMessageTime:
                             '10 am',
                         // chatModel: widget.chatModels[index],
