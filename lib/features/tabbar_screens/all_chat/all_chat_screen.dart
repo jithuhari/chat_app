@@ -109,12 +109,21 @@ class AllChatScreen extends StatelessWidget {
                             .toString(),
                         onTap: () {
                           Get.toNamed('/chat_window_screen', arguments: {
-                            'firstName':controller.chatListModelData[index].isGroup == 0?
-                                controller.chatListModelData[index].firstName:controller.chatListModelData[index].groupName,
-                            'lastName':controller.chatListModelData[index].isGroup == 0?
-                                controller.chatListModelData[index].lastName:'',
-                            'receiverId':controller.chatListModelData[index].isGroup == 0?
-                                controller.chatListModelData[index].userId:controller.chatListModelData[index].groupId
+                            'firstName': controller
+                                        .chatListModelData[index].isGroup ==
+                                    0
+                                ? controller.chatListModelData[index].firstName
+                                : controller.chatListModelData[index].groupName,
+                            'lastName':
+                                controller.chatListModelData[index].isGroup == 0
+                                    ? controller
+                                        .chatListModelData[index].lastName
+                                    : '',
+                            'receiverId':
+                                controller.chatListModelData[index].isGroup == 0
+                                    ? controller.chatListModelData[index].userId
+                                    : controller
+                                        .chatListModelData[index].groupId
                           });
                         },
                         name: controller.chatListModelData[index].isGroup == 0
@@ -123,10 +132,12 @@ class AllChatScreen extends StatelessWidget {
                                 .toString(),
                         message: controller.chatListModelData[index].isGroup ==
                                 0
-                            ? controller.chatListModelData[index].message
-                                .toString()
-                            : controller.chatListModelData[index].lastMessage
-                                .toString(),
+                            ? controller.chatListModelData[index].message!
+                            : controller.chatListModelData[index].lastMessage ==
+                                    null
+                                ? ''
+                                : controller
+                                    .chatListModelData[index].lastMessage!,
                         lastMessageTime: controller
                                     .chatListModelData[index].lastMessageTime ==
                                 null
