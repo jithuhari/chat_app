@@ -4,6 +4,7 @@ import 'package:nms_chat/utils/theme/theme.dart';
 import '../../widgets/search_text_field.dart';
 import '../tabbar_screens/all_chat/all_chat.dart';
 import '../tabbar_screens/all_chat_search/all_chat_search.dart';
+import '../tabbar_screens/groups_screen/groups_screen.dart';
 import 'chat_main_layout.dart';
 
 class ChatMainLayoutScreen extends StatefulWidget {
@@ -261,7 +262,7 @@ class _ChatMainLayoutScreenState extends State<ChatMainLayoutScreen>
                                 controller: _controller,
                                 children: const [
                                   AllChatScreen(),
-                                  Center(child: Text('Groups')),
+                                  AllGroupScreen()
                                 ]),
                           ),
                         ],
@@ -274,7 +275,7 @@ class _ChatMainLayoutScreenState extends State<ChatMainLayoutScreen>
                                 controller: _controller,
                                 children: const [
                                   AllChatSearchScreen(),
-                                  Center(child: Text('Groups')),
+                                  AllGroupScreen()
                                 ]),
                           ),
                         ],

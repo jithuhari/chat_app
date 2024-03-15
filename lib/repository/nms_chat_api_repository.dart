@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import '../dtos/chat_app_dtos/create_group/create_group.dart';
 import '../dtos/chat_app_dtos/create_new_user/create_new_user.dart';
 import '../dtos/chat_app_dtos/group_user_list/group_user_list.dart';
+import '../dtos/chat_app_dtos/list_group/list_group.dart';
 import '../dtos/chat_app_dtos/new_chat/nms_new_chat.dart';
 import '../dtos/chat_app_dtos/nms_chat_list/nms_chat_list.dart';
 import '../dtos/chat_app_dtos/pinned_message/pinned_message.dart';
@@ -39,7 +40,10 @@ abstract class NMSChatApiRepository extends GetxController {
       {required CreateGroupRequest request});
       
   Future<CreateNewUserResponse> createUser(
-      {required CreateNewUserRequest request});    
+      {required CreateNewUserRequest request}); 
+      
+  Future<ListGroupResponse> fetchGroups(
+      {required ListGroupRequest request});     
 }
 
 class NMSApiRepositoryImpl extends GetxController
@@ -175,5 +179,20 @@ class NMSApiRepositoryImpl extends GetxController
     );
 
     return CreateNewUserResponse.fromJson(response);
+  }
+
+  // listing the groups in group tab api
+
+   @override
+  Future<ListGroupResponse> fetchGroups(
+      {required ListGroupRequest request}) async {
+    final response = await _helper.postWithBody(
+      // headers: _headersWithoutToken,
+      endpoint: ApiEndPoints.fetchGroup,
+      params: {},
+      body: request.toBody(),
+    );
+    debugPrint("response $response");
+    return ListGroupResponse.fromJson(response);
   }
 }

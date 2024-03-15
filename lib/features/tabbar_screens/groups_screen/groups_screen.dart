@@ -5,15 +5,15 @@ import 'package:get/get.dart';
 
 import '../../../utils/utils.dart';
 import '../../../widgets/custom_card.dart';
-import 'all_chat.dart';
+import 'groups_controller.dart';
 
-class AllChatScreen extends StatelessWidget {
-  const AllChatScreen({super.key});
+class AllGroupScreen extends StatelessWidget {
+  const AllGroupScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<AllChatController>(
-        init: AllChatController(),
+    return GetBuilder<AllGroupController>(
+        init: AllGroupController(),
         builder: (controller) {
           return Scaffold(
             backgroundColor: Colors.white,
@@ -69,14 +69,14 @@ class AllChatScreen extends StatelessWidget {
               ],
             ),
             body: ListView.builder(
-                itemCount: controller.chatListModelData.length,
+                itemCount: controller.fetchGroupsDetails.length,
                 itemBuilder: (context, index) {
                   return Slidable(
                     startActionPane:
                         ActionPane(motion: const StretchMotion(), children: [
                       SlidableAction(
                         onPressed: (context) {
-                          controller.onDissmissed();
+                          // controller.onDissmissed();
                         },
                         backgroundColor: Colors.green,
                         icon: Icons.share,
@@ -84,7 +84,7 @@ class AllChatScreen extends StatelessWidget {
                       ),
                       SlidableAction(
                         onPressed: (context) {
-                          controller.onDissmissed();
+                          // controller.onDissmissed();
                         },
                         backgroundColor: Colors.blue,
                         icon: Icons.archive,
@@ -95,7 +95,7 @@ class AllChatScreen extends StatelessWidget {
                         ActionPane(motion: const BehindMotion(), children: [
                       SlidableAction(
                         onPressed: (context) {
-                          controller.onDissmissed();
+                          // controller.onDissmissed();
                         },
                         backgroundColor: Colors.red,
                         icon: Icons.delete,
@@ -104,24 +104,23 @@ class AllChatScreen extends StatelessWidget {
                     ]),
                     child: InkWell(
                       child: CustomCard(
-                        unReadMessageCount: controller
-                            .chatListModelData[index].unReadMessageCount,
+                        unReadMessageCount: '10',
                         onTap: () {
-                          Get.toNamed('/chat_window_screen', arguments: {
-                            'firstName':
-                                controller.chatListModelData[index].firstName,
-                            'lastName':
-                                controller.chatListModelData[index].lastName,
-                            'receiverId':
-                                controller.chatListModelData[index].userId
-                          });
+                          // Get.toNamed('/chat_window_screen', arguments: {
+                          //   'firstName':
+                          //       controller.chatListModelData[index].firstName,
+                          //   'lastName':
+                          //       controller.chatListModelData[index].lastName,
+                          //   'receiverId':
+                          //       controller.chatListModelData[index].userId
+                          // });
                         },
                         // name: 'Cody Fisher',
                         name:
-                            '${controller.chatListModelData[index].firstName} ${controller.chatListModelData[index].lastName}',
-                        message: controller.chatListModelData[index].message,
+                            controller.fetchGroupsDetails[index].groupName,
+                        message: 'controller.chatListModelData[index].message',
                         lastMessageTime:
-                            controller.formattedLastMessageTime[index],
+                            '10 am',
                         // chatModel: widget.chatModels[index],
                         // sourceChat: widget.sourceChat,
                       ),
