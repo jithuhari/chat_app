@@ -79,7 +79,7 @@ class AllChatSearchScreen extends StatelessWidget {
                                       ),
                                     ]),
                                 child: CustomCard(
-                                  unReadMessageCount: controller.chatListModelData[index].unReadMessageCount,
+                                  unReadMessageCount: controller.chatListModelData[index].unReadMessageCount.toString(),
                                   onTap: () {},
                                   name: controller
                                       .contactsData!.data[index].userName,
@@ -313,11 +313,11 @@ class AllChatSearchScreen extends StatelessWidget {
                                 child: CustomCard(
                                   onTap: () {},
                                   // name: 'Cody Fisher',
-                                  unReadMessageCount: controller.chatListModelData[index].unReadMessageCount,
+                                  unReadMessageCount: controller.chatListModelData[index].unReadMessageCount.toString(),
                                   name: controller
-                                      .chatListModelData[index].firstName,
+                                      .chatListModelData[index].firstName.toString(),
                                   message: controller
-                                      .chatListModelData[index].message,
+                                      .chatListModelData[index].message.toString(),
                                   lastMessageTime: controller
                                       .formattedLastMessageTime[index],
                                   // chatModel: widget.chatModels[index],

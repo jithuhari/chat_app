@@ -1,22 +1,34 @@
 class ChatData {
-  int userId;
-  String firstName;
-  String lastName;
+  int? userId;
+  String? firstName;
+  String? lastName;
   dynamic profileImage;
-  String message;
+  String? message;
   DateTime lastMessageTime;
-  String rowNum;
-  String unReadMessageCount;
+  String? rowNum;
+  String? unReadMessageCount;
+  String? lastSeen;
+  int isGroup;
+  int? groupId;
+  String? groupName;
+  int? createdBy;
+  String? lastMessage;
 
   ChatData(
       {required this.userId,
-      required this.firstName,
-      required this.lastName,
-      required this.profileImage,
-      required this.message,
+      this.firstName,
+      this.lastName,
+      this.profileImage,
+      this.message,
       required this.lastMessageTime,
-      required this.rowNum,
-      required this.unReadMessageCount});
+      this.rowNum,
+      this.unReadMessageCount,
+      this.lastSeen,
+      required this.isGroup,
+      this.groupId,
+      this.groupName,
+      this.createdBy,
+      this.lastMessage});
 
   factory ChatData.fromJson(Map<String, dynamic> json) => ChatData(
       userId: json["user_id"],
@@ -26,7 +38,13 @@ class ChatData {
       message: json["message"],
       lastMessageTime: DateTime.parse(json["last_message_time"]),
       rowNum: json["row_num"],
-      unReadMessageCount: json["unread_message_count"]);
+      unReadMessageCount: json["unread_message_count"],
+      lastSeen: json["last_seen"],
+      isGroup: json["is_group"],
+      groupId: json["group_id"],
+      groupName: json["group_name"],
+      createdBy: json["created_by"],
+      lastMessage: json["last_message"]);
 
   Map<String, dynamic> toJson() => {
         "user_id": userId,
@@ -36,7 +54,13 @@ class ChatData {
         "message": message,
         "last_message_time": lastMessageTime.toIso8601String(),
         "row_num": rowNum,
-        "unread_message_count": unReadMessageCount
+        "unread_message_count": unReadMessageCount,
+        "last_seen": lastSeen,
+        "is_group": isGroup,
+        "group_id": groupId,
+        "group_name": groupName,
+        "created_by": createdBy,
+        "last_message": lastMessage
       };
 }
 

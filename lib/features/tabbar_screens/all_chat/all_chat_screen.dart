@@ -105,7 +105,7 @@ class AllChatScreen extends StatelessWidget {
                     child: InkWell(
                       child: CustomCard(
                         unReadMessageCount: controller
-                            .chatListModelData[index].unReadMessageCount,
+                            .chatListModelData[index].unReadMessageCount.toString(),
                         onTap: () {
                           Get.toNamed('/chat_window_screen', arguments: {
                             'firstName':
@@ -119,7 +119,7 @@ class AllChatScreen extends StatelessWidget {
                         // name: 'Cody Fisher',
                         name:
                             '${controller.chatListModelData[index].firstName} ${controller.chatListModelData[index].lastName}',
-                        message: controller.chatListModelData[index].message,
+                        message: controller.chatListModelData[index].message.toString(),
                         lastMessageTime:
                             controller.formattedLastMessageTime[index],
                         // chatModel: widget.chatModels[index],
