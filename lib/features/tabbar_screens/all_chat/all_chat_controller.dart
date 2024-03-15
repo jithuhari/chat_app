@@ -48,10 +48,19 @@ class AllChatController extends GetxController with SnackbarMixin {
         if (_chatListModelData.isNotEmpty) {
           for (int i = 0; i < chatListModelData.length; i++) {
             _chatUserListLength.value = _chatListModelData.length;
+            print('----group or not${chatListModelData[i].isGroup}');
             // Parse lastMessageTime string to DateTime
-            DateTime lastMessageDateTime =
-                DateTime.parse(chatListModelData[i].lastMessageTime.toString());
+            // DateTime lastMessageDateTime =
+            //     DateTime.parse(chatListModelData[i].lastMessageTime.toString());
 
+            DateTime lastMessageDateTime;
+            if (chatListModelData[i].lastMessageTime != null) {
+              lastMessageDateTime = DateTime.parse(
+                  chatListModelData[i].lastMessageTime.toString());
+            } else {
+              return '';
+            }
+            update();
             // Add 5 hours and 30 minutes
             lastMessageDateTime = lastMessageDateTime.add(
               const Duration(hours: 5, minutes: 30),

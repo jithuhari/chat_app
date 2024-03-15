@@ -4,7 +4,7 @@ class ChatData {
   String? lastName;
   dynamic profileImage;
   String? message;
-  DateTime lastMessageTime;
+  String? lastMessageTime;
   String? rowNum;
   String? unReadMessageCount;
   String? lastSeen;
@@ -20,7 +20,7 @@ class ChatData {
       this.lastName,
       this.profileImage,
       this.message,
-      required this.lastMessageTime,
+      this.lastMessageTime,
       this.rowNum,
       this.unReadMessageCount,
       this.lastSeen,
@@ -36,7 +36,7 @@ class ChatData {
       lastName: json["last_name"],
       profileImage: json["profile_image"],
       message: json["message"],
-      lastMessageTime: DateTime.parse(json["last_message_time"]),
+      lastMessageTime: json["last_message_time"],
       rowNum: json["row_num"],
       unReadMessageCount: json["unread_message_count"],
       lastSeen: json["last_seen"],
@@ -52,7 +52,7 @@ class ChatData {
         "last_name": lastName,
         "profile_image": profileImage,
         "message": message,
-        "last_message_time": lastMessageTime.toIso8601String(),
+        "last_message_time": lastMessageTime,
         "row_num": rowNum,
         "unread_message_count": unReadMessageCount,
         "last_seen": lastSeen,

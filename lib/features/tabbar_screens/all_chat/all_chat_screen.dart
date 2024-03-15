@@ -105,25 +105,33 @@ class AllChatScreen extends StatelessWidget {
                     child: InkWell(
                       child: CustomCard(
                         unReadMessageCount: controller
-                            .chatListModelData[index].unReadMessageCount.toString(),
+                            .chatListModelData[index].unReadMessageCount
+                            .toString(),
                         onTap: () {
                           Get.toNamed('/chat_window_screen', arguments: {
-                            'firstName':
-                                controller.chatListModelData[index].firstName,
-                            'lastName':
-                                controller.chatListModelData[index].lastName,
-                            'receiverId':
-                                controller.chatListModelData[index].userId
+                            'firstName':controller.chatListModelData[index].isGroup == 0?
+                                controller.chatListModelData[index].firstName:controller.chatListModelData[index].groupName,
+                            'lastName':controller.chatListModelData[index].isGroup == 0?
+                                controller.chatListModelData[index].lastName:'',
+                            'receiverId':controller.chatListModelData[index].isGroup == 0?
+                                controller.chatListModelData[index].userId:controller.chatListModelData[index].groupId
                           });
                         },
-                        // name: 'Cody Fisher',
-                        name:
-                            '${controller.chatListModelData[index].firstName} ${controller.chatListModelData[index].lastName}',
-                        message: controller.chatListModelData[index].message.toString(),
-                        lastMessageTime:
-                            controller.formattedLastMessageTime[index],
-                        // chatModel: widget.chatModels[index],
-                        // sourceChat: widget.sourceChat,
+                        name: controller.chatListModelData[index].isGroup == 0
+                            ? '${controller.chatListModelData[index].firstName} ${controller.chatListModelData[index].lastName}'
+                            : controller.chatListModelData[index].groupName
+                                .toString(),
+                        message: controller.chatListModelData[index].isGroup ==
+                                0
+                            ? controller.chatListModelData[index].message
+                                .toString()
+                            : controller.chatListModelData[index].lastMessage
+                                .toString(),
+                        lastMessageTime: controller
+                                    .chatListModelData[index].lastMessageTime ==
+                                null
+                            ? ''
+                            : controller.formattedLastMessageTime[index],
                       ),
                     ),
                   );
