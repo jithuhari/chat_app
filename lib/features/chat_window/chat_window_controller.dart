@@ -196,7 +196,13 @@ class ChatWindowController extends GetxController with SnackbarMixin {
 
 // Function to convert UTC timestamp to Indian Standard Time (IST) and format based on the condition
   String convertToIndianTime(String utcTimestamp) {
-    DateTime utcDateTime = DateTime.parse(utcTimestamp);
+    DateTime utcDateTime;
+    if (utcTimestamp.isEmpty) {
+      return '';
+    } else {
+      utcDateTime = DateTime.parse(utcTimestamp);
+    }
+
     DateTime indianDateTime = utcDateTime.toLocal();
 
     // Get current Indian Standard Time (IST) date
@@ -238,8 +244,8 @@ class ChatWindowController extends GetxController with SnackbarMixin {
   fetchPinnedMessage() async {
     // _isLoading.value = true;
     try {
-      final request =
-          PinnedMessageRequest(senderId: 88, receiverId: receiverId, pinnedId: 704);
+      final request = PinnedMessageRequest(
+          senderId: 88, receiverId: receiverId, pinnedId: 704);
       final response =
           await NMSChatApiRepository.to.pinnedMessage(request: request);
       if (response.status == 200) {

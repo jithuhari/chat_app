@@ -126,6 +126,7 @@ class NewGroupScreen extends StatelessWidget {
                         title: 'Create group',
                         onPress: () async {
                           await controller.createGroup();
+                          await Get.offAllNamed('/chat_main_layout_screen',);
                         },
                         color: primaryColor,
                         textcolor: Colors.white,

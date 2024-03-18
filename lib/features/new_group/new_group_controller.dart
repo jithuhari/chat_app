@@ -99,6 +99,7 @@ class NewGroupController extends GetxController with SnackbarMixin {
         _createGroupData.value = response.data;
 
         debugPrint("Categorylist-- length  ${_createGroupData.value!.groupId}");
+        
       }
       update();
     } catch (e) {
