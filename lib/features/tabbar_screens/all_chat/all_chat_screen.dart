@@ -123,7 +123,10 @@ class AllChatScreen extends StatelessWidget {
                                 controller.chatListModelData[index].isGroup == 0
                                     ? controller.chatListModelData[index].userId
                                     : controller
-                                        .chatListModelData[index].groupId
+                                        .chatListModelData[index].groupId,
+                            'lastSeen':controller.chatListModelData[index].isGroup == 0
+                                    ? controller.chatListModelData[index].lastSeen
+                                    : '',
                           });
                         },
                         name: controller.chatListModelData[index].isGroup == 0

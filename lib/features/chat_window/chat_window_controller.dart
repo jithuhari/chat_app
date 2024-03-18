@@ -13,6 +13,7 @@ class ChatWindowController extends GetxController with SnackbarMixin {
   late final String firstName = arguments!['firstName'];
   late final String lastName = arguments!['lastName'];
   late final int receiverId = arguments!['receiverId'];
+  late final String lastSeen = arguments!['lastSeen'];
 
   final TextEditingController searchController = TextEditingController();
 

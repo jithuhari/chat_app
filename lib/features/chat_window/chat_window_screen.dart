@@ -45,11 +45,11 @@ class ChatWindowScreen extends StatelessWidget {
                                               child: Image.asset(
                                                   'assets/png/push_pin.png'),
                                             ),
-                                             SizedBox(
+                                            SizedBox(
                                               height: 50,
                                               child: Padding(
-                                                padding:
-                                                    const EdgeInsets.only(left: 16.0),
+                                                padding: const EdgeInsets.only(
+                                                    left: 16.0),
                                                 child: Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
@@ -63,9 +63,8 @@ class ChatWindowScreen extends StatelessWidget {
                                                           color:
                                                               secondaryColor),
                                                     ),
-                                                    Text(
-                                                        controller.message,
-                                                        style:const TextStyle(
+                                                    Text(controller.message,
+                                                        style: const TextStyle(
                                                             fontSize: 12,
                                                             fontWeight:
                                                                 FontWeight.w400,
@@ -77,7 +76,8 @@ class ChatWindowScreen extends StatelessWidget {
                                             ),
                                           ],
                                         ),
-                                         Text(controller.convertToIndianTime(controller.timeOfMessage))
+                                        Text(controller.convertToIndianTime(
+                                            controller.timeOfMessage))
                                       ],
                                     ),
                                   ),
@@ -143,9 +143,10 @@ class ChatWindowScreen extends StatelessWidget {
                             const SizedBox(
                               height: 4,
                             ),
-                            const Text(
-                              'Last seen 2 mins ago',
-                              style: TextStyle(
+                            Text(
+                              controller
+                                  .convertToIndianTime(controller.lastSeen),
+                              style: const TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
                                   color: iconColor),

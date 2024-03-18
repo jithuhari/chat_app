@@ -21,8 +21,9 @@ class NewGroupController extends GetxController with SnackbarMixin {
   final _lastName = (List<dynamic>.empty()).obs;
   List<dynamic> get lastName => _lastName;
 
-  final _myUserId = (List<dynamic>.empty()).obs;
-  List<dynamic> get myUserId => _myUserId;
+  // final _myUserId = (List<dynamic>.empty()).obs;
+  // List<dynamic> get myUserId => _myUserId;
+  final List<dynamic> myUserId = [88].obs;
 
   final _myUserUniqueId = (List<dynamic>.empty()).obs;
   List<dynamic> get myUserUniqueId => _myUserUniqueId;
