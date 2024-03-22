@@ -121,6 +121,7 @@ class ChatWindowController extends GetxController with SnackbarMixin {
     Map<String, dynamic> messageObj = {
       "sender_id": senderId,
       "receiver_id": receiverId,
+      "is_group":0,
     };
     socket.emit("old_message", messageObj);
 
@@ -154,6 +155,7 @@ class ChatWindowController extends GetxController with SnackbarMixin {
       "sender_id": senderId,
       "receiver_id": receiverId,
       "page": page,
+      "is_group":0,
     };
     print(messageObj);
     socket.emit("message", messageObj);
