@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:nms_chat/features/chat_window/chat_window.dart';
 import 'package:nms_chat/widgets/message_widgets/own_message_card.dart';
 import 'package:nms_chat/widgets/message_widgets/reply_message_card.dart';
 
 import '../../utils/utils.dart';
-import '../../widgets/search_text_field.dart';
+import 'widgets/check_box_widget.dart';
+import 'widgets/main_app_bar.dart';
+import 'widgets/message_bottom_sheet.dart';
+import 'widgets/search_app_bar_widget.dart';
 
 class ChatWindowScreen extends StatelessWidget {
   const ChatWindowScreen({super.key});
@@ -20,222 +22,8 @@ class ChatWindowScreen extends StatelessWidget {
             child: Scaffold(
               backgroundColor: Colors.white,
               appBar: controller.searchDisplayValue == false
-                  ? AppBar(
-                      bottom: controller.isPinMessageActive == true
-                          ? PreferredSize(
-                              preferredSize: Size.fromHeight(
-                                  AppBar().preferredSize.height / .9),
-                              child: Column(
-                                children: [
-                                  const Divider(
-                                    thickness: .4,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 14.0, right: 8.0),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  bottom: 15.0),
-                                              child: Image.asset(
-                                                  'assets/png/push_pin.png'),
-                                            ),
-                                            SizedBox(
-                                              height: 50,
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 16.0),
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    const Text(
-                                                      'Ryan Lewis',
-                                                      style: TextStyle(
-                                                          fontSize: 12,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          color:
-                                                              secondaryColor),
-                                                    ),
-                                                    Text(controller.message,
-                                                        style: const TextStyle(
-                                                            fontSize: 12,
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            color:
-                                                                secondaryColor))
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Text(controller.convertToIndianTime(
-                                            controller.timeOfMessage))
-                                      ],
-                                    ),
-                                  ),
-                                  Row(
-                                    children: [
-                                      Container(
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        height: 1.5,
-                                        color: const Color.fromARGB(
-                                            255, 245, 245, 245),
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
-                            )
-                          : PreferredSize(
-                              preferredSize: Size.fromHeight(
-                                  AppBar().preferredSize.height / 10),
-                              child: Container(),
-                            ),
-                      toolbarHeight: 64,
-                      surfaceTintColor: Colors.white,
-                      backgroundColor: cardColor,
-                      iconTheme: const IconThemeData(
-                        color: iconColor,
-                      ),
-                      leadingWidth: 70,
-                      leading: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          InkWell(
-                              onTap: () {
-                                Get.back();
-                              },
-                              child: const Icon(
-                                Icons.arrow_back,
-                                size: 24,
-                              )),
-                          const SizedBox(
-                            width: 4,
-                          ),
-                          const CircleAvatar(
-                              radius: 20,
-                              backgroundColor: Colors.blueGrey,
-                              backgroundImage:
-                                  AssetImage('assets/png/person.jpg')),
-                        ],
-                      ),
-                      title: InkWell(
-                        onTap: () {
-                          Get.toNamed('/profile_page_screen');
-                        },
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              '${controller.firstName} ${controller.lastName}',
-                              style: const TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.w700),
-                            ),
-                            const SizedBox(
-                              height: 4,
-                            ),
-                            Text(
-                              controller
-                                  .convertToIndianTime(controller.lastSeen),
-                              style: const TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                  color: iconColor),
-                            )
-                          ],
-                        ),
-                      ),
-                      actions: [
-                        Padding(
-                          padding: const EdgeInsets.only(right: 16.0),
-                          child: InkWell(
-                              onTap: () {
-                                debugPrint('Search');
-                                controller.searchDisplay();
-                              },
-                              child: Image.asset("assets/png/search1.png")),
-                        ),
-                        PopupMenuButton(
-                            iconColor: iconColor,
-                            iconSize: 24,
-                            onSelected: (value) {
-                              debugPrint(value);
-                            },
-                            itemBuilder: (BuildContext context) {
-                              return const [
-                                PopupMenuItem(
-                                  value: 'New group',
-                                  child: Text(
-                                    'New group',
-                                  ),
-                                ),
-                                PopupMenuItem(
-                                  value: 'New broadcast',
-                                  child: Text(
-                                    'New broadcast',
-                                  ),
-                                ),
-                                PopupMenuItem(
-                                  value: 'Whatsapp web',
-                                  child: Text(
-                                    'Whatsapp web',
-                                  ),
-                                ),
-                                PopupMenuItem(
-                                  value: 'Starred message',
-                                  child: Text(
-                                    'Starred message',
-                                  ),
-                                ),
-                                PopupMenuItem(
-                                  value: 'Settings',
-                                  child: Text(
-                                    'Settings',
-                                  ),
-                                ),
-                              ];
-                            })
-                      ],
-                    )
-                  : AppBar(
-                      toolbarHeight: 64,
-                      surfaceTintColor: Colors.white,
-                      backgroundColor: const Color(0xffFAFAFA),
-                      leading: Container(),
-                      actions: [
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                                top: 10, left: 22, right: 23.8, bottom: 4),
-                            child: SearchTextField(
-                              onSubmitted: (value) async {},
-                              controller: controller.searchController,
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 24.0),
-                          child: InkWell(
-                            onTap: () {
-                              controller.searchDisplay();
-                            },
-                            child: const Icon(
-                              Icons.close,
-                              size: 24,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                  ? mainAppBar(controller, context)
+                  : searhAppBarWidget(controller),
               body: SizedBox(
                 height: MediaQuery.of(context).size.height,
                 width: MediaQuery.of(context).size.width,
@@ -265,25 +53,7 @@ class ChatWindowScreen extends StatelessWidget {
                                     ? Row(
                                         children: [
                                           controller.isForwardActive == true
-                                              ? Checkbox(
-                                                  shape: RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              3)),
-                                                  activeColor: primaryColor,
-                                                  side: const BorderSide(
-                                                    width: 1,
-                                                    color: messageColor,
-                                                  ),
-                                                  value: controller
-                                                      .selectedIndexes
-                                                      .contains(
-                                                          index), // Check if index is in the selectedIndexes list
-                                                  onChanged: (value) {
-                                                    controller.toggleSelection(
-                                                        index); // Toggle the selection when checkbox is clicked
-                                                  },
-                                                )
+                                              ? chekBoxWidget(controller, index)
                                               : Container(),
                                           Expanded(
                                             child: OwnMessageCard(
@@ -320,25 +90,7 @@ class ChatWindowScreen extends StatelessWidget {
                                     : Row(
                                         children: [
                                           controller.isForwardActive == true
-                                              ? Checkbox(
-                                                  shape: RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              3)),
-                                                  activeColor: primaryColor,
-                                                  side: const BorderSide(
-                                                    width: 1,
-                                                    color: messageColor,
-                                                  ),
-                                                  value: controller
-                                                      .selectedIndexes
-                                                      .contains(
-                                                          index), // Check if index is in the selectedIndexes list
-                                                  onChanged: (value) {
-                                                    controller.toggleSelection(
-                                                        index); // Toggle the selection when checkbox is clicked
-                                                  },
-                                                )
+                                              ? chekBoxWidget(controller, index)
                                               : Container(),
                                           Expanded(
                                             child: OwnMessageCard(
@@ -376,25 +128,7 @@ class ChatWindowScreen extends StatelessWidget {
                                     ? Row(
                                         children: [
                                           controller.isForwardActive == true
-                                              ? Checkbox(
-                                                  shape: RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              3)),
-                                                  activeColor: primaryColor,
-                                                  side: const BorderSide(
-                                                    width: 1,
-                                                    color: messageColor,
-                                                  ),
-                                                  value: controller
-                                                      .selectedIndexes
-                                                      .contains(
-                                                          index), // Check if index is in the selectedIndexes list
-                                                  onChanged: (value) {
-                                                    controller.toggleSelection(
-                                                        index); // Toggle the selection when checkbox is clicked
-                                                  },
-                                                )
+                                              ? chekBoxWidget(controller, index)
                                               : Container(),
                                           Expanded(
                                             child: ReplyMessageCard(
@@ -435,25 +169,7 @@ class ChatWindowScreen extends StatelessWidget {
                                     : Row(
                                         children: [
                                           controller.isForwardActive == true
-                                              ? Checkbox(
-                                                  shape: RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              3)),
-                                                  activeColor: primaryColor,
-                                                  side: const BorderSide(
-                                                    width: 1,
-                                                    color: messageColor,
-                                                  ),
-                                                  value: controller
-                                                      .selectedIndexes
-                                                      .contains(
-                                                          index), // Check if index is in the selectedIndexes list
-                                                  onChanged: (value) {
-                                                    controller.toggleSelection(
-                                                        index); // Toggle the selection when checkbox is clicked
-                                                  },
-                                                )
+                                              ? chekBoxWidget(controller, index)
                                               : Container(),
                                           Expanded(
                                             child: ReplyMessageCard(
@@ -939,162 +655,6 @@ class ChatWindowScreen extends StatelessWidget {
               ),
             ),
           );
-        });
-  }
-
-  Future<dynamic> messageBottomSheet(BuildContext context,
-      String messageContent, ChatWindowController controller, int index) {
-    return showModalBottomSheet(
-        context: context,
-        builder: (BuildContext context) {
-          return SizedBox(
-              height: MediaQuery.of(context).size.height / 2,
-              width: MediaQuery.of(context).size.width,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 24.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                          color: Colors.grey,
-                          borderRadius: BorderRadius.circular(10)),
-                      height: 3,
-                      width: 75,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 24),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Image.asset(
-                              'assets/png/message_bottom_sheet/love.png'),
-                          Image.asset(
-                              'assets/png/message_bottom_sheet/laugh.png'),
-                          Image.asset(
-                              'assets/png/message_bottom_sheet/sad.png'),
-                          Image.asset(
-                              'assets/png/message_bottom_sheet/thumps_up.png'),
-                          Image.asset(
-                              'assets/png/message_bottom_sheet/add_reactions.png')
-                        ],
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Clipboard.setData(ClipboardData(text: messageContent));
-                        Navigator.pop(context);
-                      },
-                      child: Row(
-                        children: [
-                          Image.asset(
-                              'assets/png/message_bottom_sheet/copy.png'),
-                          const SizedBox(
-                            width: 32,
-                          ),
-                          const Text(
-                            'Copy',
-                            style: TextStyle(
-                                color: secondaryColor,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400),
-                          ),
-                        ],
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        controller.pinMessageActive();
-                        Navigator.pop(context);
-                      },
-                      child: Row(
-                        children: [
-                          Image.asset(
-                              'assets/png/message_bottom_sheet/pin.png'),
-                          const SizedBox(
-                            width: 32,
-                          ),
-                          const Text(
-                            'Pin Message',
-                            style: TextStyle(
-                                color: secondaryColor,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400),
-                          ),
-                        ],
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        controller.starMessageActive();
-                        Navigator.pop(context);
-                      },
-                      child: Row(
-                        children: [
-                          Image.asset(controller.isStarMessageActive == false
-                              ? 'assets/png/message_bottom_sheet/star.png'
-                              : 'assets/png/message_bottom_sheet/unstar.png'),
-                          const SizedBox(
-                            width: 32,
-                          ),
-                          const Text(
-                            'Star Message',
-                            style: TextStyle(
-                                color: secondaryColor,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400),
-                          ),
-                        ],
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () async {
-                        Navigator.pop(context);
-                        await controller.replyToMessage();
-                      },
-                      child: Row(
-                        children: [
-                          Image.asset(
-                              'assets/png/message_bottom_sheet/reply.png'),
-                          const SizedBox(
-                            width: 32,
-                          ),
-                          const Text(
-                            'Reply',
-                            style: TextStyle(
-                                color: secondaryColor,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400),
-                          ),
-                        ],
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        controller.toggleSelection(index);
-                        controller.forwardActionActive();
-                        Navigator.pop(context);
-                      },
-                      child: Row(
-                        children: [
-                          Image.asset(
-                              'assets/png/message_bottom_sheet/forward.png'),
-                          const SizedBox(
-                            width: 32,
-                          ),
-                          const Text(
-                            'Forward',
-                            style: TextStyle(
-                                color: secondaryColor,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400),
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              ));
         });
   }
 }
