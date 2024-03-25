@@ -88,10 +88,18 @@ class ChatWindowController extends GetxController with SnackbarMixin {
   final _isStarMessageActive = false.obs;
   bool get isStarMessageActive => _isStarMessageActive.value;
 
+  final _isReplyActive = false.obs;
+  bool get isReplyActive => _isReplyActive.value;
+
   final _selectedCount = 0.obs;
   int get selectedCount => _selectedCount.value;
 
   // FocusNode focusNode = FocusNode();
+
+  FocusNode msgTextFocusNode = FocusNode();
+
+  final _selectedMessage = "".obs;
+  String get selectedMessage => _selectedMessage.value;
 
   TextEditingController msgTextController = TextEditingController();
 
@@ -121,7 +129,7 @@ class ChatWindowController extends GetxController with SnackbarMixin {
     Map<String, dynamic> messageObj = {
       "sender_id": senderId,
       "receiver_id": receiverId,
-      "is_group":0,
+      "is_group": 0,
     };
     socket.emit("old_message", messageObj);
 
@@ -155,7 +163,7 @@ class ChatWindowController extends GetxController with SnackbarMixin {
       "sender_id": senderId,
       "receiver_id": receiverId,
       "page": page,
-      "is_group":0,
+      "is_group": 0,
     };
     print(messageObj);
     socket.emit("message", messageObj);
@@ -314,6 +322,19 @@ class ChatWindowController extends GetxController with SnackbarMixin {
 
   starMessageActive() {
     _isStarMessageActive.value = !_isStarMessageActive.value;
+    update();
+  }
+
+  replyToMessage() {
+    // _selectedMessage.value = message;
+    // Focus on the message input field after selecting a message to reply to
+    msgTextFocusNode.requestFocus();
+    _isReplyActive.value = true;
+    update();
+  }
+
+  replyToMessageClose() {
+    _isReplyActive.value = false;
     update();
   }
 }

@@ -244,7 +244,9 @@ class ChatWindowScreen extends StatelessWidget {
                     SizedBox(
                         height: controller.isPinMessageActive == true
                             ? MediaQuery.of(context).size.height * .66
-                            : MediaQuery.of(context).size.height * .73,
+                            : controller.isReplyActive == true
+                                ? MediaQuery.of(context).size.height * .67
+                                : MediaQuery.of(context).size.height * .73,
                         child: ListView.builder(
                             reverse: true,
                             shrinkWrap: true,
@@ -617,101 +619,320 @@ class ChatWindowScreen extends StatelessWidget {
                               )
                             : Align(
                                 alignment: Alignment.bottomCenter,
-                                child: Container(
-                                  color: cardColor,
-                                  child: Row(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 16),
-                                        child:
-                                            Image.asset('assets/png/Plus.png'),
-                                      ),
-                                      SizedBox(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width -
-                                              140,
-                                          child: Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 13),
-                                            child: Container(
-                                                height: 38,
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(8),
-                                                  color: Colors.white,
-                                                ),
-                                                child: TextFormField(
-                                                  // focusNode: controller.focusNode,
-                                                  controller: controller
-                                                      .msgTextController,
-                                                  onChanged: (value) {
-                                                    if (value.isNotEmpty) {
-                                                      controller
-                                                          .changeSendButtonStatusToTrue();
-                                                    } else {
-                                                      controller
-                                                          .changeSendButtonStatusTofalse();
-                                                    }
-                                                  },
-                                                  keyboardType:
-                                                      TextInputType.multiline,
-                                                  textAlignVertical:
-                                                      TextAlignVertical.top,
-                                                  maxLines: 5,
-                                                  minLines: 1,
-                                                  decoration:
-                                                      const InputDecoration(
-                                                    enabledBorder:
-                                                        OutlineInputBorder(
-                                                            borderSide: BorderSide(
-                                                                color: Color(
-                                                                    0xffF1F1F1))),
-                                                    fillColor: Colors.white,
-                                                    border: InputBorder.none,
-                                                    hintText:
-                                                        'Type a message...',
-                                                    hintStyle: TextStyle(
-                                                        color: hintColor,
-                                                        fontSize: 14,
-                                                        fontWeight:
-                                                            FontWeight.w400),
-                                                    contentPadding:
-                                                        EdgeInsets.all(5),
-                                                  ),
+                                child: controller.isReplyActive == false
+                                    ? Container(
+                                        color: cardColor,
+                                        child: Row(
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 16),
+                                              child: Image.asset(
+                                                  'assets/png/Plus.png'),
+                                            ),
+                                            SizedBox(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width -
+                                                    140,
+                                                child: Padding(
+                                                  padding: const EdgeInsets
+                                                      .symmetric(vertical: 13),
+                                                  child: Container(
+                                                      height: 38,
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(8),
+                                                        color: Colors.white,
+                                                      ),
+                                                      child: TextFormField(
+                                                        focusNode: controller
+                                                            .msgTextFocusNode,
+                                                        controller: controller
+                                                            .msgTextController,
+                                                        onChanged: (value) {
+                                                          if (value
+                                                              .isNotEmpty) {
+                                                            controller
+                                                                .changeSendButtonStatusToTrue();
+                                                          } else {
+                                                            controller
+                                                                .changeSendButtonStatusTofalse();
+                                                          }
+                                                        },
+                                                        keyboardType:
+                                                            TextInputType
+                                                                .multiline,
+                                                        textAlignVertical:
+                                                            TextAlignVertical
+                                                                .top,
+                                                        maxLines: 5,
+                                                        minLines: 1,
+                                                        decoration:
+                                                            const InputDecoration(
+                                                          enabledBorder:
+                                                              OutlineInputBorder(
+                                                                  borderSide:
+                                                                      BorderSide(
+                                                                          color:
+                                                                              Color(0xffF1F1F1))),
+                                                          fillColor:
+                                                              Colors.white,
+                                                          border:
+                                                              InputBorder.none,
+                                                          hintText:
+                                                              'Type a message...',
+                                                          hintStyle: TextStyle(
+                                                              color: hintColor,
+                                                              fontSize: 14,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400),
+                                                          contentPadding:
+                                                              EdgeInsets.all(5),
+                                                        ),
+                                                      )),
                                                 )),
-                                          )),
-                                      Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 16.0),
-                                          child: InkWell(
-                                              onTap: () {
-                                                if (controller.isSendButton ==
-                                                    true) {
-                                                  FocusScope.of(context)
-                                                      .unfocus();
-                                                  controller
-                                                      .isInitialMessageshowfalse();
-                                                  controller.sendMessage(
-                                                      controller
-                                                          .msgTextController
-                                                          .text,
-                                                      88,
-                                                      controller.receiverId,
-                                                      1);
-                                                  controller.msgTextController
-                                                      .clear();
-                                                }
-                                              },
-                                              child: Image.asset(controller
-                                                          .isSendButton ==
-                                                      false
-                                                  ? 'assets/png/microphone.png'
-                                                  : 'assets/png/send.png'))),
-                                    ],
-                                  ),
-                                ),
+                                            Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 16.0),
+                                                child: InkWell(
+                                                    onTap: () {
+                                                      if (controller
+                                                              .isSendButton ==
+                                                          true) {
+                                                        FocusScope.of(context)
+                                                            .unfocus();
+                                                        controller
+                                                            .isInitialMessageshowfalse();
+                                                        controller.sendMessage(
+                                                            controller
+                                                                .msgTextController
+                                                                .text,
+                                                            88,
+                                                            controller
+                                                                .receiverId,
+                                                            1);
+                                                        controller
+                                                            .msgTextController
+                                                            .clear();
+                                                      }
+                                                    },
+                                                    child: Image.asset(controller
+                                                                .isSendButton ==
+                                                            false
+                                                        ? 'assets/png/microphone.png'
+                                                        : 'assets/png/send.png'))),
+                                          ],
+                                        ),
+                                      )
+                                    : Container(
+                                        decoration: const BoxDecoration(
+                                            border: Border(
+                                          top: BorderSide(
+                                              width: 1,
+                                              color: replyMessageColor),
+                                        )),
+                                        height: 110,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    const SizedBox(
+                                                      width: 7,
+                                                    ),
+                                                    Container(
+                                                      decoration: BoxDecoration(
+                                                          color: primaryColor,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      10)),
+                                                      width: 5,
+                                                      height: 40,
+                                                    ),
+                                                    const SizedBox(
+                                                      width: 15,
+                                                    ),
+                                                    const Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          'Esther Howard',
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.black,
+                                                              fontSize: 14,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w700),
+                                                        ),
+                                                        Text(
+                                                          'Lorem Ipsum dolor sit amet Lorem ',
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.black,
+                                                              fontSize: 12,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400),
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: InkWell(
+                                                      onTap: () {
+                                                        controller
+                                                            .replyToMessageClose();
+                                                      },
+                                                      child: const Icon(
+                                                        Icons.close,
+                                                        color: messageColor,
+                                                      )),
+                                                )
+                                              ],
+                                            ),
+                                            Container(
+                                              color: cardColor,
+                                              child: Row(
+                                                children: [
+                                                  Padding(
+                                                    padding: const EdgeInsets
+                                                        .symmetric(
+                                                        horizontal: 16),
+                                                    child: Image.asset(
+                                                        'assets/png/Plus.png'),
+                                                  ),
+                                                  SizedBox(
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width -
+                                                              140,
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .symmetric(
+                                                                vertical: 13),
+                                                        child: Container(
+                                                            height: 38,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          8),
+                                                              color:
+                                                                  Colors.white,
+                                                            ),
+                                                            child:
+                                                                TextFormField(
+                                                              focusNode: controller
+                                                                  .msgTextFocusNode,
+                                                              controller: controller
+                                                                  .msgTextController,
+                                                              onChanged:
+                                                                  (value) {
+                                                                if (value
+                                                                    .isNotEmpty) {
+                                                                  controller
+                                                                      .changeSendButtonStatusToTrue();
+                                                                } else {
+                                                                  controller
+                                                                      .changeSendButtonStatusTofalse();
+                                                                }
+                                                              },
+                                                              keyboardType:
+                                                                  TextInputType
+                                                                      .multiline,
+                                                              textAlignVertical:
+                                                                  TextAlignVertical
+                                                                      .top,
+                                                              maxLines: 5,
+                                                              minLines: 1,
+                                                              decoration:
+                                                                  const InputDecoration(
+                                                                enabledBorder: OutlineInputBorder(
+                                                                    borderSide:
+                                                                        BorderSide(
+                                                                            color:
+                                                                                Color(0xffF1F1F1))),
+                                                                fillColor:
+                                                                    Colors
+                                                                        .white,
+                                                                border:
+                                                                    InputBorder
+                                                                        .none,
+                                                                hintText:
+                                                                    'Type a message...',
+                                                                hintStyle: TextStyle(
+                                                                    color:
+                                                                        hintColor,
+                                                                    fontSize:
+                                                                        14,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400),
+                                                                contentPadding:
+                                                                    EdgeInsets
+                                                                        .all(5),
+                                                              ),
+                                                            )),
+                                                      )),
+                                                  Padding(
+                                                      padding: const EdgeInsets
+                                                          .symmetric(
+                                                          horizontal: 16.0),
+                                                      child: InkWell(
+                                                          onTap: () {
+                                                            if (controller
+                                                                    .isSendButton ==
+                                                                true) {
+                                                              FocusScope.of(
+                                                                      context)
+                                                                  .unfocus();
+                                                              controller
+                                                                  .isInitialMessageshowfalse();
+                                                              controller.sendMessage(
+                                                                  controller
+                                                                      .msgTextController
+                                                                      .text,
+                                                                  88,
+                                                                  controller
+                                                                      .receiverId,
+                                                                  1);
+                                                              controller
+                                                                  .msgTextController
+                                                                  .clear();
+                                                            }
+                                                          },
+                                                          child: Image.asset(controller
+                                                                      .isSendButton ==
+                                                                  false
+                                                              ? 'assets/png/microphone.png'
+                                                              : 'assets/png/send.png'))),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
                               )
                   ],
                 ),
@@ -826,21 +1047,27 @@ class ChatWindowScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Row(
-                      children: [
-                        Image.asset(
-                            'assets/png/message_bottom_sheet/reply.png'),
-                        const SizedBox(
-                          width: 32,
-                        ),
-                        const Text(
-                          'Reply',
-                          style: TextStyle(
-                              color: secondaryColor,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400),
-                        ),
-                      ],
+                    InkWell(
+                      onTap: () async {
+                        Navigator.pop(context);
+                        await controller.replyToMessage();
+                      },
+                      child: Row(
+                        children: [
+                          Image.asset(
+                              'assets/png/message_bottom_sheet/reply.png'),
+                          const SizedBox(
+                            width: 32,
+                          ),
+                          const Text(
+                            'Reply',
+                            style: TextStyle(
+                                color: secondaryColor,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400),
+                          ),
+                        ],
+                      ),
                     ),
                     InkWell(
                       onTap: () {
